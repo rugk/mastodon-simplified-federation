@@ -1,0 +1,43 @@
+{
+  "manifest_version": 2,
+  "name": "__MSG_extensionName__",
+  "short_name": "__MSG_extensionNameShort__",
+  "version": "0.1",
+  "author": "rugk",
+
+  "description": "__MSG_extensionDescription__",
+  "homepage_url": "https://github.com/rugk/mastodon-auto-remote-follow",
+
+  "content_security_policy": "default-src 'self'",
+  "default_locale": "en",
+
+  "options_ui": {
+    "page": "options/options.html",
+    "browser_style": true
+  },
+
+  "background": {
+    "page": "background/background.html"
+  },
+
+  "permissions": [
+    "storage",
+    "tabs",
+    "http://*/*",
+    "https://*/*"
+  ],
+
+  "content_scripts": [
+    {
+      "matches": ["https://*/*"],
+      "js": ["content_script/content.js"]
+    }
+  ],
+
+  "applications": {
+    "gecko": {
+      "id": "mastodon-auto-remote-follow@rugk.github.io",
+      "strict_min_version": "60.0"
+    }
+  }
+}

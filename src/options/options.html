@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="options.css">
+
+		<script defer src="./options.js" type="module"></script>
+	</head>
+
+	<body>
+		<form>
+			<ul>
+				<li>
+					<label data-i18n="__MSG_optionMastodonHandle__" for="insertHandle">Insert the following handle: </label>
+					<input class="setting save-on-change" type="text" id="insertHandle" name="insert-handle">
+				</li>
+				<li>
+					<button disabled data-i18n="__MSG_optionsResetButton__" type="button" name="reset-button" id="resetButton">Reset all settings to defaults</button>
+				</li>
+			</ul>
+		</form>
+	</body>
+
+</html>

@@ -1,0 +1,15 @@
+{
+  // manifest.json
+  "extensionName": {
+    "message": "Mastodon Remote Auto Follow",
+    "description": "Name of the extension."
+  },
+  "extensionNameShort": {
+    "message": "Mastodon Auto",
+    "description": "Name of the extension."
+  },
+  "extensionDescription": {
+    "message": "Gibt automatisch dein Mastodon-Handle ein, um anderen Leuten zu folgen.",
+    "description": "Description of the extension."
+  }
+}
