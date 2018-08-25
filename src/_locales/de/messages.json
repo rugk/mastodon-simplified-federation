@@ -1,15 +1,15 @@
 {
   // manifest.json
   "extensionName": {
-    "message": "Mastodon Remote Auto Follow",
+    "message": "Mastodon – Simplified Federation!",
     "description": "Name of the extension."
   },
   "extensionNameShort": {
-    "message": "Mastodon Auto",
+    "message": "Mastodon - Simplified Federation!",
     "description": "Name of the extension."
   },
   "extensionDescription": {
-    "message": "Gibt automatisch dein Mastodon-Handle ein, um anderen Leuten zu folgen.",
+    "message": "Vereinfacht das Folgen und das Interagieren mit Nutzern auf anderen Instanzen.",
     "description": "Description of the extension."
   }
 }

@@ -1,8 +1,8 @@
-# Mastodon Auto-Remote-Follow
+# Mastodon – Simplified Federation!
 
 **Attention:** Prototype version!
 
-Automatically enters your Mastodon handle into the "Follow remote user" interface and clicks the submit button, so you only need to have one click to confirm the following. :smile:
+Simplifies following or interacting with other users on remote instances. Basically, it skips the "Enter your Mastodon handle" interface. :smile:
 
 [Idea by](https://social.wxcafe.net/@akkes/100550833588126733) [@akkes](https://social.wxcafe.net/@akkes).
 
