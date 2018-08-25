@@ -3,7 +3,7 @@ const REMOTE_FOLLOW_REGEX = /\/users\/(.+)\/remote_follow\/?$/;
 // https://regex101.com/r/kyjiHj/2
 const REMOTE_INTERACT_REGEX = /\/interact\/(\d+)\/?$/;
 
-import {splitMastodonHandle} from "/common/modules/mastodonHandle.js";
+import * as mastodon from "/common/modules/mastodon.js";
 
 const MASTODON_INTERACTION_TYPE = Object.freeze({
     FOLLOW: Symbol("mastodon remote follow"),
@@ -34,12 +34,10 @@ function handleTabUpdate(tabId, changeInfo) {
     case null:
         return Promise.resolve();
 
-    case MASTODON_INTERACTION_TYPE.TOOT_INTERACT: {
+    case MASTODON_INTERACTION_TYPE.TOOT_INTERACT:
         // verify it is really Mastodon first
-        return verifyItIsMastodon().then(() => {
-            return redirectToot(url);
-        });
-    }
+        return redirectToot(url);
+
     case MASTODON_INTERACTION_TYPE.FOLLOW:
         return redirectFollow(url);
 
@@ -50,7 +48,7 @@ function handleTabUpdate(tabId, changeInfo) {
 
 
 /**
- * Verifies the current tab is a Mastodon instance.
+ * Fiund the follow URL.
  *
  * Rejects, if it is not Mastodon.
  *
@@ -58,21 +56,20 @@ function handleTabUpdate(tabId, changeInfo) {
  * @private
  * @returns {Promise}
  */
-function verifyItIsMastodon() {
+function getFollowUrl() {
     // default = current tab
     return browser.tabs.executeScript(
         {
-            file: "/content_script/verifyItIsMastodon.js",
+            file: "/content_script/findTootUrl.js",
             runAt: "document_end"
         }
-    ).then((isMastodon) => {
-        if (!isMastodon) {
+    ).then((followUrl) => {
+        if (!followUrl) {
             return Promise.reject(new Error("not Mastodon"));
         }
 
-        return true;
+        return followUrl[0]; // I have no idea, why it is an array, here.
     });
-
 }
 
 /**
@@ -80,24 +77,20 @@ function verifyItIsMastodon() {
  *
  * @function
  * @private
- * @param {string} path
- * @param {Promise} [gettingHandle] storage call to get own Mastodon handle
+ * @param {string} args
  * @returns {Promise}
  */
-async function redirectTo(path, gettingHandle) {
-    if (gettingHandle === undefined) {
-        gettingHandle = browser.storage.sync.get("insertHandle");
-    }
+async function redirectToRemote(args) {
+    const handleObject = await browser.storage.sync.get("insertHandle");
 
-    const handleObject = await gettingHandle;
-
-    const ownMastodon = splitMastodonHandle(handleObject.insertHandle);
+    const ownMastodon = mastodon.splitUserHandle(handleObject.insertHandle);
+    const mastodonApiPath = await mastodon.getRemoteApi(ownMastodon.server);
 
     // construct new URL and redirect
     return browser.tabs.update({
         loadReplace: true,
         // NOTE: This assumes the own server runs on HTTPS, but hey, it really should nowadays!
-        url: (new URL(`https://${ownMastodon.server}${path}`)).toString()
+        url: (new URL(`https://${ownMastodon.server}${mastodonApiPath}?${args}`)).toString()
     });
 }
 
@@ -129,17 +122,16 @@ function getMastodonInteractionType(url) {
  * @param {URL} url
  * @returns {Promise}
  */
-function redirectToot(url) {
-    const gettingHandle = browser.storage.sync.get("insertHandle");
+async function redirectToot(url) {
+    const tootUrl = await getFollowUrl();
 
     // Redirect remote_follow page to own instance directly
     const tootId = getTootId(url);
-    if (!tootId) {
-        throw new Error("Could not get toot ID from Mastodon page.");
+    if (!tootUrl.includes(tootId)) {
+        throw new Error("Toot ID is not included in toot URL.");
     }
 
-    // https://mastodon.social/authorize_interaction?uri=
-    return redirectTo(`/web/statuses/${tootId}`, gettingHandle);
+    return redirectToRemote(`uri=${tootUrl}`);
 }
 
 /**
@@ -151,8 +143,6 @@ function redirectToot(url) {
  * @returns {Promise}
  */
 function redirectFollow(url) {
-    const gettingHandle = browser.storage.sync.get("insertHandle");
-
     // Redirect remote_follow page to own instance directly
     const remoteUser = getUsername(url);
     if (!remoteUser) {
@@ -160,7 +150,7 @@ function redirectFollow(url) {
     }
 
     const remoteServer = url.host;
-    return redirectTo(`/authorize_follow?acct=${remoteUser}@${remoteServer}`, gettingHandle);
+    return redirectToRemote(`acct=${remoteUser}@${remoteServer}`);
 }
 
 /**
