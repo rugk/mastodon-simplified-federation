@@ -54,35 +54,3 @@ fieldset {
 label + .setting {
   margin-left: 8px;
 }
-
-.helper-text {
-  display: block;
-  color: var(--grey-50);
-
-  margin-top: 4px;
-}
-
-/* some margin to align with checkbox */
-input[type=checkbox] ~ .helper-text,
-input[type=radio] ~ .helper-text {
-  /* 4px margin-left + 16px size + 3px margin-right + 5px space (#text) */
-  margin-left: 28px;
-}
-
-/* when a link is used in a helper text, add margin */
-.helper-text > a {
-  margin-left: 4px;
-  overflow-wrap: none;
-}
-
-/* special options values */
-
-#popupIconColor {
-  display: inline;
-}
-/* @TODO: improve ID! size can be anything! Just needed, because of current JS behaviour */
-#size {
-  width: 4.5em;
-}
-
-/* TODO: make i icon bigger */

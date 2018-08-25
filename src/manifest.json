@@ -27,17 +27,10 @@
     "https://*/*"
   ],
 
-  "content_scripts": [
-    {
-      "matches": ["https://*/*"],
-      "js": ["content_script/content.js"]
-    }
-  ],
-
   "applications": {
     "gecko": {
       "id": "mastodon-auto-remote-follow@rugk.github.io",
-      "strict_min_version": "60.0"
+      "strict_min_version": "61.0"
     }
   }
 }
