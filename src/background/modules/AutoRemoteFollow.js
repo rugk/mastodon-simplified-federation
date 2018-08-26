@@ -73,24 +73,23 @@ function getFollowUrl() {
 }
 
 /**
- * Redirects to a given path on your own instance.
+ * Redirects to a API endpoint of Mastodon for remote following.
  *
  * @function
  * @private
- * @param {string} args
+ * @param {string} uri a Mastodon hanlde (user account) to follow or toot URL
  * @returns {Promise}
  */
-async function redirectToRemote(args) {
+async function triggerRemoteAction(uri) {
     const handleObject = await browser.storage.sync.get("insertHandle");
 
     const ownMastodon = mastodon.splitUserHandle(handleObject.insertHandle);
-    const mastodonApiPath = await mastodon.getRemoteApi(ownMastodon.server);
+    const mastodonApiUrl = await mastodon.getSubscribeApiUrl(ownMastodon, uri);
 
     // construct new URL and redirect
     return browser.tabs.update({
         loadReplace: true,
-        // NOTE: This assumes the own server runs on HTTPS, but hey, it really should nowadays!
-        url: (new URL(`https://${ownMastodon.server}${mastodonApiPath}?${args}`)).toString()
+        url: (new URL(mastodonApiUrl)).toString()
     });
 }
 
@@ -131,7 +130,7 @@ async function redirectToot(url) {
         throw new Error("Toot ID is not included in toot URL.");
     }
 
-    return redirectToRemote(`uri=${tootUrl}`);
+    return triggerRemoteAction(tootUrl);
 }
 
 /**
@@ -150,7 +149,7 @@ function redirectFollow(url) {
     }
 
     const remoteServer = url.host;
-    return redirectToRemote(`acct=${remoteUser}@${remoteServer}`);
+    return triggerRemoteAction(`${remoteUser}@${remoteServer}`);
 }
 
 /**
