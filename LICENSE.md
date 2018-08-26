@@ -10,3 +10,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 ## Third-party software
 
 * The icon of this extension is based on [the icon of Mastodon](https://github.com/tootsuite/mastodon).
+
+
+## Special thanks
+* to [SVGO](https://jakearchibald.github.io/svgomg/) for their SVG minimisation tool
