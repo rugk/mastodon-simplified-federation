@@ -36,7 +36,7 @@ function handleTabUpdate(tabId, changeInfo) {
 
     case MASTODON_INTERACTION_TYPE.TOOT_INTERACT:
         // verify it is really Mastodon first
-        return redirectToot(url);
+        return redirectToot();
 
     case MASTODON_INTERACTION_TYPE.FOLLOW:
         return redirectFollow(url);
@@ -142,17 +142,10 @@ function getMastodonInteractionType(url) {
  *
  * @function
  * @private
- * @param {URL} url
  * @returns {Promise}
  */
-async function redirectToot(url) {
+async function redirectToot() {
     const tootUrl = await getFollowUrl();
-
-    // Redirect remote_follow page to own instance directly
-    const tootId = getTootId(url);
-    if (!tootUrl.includes(tootId)) {
-        throw new Error("Toot ID is not included in toot URL.");
-    }
 
     return triggerRemoteAction(tootUrl);
 }
@@ -190,19 +183,6 @@ function getUsername(url) {
 }
 
 /**
- * Returns the toot ID of the given interact page.
- *
- * @function
- * @private
- * @param {URL} url
- * @returns {string|undefined}
- */
-function getTootId(url) {
-    const match = REMOTE_INTERACT_REGEX.exec(url.pathname);
-    return match[1];
-}
-
-/**
  * Listen to a web request of this URL.
  *
  * @function
@@ -227,11 +207,6 @@ function webRequestListen(expectedUrl, onAction, handleWebRequest) {
  */
 function init() {
     browser.tabs.onUpdated.addListener(handleTabUpdate);
-    // browser.webRequest.onBeforeRequest.addListener(
-    //     handleWebRequest,
-    //     {urls: ["<all_urls>"], types: ["main_frame"]},
-    //     ["blocking"]
-    // );
 }
 
 init();
