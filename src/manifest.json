@@ -6,9 +6,15 @@
   "author": "rugk",
 
   "description": "__MSG_extensionDescription__",
-  "homepage_url": "https://github.com/rugk/mastodon-auto-remote-follow",
+  "homepage_url": "https://github.com/rugk/mastodon-simplified-federation",
 
   "content_security_policy": "default-src 'self'; connect-src https:",
+  "icons": {
+    "16": "icons/icon.svg",
+    "32": "icons/icon.svg",
+    "48": "icons/icon.svg",
+    "96": "icons/icon.svg"
+  },
   "default_locale": "en",
 
   "options_ui": {

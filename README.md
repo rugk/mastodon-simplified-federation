@@ -1,8 +1,17 @@
-# Mastodon – Simplified Federation!
+# Mastodon – Simplified Federation! <img align="right" height="100" width="100" src="assets/logo/logo_optimized.svg">
+
+[![Mozilla Add-on version](https://img.shields.io/amo/v/mastodon-simplified-federation.svg)](https://addons.mozilla.org/de/firefox/addon/mastodon-simplified-federation/)  
+[![Mozilla Add-on downloads](https://img.shields.io/amo/d/mastodon-simplified-federation.svg)](https://addons.mozilla.org/de/firefox/addon/mastodon-simplified-federation/)
+[![Mozilla Add-on users](https://img.shields.io/amo/users/mastodon-simplified-federation.svg)](https://addons.mozilla.org/de/firefox/addon/mastodon-simplified-federation/statistics/)
+[![Mozilla Add-on stars](https://img.shields.io/amo/stars/mastodon-simplified-federation.svg)](https://addons.mozilla.org/de/firefox/addon/mastodon-simplified-federation/reviews/)
 
 Simplifies following or interacting with other users on remote instances. Basically, it skips the "Enter your Mastodon handle" interface and takes you directly to your own "home" instance, when you click on a "Follow" button or a reply/retoot/fav button on another instance. :smile:
 
 [Idea by](https://social.wxcafe.net/@akkes/100550833588126733) [@akkes](https://social.wxcafe.net/@akkes).
+
+## Download
+
+**[![Get it for Firefox!](assets/amobutton.png)](https://addons.mozilla.org/de/firefox/addon/mastodon-simplified-federation)**
 
 ### Why?
 
@@ -19,10 +28,6 @@ Additionally, this add-on makes sure to keep your Mastodon handle **private**. I
   * for remote follows: It get's the account to follow from the URL
   * for toot interactions: Currently it has to grab the toot URL the interaction is about from the HTML page
 * Afterwards it then redirects to the "remote_follow"/"remote_interaction" endpoint of your own Mastodon instance directly, thus skipping entering the Mastodon handle in that "foreign" page.
-
-## Download
-
-**[![Get it for Firefox!](assets/amobutton.png)](https://addons.mozilla.org/de/firefox/addon/mastodon-simplified-federation)**
 
 ## Support development
 
