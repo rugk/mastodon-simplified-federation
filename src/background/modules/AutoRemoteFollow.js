@@ -11,7 +11,7 @@ const MASTODON_INTERACTION_TYPE = Object.freeze({
 });
 
 /**
- * Saves the information about the parent tab and their state.
+ * Listens for Mastodon requests at tab update.
  *
  * @function
  * @private
@@ -45,7 +45,6 @@ function handleTabUpdate(tabId, changeInfo) {
         throw new Error(`unknown interaction type: ${mastodonInteraction.toString()}`);
     }
 }
-
 
 /**
  * Fiund the follow URL.
@@ -86,10 +85,35 @@ async function triggerRemoteAction(uri) {
     const ownMastodon = mastodon.splitUserHandle(handleObject.insertHandle);
     const mastodonApiUrl = await mastodon.getSubscribeApiUrl(ownMastodon, uri);
 
-    // construct new URL and redirect
+    const url = (new URL(mastodonApiUrl)).toString();
+
+    // observe triggered request, so we can make sure it
+    const verifyRequest = async (requestDetails) => {
+        // cleanup listener
+        browser.webRequest.onCompleted.removeListener(verifyRequest);
+
+        // if everything is okay, we are fine with that
+        if (requestDetails.statusCode === 200) {
+            return;
+        }
+
+        // error happened, let's try redirect again without cache
+        // (the APi endpoint could have been changed)
+        const mastodonApiUrl = await mastodon.getSubscribeApiUrl(ownMastodon, uri, true);
+        const url = (new URL(mastodonApiUrl)).toString();
+
+        browser.tabs.update({
+            loadReplace: true,
+            url: url
+        });
+    };
+
+    webRequestListen(url, "onCompleted", verifyRequest);
+
+    // finally redirect
     return browser.tabs.update({
         loadReplace: true,
-        url: (new URL(mastodonApiUrl)).toString()
+        url: url
     });
 }
 
@@ -179,6 +203,23 @@ function getTootId(url) {
 }
 
 /**
+ * Listen to a web request of this URL.
+ *
+ * @function
+ * @private
+ * @param {string} expectedUrl
+ * @param {string} onAction
+ * @param {function} handleWebRequest
+ * @returns {string|undefined}
+ */
+function webRequestListen(expectedUrl, onAction, handleWebRequest) {
+    browser.webRequest[onAction].addListener(
+        handleWebRequest,
+        {urls: [expectedUrl], types: ["main_frame"]}
+    );
+}
+
+/**
  * Init AutoRemoteFollower module.
  *
  * @function
@@ -186,6 +227,11 @@ function getTootId(url) {
  */
 function init() {
     browser.tabs.onUpdated.addListener(handleTabUpdate);
+    // browser.webRequest.onBeforeRequest.addListener(
+    //     handleWebRequest,
+    //     {urls: ["<all_urls>"], types: ["main_frame"]},
+    //     ["blocking"]
+    // );
 }
 
 init();
