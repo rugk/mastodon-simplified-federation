@@ -29,7 +29,7 @@ export function getTootUrl() {
     // default = current tab
     return browser.tabs.executeScript(
         {
-            file: "/content_script/findTootUrl.js",
+            file: "/content_script/mastodonFindTootUrl.js",
             runAt: "document_end"
         }
     ).then((followUrl) => {
