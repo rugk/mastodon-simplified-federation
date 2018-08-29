@@ -1,4 +1,11 @@
+/**
+ * Controller intercepting tab loads and redirecting them to correct modules.
+ *
+ * @module AutoRenameFollow
+ */
 
+import {INTERACTION_TYPE} from "./data/INTERACTION_TYPE.js";
+import * as MastodonDetect from "./Detect/Mastodon.js";
 import * as MastodonRedirect from "./MastodonRedirect.js";
 
 const FEDIVERSE_TYPE = Object.freeze({
@@ -16,7 +23,7 @@ const FEDIVERSE_TYPE = Object.freeze({
  * @throws {Error}
  * @returns {Promise}
  */
-function handleTabUpdate(tabId, changeInfo) {
+async function handleTabUpdate(tabId, changeInfo) {
     // ignore when URL is not changed
     if (!changeInfo.url) {
         return Promise.reject(new Error("URL info not available"));
@@ -26,14 +33,34 @@ function handleTabUpdate(tabId, changeInfo) {
 
     const [software, interaction] = getInteractionType(url);
 
+    // detect, which network/fsoftware it uses
+    let detectModule;
     switch (software) {
     case null:
-        // ignore other sites
+        // ignore unrelated sites
         return Promise.resolve();
     case FEDIVERSE_TYPE.MASTODON:
-        return MastodonRedirect.handleSite(url, interaction);
+        detectModule = MastodonDetect;
+        break;
     default:
-        throw new Error(`known fediverse type: ${software}`);
+        throw new Error(`unknown fediverse type: ${software.toString()}`);
+    }
+
+    // and get data and pass to redirect
+    switch (interaction) {
+    case INTERACTION_TYPE.FOLLOW: {
+        const remoteUser = await detectModule.getUsername(url);
+        const remoteServer = await detectModule.getServer(url);
+
+        return MastodonRedirect.redirectFollow(remoteUser, remoteServer);
+    }
+    case INTERACTION_TYPE.TOOT_INTERACT: {
+        const tootUrl = await detectModule.getTootUrl(url);
+
+        return MastodonRedirect.redirectToot(tootUrl);
+    }
+    default:
+        throw new Error(`unknown interaction type: ${interaction.toString()}`);
     }
 }
 
@@ -46,7 +73,7 @@ function handleTabUpdate(tabId, changeInfo) {
  * @returns {[FEDIVERSE_TYPE, Symbol]|null}
  */
 function getInteractionType(url) {
-    for (const [checkRegEx, interactionType] of MastodonRedirect.CATCH_URLS) {
+    for (const [checkRegEx, interactionType] of MastodonDetect.CATCH_URLS) {
         if (url.pathname.match(checkRegEx)) {
             return [FEDIVERSE_TYPE.MASTODON, interactionType];
         }

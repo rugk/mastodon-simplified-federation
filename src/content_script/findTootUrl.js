@@ -4,8 +4,8 @@
  * @function
  * @returns {string}
  */
-function getFollowUrl() {
+function getTootUrl() {
     return document.querySelector(".status__info [href]").getAttribute("href");
 }
 
-getFollowUrl();
+getTootUrl();
