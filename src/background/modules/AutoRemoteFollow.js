@@ -5,12 +5,19 @@
  */
 
 import {INTERACTION_TYPE} from "./data/INTERACTION_TYPE.js";
+
 import * as MastodonDetect from "./Detect/Mastodon.js";
+import * as GnuSocialDetect from "./Detect/GnuSocial.js";
+
 import * as MastodonRedirect from "./MastodonRedirect.js";
 
 const FEDIVERSE_TYPE = Object.freeze({
     MASTODON: Symbol("mastodon"),
     GNU_SOCIAL: Symbol("GNU Social")
+});
+const FEDIVERSE_MODULE = Object.freeze({
+    [FEDIVERSE_TYPE.MASTODON]: MastodonDetect,
+    [FEDIVERSE_TYPE.GNU_SOCIAL]: GnuSocialDetect
 });
 
 /**
@@ -41,6 +48,9 @@ async function handleTabUpdate(tabId, changeInfo) {
         return Promise.resolve();
     case FEDIVERSE_TYPE.MASTODON:
         detectModule = MastodonDetect;
+        break;
+    case FEDIVERSE_TYPE.GNU_SOCIAL:
+        detectModule = GnuSocialDetect;
         break;
     default:
         throw new Error(`unknown fediverse type: ${software.toString()}`);
@@ -73,9 +83,11 @@ async function handleTabUpdate(tabId, changeInfo) {
  * @returns {[FEDIVERSE_TYPE, Symbol]|null}
  */
 function getInteractionType(url) {
-    for (const [checkRegEx, interactionType] of MastodonDetect.CATCH_URLS) {
-        if (url.pathname.match(checkRegEx)) {
-            return [FEDIVERSE_TYPE.MASTODON, interactionType];
+    for (const fedType of Object.values(FEDIVERSE_TYPE)) {
+        for (const [checkRegEx, interactionType] of FEDIVERSE_MODULE[fedType].CATCH_URLS) {
+            if (url.pathname.match(checkRegEx)) {
+                return [fedType, interactionType];
+            }
         }
     }
 
