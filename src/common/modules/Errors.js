@@ -1,6 +1,7 @@
 /**
- * Module, that detects a GNU Social instance and returns the required values.
+ * Custom JS error types.
  *
+ * @see {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error#Custom_Error_Types}
  * @module Errors
  */
 

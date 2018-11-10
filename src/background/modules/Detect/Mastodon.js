@@ -21,13 +21,12 @@ CATCH_URLS.set(REMOTE_INTERACT_REGEX, INTERACTION_TYPE.TOOT_INTERACT);
  *
  * Rejects, if it is not Mastodon.
  *
- * @function
  * @private
+ * @param {URL} url
  * @returns {Promise}
  */
-export function getTootUrl() {
-    // default = current tab
-    return browser.tabs.executeScript(
+export function getTootUrl(url) {
+    const scrapFromHtml = browser.tabs.executeScript(
         {
             file: "/content_script/mastodonFindTootUrl.js",
             runAt: "document_end"
@@ -39,6 +38,9 @@ export function getTootUrl() {
 
         return followUrl[0]; // I have no idea, why it is an array, here.
     });
+
+    // default = current tab
+    return Promise.race(scrapFromHtml);
 }
 
 /**

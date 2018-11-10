@@ -12,7 +12,6 @@ import * as NetworkTools from "./NetworkTools.js";
  * Redirects to a API endpoint of Mastodon for remote following.
  *
  * @private
- * @function
  * @param {string} uri a Mastodon hanlde (user account) to follow or toot URL
  * @returns {Promise}
  */
@@ -68,7 +67,6 @@ export function redirectToot(tootUrl) {
 /**
  * Checks what type of interaction the current URL denotes.
  *
- * @function
  * @param {string} remoteUser
  * @param {string} remoteServer
  * @returns {Promise}
