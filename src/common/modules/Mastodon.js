@@ -60,8 +60,7 @@ export async function getSubscribeApiUrl(mastodon, uri, skipCache = false) {
     if (skipCache || !apiTemplate || !apiTemplate.startsWith(`https://${mastodon.server}/`)) {
         // default URI, if no cached value
         if (!apiTemplate) {
-            // TODO: change default to "/authorize_interaction?uri=" later
-            apiTemplate = `https://${mastodon.server}/authorize_follow?acct=${templatePlaceholder}`;
+            apiTemplate = `https://${mastodon.server}/authorize_interaction?uri=${templatePlaceholder}`;
         }
 
         console.log(`Fetch subscribe API for "${mastodon.server}" via Webfinger.`);
