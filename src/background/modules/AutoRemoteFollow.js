@@ -13,7 +13,7 @@ import * as NetworkTools from "./NetworkTools.js";
 import * as MastodonRedirect from "./MastodonRedirect.js";
 
 const FEDIVERSE_TYPE = Object.freeze({
-    MASTODON: Symbol("mastodon"),
+    MASTODON: Symbol("Mastodon"),
     GNU_SOCIAL: Symbol("GNU Social")
 });
 const FEDIVERSE_MODULE = Object.freeze({
