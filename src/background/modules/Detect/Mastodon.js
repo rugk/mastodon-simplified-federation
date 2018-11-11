@@ -30,19 +30,15 @@ CATCH_URLS.set(REMOTE_INTERACT_REGEX, INTERACTION_TYPE.TOOT_INTERACT);
  *
  * Also notice a string is returned and not a number, as JS cannot safely handle
  * such big numbers.
+ * This does expect a valid input and does not re-check the URL format.
  *
  * @private
  * @param {URL} url
  * @returns {string}
- * @throws {TypeError} if URL is not valid
  */
 export function getTootId(url) {
-    const match = REMOTE_INTERACT_REGEX.exec(url.pathname);
-    if (match.length < 2) {
-        throw new TypeError("URL is invalid and not an interact URL.");
-    }
-
-    return match[1];
+    // just find number at the end
+    return url.pathname.substring(url.pathname.lastIndexOf("/") + 1);
 }
 
 /**
