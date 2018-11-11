@@ -4,6 +4,9 @@
  * @module Detect/Mastodon.js
  */
 
+import * as Mastodon from "/common/modules/Mastodon.js";
+import * as MastodonApi from "/common/modules/MastodonApi.js";
+
 import {INTERACTION_TYPE} from "../data/INTERACTION_TYPE.js";
 
 // https://regex101.com/r/eKt3Fm/2
@@ -11,10 +14,36 @@ const REMOTE_FOLLOW_REGEX = /\/users\/(.+)\/remote_follow\/?$/;
 // https://regex101.com/r/kyjiHj/2
 const REMOTE_INTERACT_REGEX = /\/interact\/(\d+)\/?$/;
 
+// static URL of Mastodon server,
+const TOOT_INTERACTION_URL = "https://{mastodonServer}/web/statuses/{tootId}";
+
 /** The URLs to intercept and pass to this module. */
 export const CATCH_URLS = new Map();
 CATCH_URLS.set(REMOTE_FOLLOW_REGEX, INTERACTION_TYPE.FOLLOW);
 CATCH_URLS.set(REMOTE_INTERACT_REGEX, INTERACTION_TYPE.TOOT_INTERACT);
+
+/**
+ * Returns the (local) toot ID of the given interact page.
+ *
+ * Note the returned ID is the local one of the current server, as it is just
+ * extracted from the URL.
+ *
+ * Also notice a string is returned and not a number, as JS cannot safely handle
+ * such big numbers.
+ *
+ * @private
+ * @param {URL} url
+ * @returns {string}
+ * @throws {TypeError} if URL is not valid
+ */
+export function getTootId(url) {
+    const match = REMOTE_INTERACT_REGEX.exec(url.pathname);
+    if (match.length < 2) {
+        throw new TypeError("URL is invalid and not an interact URL.");
+    }
+
+    return match[1];
+}
 
 /**
  * Find the follow URL.
@@ -26,6 +55,28 @@ CATCH_URLS.set(REMOTE_INTERACT_REGEX, INTERACTION_TYPE.TOOT_INTERACT);
  * @returns {Promise}
  */
 export function getTootUrl(url) {
+    const mastodonServer = url.host;
+    // query the server about the remote URL
+    const localTootId = getTootId(url);
+
+    // if this is your local server, you can obviously directly redirect and
+    // use the local toot ID/URL
+    const fromStaticOwnServer = browser.storage.sync.get("insertHandle").then((handleObject) => {
+        const ownMastodon = Mastodon.splitUserHandle(handleObject.insertHandle);
+        if (mastodonServer !== ownMastodon.server) {
+            return Promise.reject(new Error("is not own server URL"));
+        }
+
+        // this does skip the usual subscripe/interact API
+        let newUrl = TOOT_INTERACTION_URL;
+        newUrl = newUrl.replace("{mastodonServer}", mastodonServer);
+        newUrl = newUrl.replace("{tootId}", localTootId);
+
+        return newUrl;
+    });
+
+    // try scrape method
+    // default = current tab
     const scrapFromHtml = browser.tabs.executeScript(
         {
             file: "/content_script/mastodonFindTootUrl.js",
@@ -39,8 +90,18 @@ export function getTootUrl(url) {
         return followUrl[0]; // I have no idea, why it is an array, here.
     });
 
-    // default = current tab
-    return Promise.race(scrapFromHtml);
+    // thanks https://discourse.joinmastodon.org/t/how-to-get-url-of-toot-from-toot-id/1335/2?u=rugk
+    const getFromApiQuery = MastodonApi.getTootStatus(mastodonServer, localTootId).then((tootStatus) => {
+        return tootStatus.url;
+    });
+
+    // We can reasonably assume that the special shortcut, fromStaticOwnServer
+    // will often fail and we can ignore the error and test the other universal
+    // methods.
+    return fromStaticOwnServer.catch(() => {
+        // prefer fastest result
+        return Promise.race([getFromApiQuery, scrapFromHtml]);
+    });
 }
 
 /**

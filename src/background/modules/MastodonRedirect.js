@@ -19,6 +19,17 @@ async function triggerRemoteAction(uri) {
     const handleObject = await browser.storage.sync.get("insertHandle");
 
     const ownMastodon = Mastodon.splitUserHandle(handleObject.insertHandle);
+
+    // skip the subscribe/interact API if it is not needed, because it is your
+    // own server
+    if (uri.startsWith(`https://${ownMastodon.server}`)) {
+        // just redirect to given input URL, if it is one the same server
+        return browser.tabs.update({
+            loadReplace: true,
+            url: uri
+        });
+    }
+
     const mastodonApiUrl = await Mastodon.getSubscribeApiUrl(ownMastodon, uri);
 
     const url = (new URL(mastodonApiUrl)).toString();
@@ -34,7 +45,7 @@ async function triggerRemoteAction(uri) {
         }
 
         // error happened, let's try redirect again without cache
-        // (the APi endpoint could have been changed)
+        // (the API endpoint could have been changed)
         const mastodonApiUrl = await Mastodon.getSubscribeApiUrl(ownMastodon, uri, true);
         const url = (new URL(mastodonApiUrl)).toString();
 

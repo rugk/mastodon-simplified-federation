@@ -1,3 +1,9 @@
+/**
+ * Module, that allows to retrieve general information about Mastodon.
+ *
+ * @module common/modules/Mastodon
+ */
+
 // https://regex101.com/r/tZjwx7/1
 const MASTODON_HANDLE_SPLIT = /^@?(.+)@(.*)$/;
 
