@@ -4,7 +4,6 @@
  * @module Detect/Mastodon.js
  */
 
-import * as Mastodon from "/common/modules/Mastodon.js";
 import * as MastodonApi from "/common/modules/MastodonApi.js";
 
 import {INTERACTION_TYPE} from "../data/INTERACTION_TYPE.js";
