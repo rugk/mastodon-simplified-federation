@@ -7,7 +7,7 @@
 /**
  * Queries the status API for a toot.
  *
- * @ublic
+ * @public
  * @param {string} mastodonServer Mastodon server domain to query
  * @param {string} localTootId local ID of the toot
  * @returns {Promise} an (JSON) object

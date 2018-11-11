@@ -29,9 +29,7 @@
 
   "permissions": [
     "storage",
-    "tabs",
     "webRequest",
-    "http://*/*",
     "https://*/*"
   ],
 

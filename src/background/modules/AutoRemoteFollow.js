@@ -9,6 +9,7 @@ import {INTERACTION_TYPE} from "./data/INTERACTION_TYPE.js";
 import * as MastodonDetect from "./Detect/Mastodon.js";
 import * as GnuSocialDetect from "./Detect/GnuSocial.js";
 
+import * as NetworkTools from "./NetworkTools.js";
 import * as MastodonRedirect from "./MastodonRedirect.js";
 
 const FEDIVERSE_TYPE = Object.freeze({
@@ -21,22 +22,21 @@ const FEDIVERSE_MODULE = Object.freeze({
 });
 
 /**
- * Listens for Mastodon requests at tab update.
+ * Listens for Mastodon requests at web request change.
  *
  * @function
  * @private
- * @param {integer} tabId
- * @param {Object} changeInfo
+ * @param {Object} requestDetails
  * @throws {Error}
  * @returns {Promise}
  */
-async function handleTabUpdate(tabId, changeInfo) {
+async function handleWebRequest(requestDetails) {
     // ignore when URL is not changed
-    if (!changeInfo.url) {
+    if (!requestDetails.url) {
         return Promise.reject(new Error("URL info not available"));
     }
 
-    const url = new URL(changeInfo.url);
+    const url = new URL(requestDetails.url);
 
     const [software, interaction] = getInteractionType(url);
 
@@ -101,7 +101,7 @@ function getInteractionType(url) {
  * @returns {Promise}
  */
 function init() {
-    browser.tabs.onUpdated.addListener(handleTabUpdate);
+    NetworkTools.webRequestListen("https://*/*", "onBeforeRequest", handleWebRequest);
 }
 
 init();

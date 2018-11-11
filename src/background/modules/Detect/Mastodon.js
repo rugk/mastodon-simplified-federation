@@ -71,21 +71,6 @@ export function getTootUrl(url) {
         return newUrl;
     });
 
-    // try scrape method
-    // default = current tab
-    const scrapFromHtml = browser.tabs.executeScript(
-        {
-            file: "/content_script/mastodonFindTootUrl.js",
-            runAt: "document_end"
-        }
-    ).then((followUrl) => {
-        if (!followUrl) {
-            return Promise.reject(new Error("not Mastodon"));
-        }
-
-        return followUrl[0]; // I have no idea, why it is an array, here.
-    });
-
     // thanks https://discourse.joinmastodon.org/t/how-to-get-url-of-toot-from-toot-id/1335/2?u=rugk
     const getFromApiQuery = MastodonApi.getTootStatus(mastodonServer, localTootId).then((tootStatus) => {
         return tootStatus.url;
@@ -95,8 +80,7 @@ export function getTootUrl(url) {
     // will often fail and we can ignore the error and test the other universal
     // methods.
     return fromStaticOwnServer.catch(() => {
-        // prefer fastest result
-        return Promise.race([getFromApiQuery, scrapFromHtml]);
+        return getFromApiQuery;
     });
 }
 

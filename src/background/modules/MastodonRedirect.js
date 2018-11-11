@@ -37,7 +37,7 @@ async function triggerRemoteAction(uri) {
     // observe triggered request, so we can make sure it
     const verifyRequest = async (requestDetails) => {
         // cleanup listener
-        browser.webRequest.onCompleted.removeListener(verifyRequest);
+        NetworkTools.webRequestListenStop("onCompleted", verifyRequest);
 
         // if everything is okay, we are fine with that
         if (requestDetails.statusCode === 200) {
