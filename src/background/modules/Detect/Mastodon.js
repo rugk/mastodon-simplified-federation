@@ -57,9 +57,8 @@ export function getTootUrl(url) {
 
     // if this is your local server, you can obviously directly redirect and
     // use the local toot ID/URL
-    const fromStaticOwnServer = browser.storage.sync.get("insertHandle").then((handleObject) => {
-        const ownMastodon = Mastodon.splitUserHandle(handleObject.insertHandle);
-        if (mastodonServer !== ownMastodon.server) {
+    const fromStaticOwnServer = browser.storage.sync.get("mastodonServer").then((handleObject) => {
+        if (mastodonServer !== handleObject.mastodonServer.server) {
             return Promise.reject(new Error("is not own server URL"));
         }
 

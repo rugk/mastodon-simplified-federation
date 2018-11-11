@@ -1,4 +1,10 @@
 /**
+ * Provides small wrapper functions around browser APIs for listening to web requests.
+ *
+ * @module NetworkTools
+ */
+
+/**
  * Listen to a web request of this URL.
  *
  * @function

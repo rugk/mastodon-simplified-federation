@@ -16,9 +16,12 @@ import * as NetworkTools from "./NetworkTools.js";
  * @returns {Promise}
  */
 async function triggerRemoteAction(uri) {
-    const handleObject = await browser.storage.sync.get("insertHandle");
-
-    const ownMastodon = Mastodon.splitUserHandle(handleObject.insertHandle);
+    // get and assemble Mastodon object
+    const handleObject = await browser.storage.sync.get(["mastodonUsername", "mastodonServer"]);
+    const ownMastodon = {
+        username: handleObject.mastodonUsername,
+        server: handleObject.mastodonServer,
+    };
 
     // skip the subscribe/interact API if it is not needed, because it is your
     // own server

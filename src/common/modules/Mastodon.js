@@ -4,8 +4,8 @@
  * @module common/modules/Mastodon
  */
 
-// https://regex101.com/r/dlnnSq/1
-const MASTODON_HANDLE_SPLIT = /^@?(.+)@(.+)$/;
+// https://regex101.com/r/dlnnSq/2
+const MASTODON_HANDLE_SPLIT = /^@?([^@ ]+)@([^@ ]+)$/;
 
 /**
  * Do a webfinger request for Mastodon account at server.
@@ -26,7 +26,7 @@ function getWebfinger(mastodonServer, mastodonHandle) {
 /**
  * Splits a Mastodon handle to return the username and server URL.
  *
- * @function
+ * @public
  * @param {string} mastodonHandle
  * @throws {TypeError}
  * @returns {{username: string, server: string}} username/server
@@ -42,6 +42,42 @@ export function splitUserHandle(mastodonHandle) {
         username: matches[1],
         server: matches[2]
     };
+}
+
+/**
+ * Concatenates a Mastodon username and server to return the full user handle.
+ *
+ * In this definition a Mastodon handle is not prefixed with '@', i.e. not
+ * '@user@example.com', but just 'user@example.com'. The function will remove
+ * the 'at' char if it is prepended to the username.
+ *
+ * @public
+ * @param {string} username
+ * @param {string} server
+ * @throws {TypeError} if the format is invalid
+ * @returns {string}
+ */
+export function concatUserHandle(username, server) {
+    // remove prefixed @ if needed
+    if (username && username.startsWith("@")) {
+        username = username.substring(1);
+    }
+
+    // sanity checks
+    if (!server) {
+        throw new TypeError("Server must not be empty.");
+    }
+    if (!username) {
+        throw new TypeError("Username must not be empty.");
+    }
+
+    const mastodonHandle = `${username}@${server}`;
+
+    if (!MASTODON_HANDLE_SPLIT.test(mastodonHandle)) {
+        throw new TypeError("Username or server has invalid format.");
+    }
+
+    return mastodonHandle;
 }
 
 /**

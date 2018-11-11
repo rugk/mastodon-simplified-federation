@@ -1,13 +1,17 @@
-"use strict";
+import * as Mastodon from "/common/modules/Mastodon.js";
 
 const insertHandle = document.getElementById("insertHandle");
 
 insertHandle.addEventListener("input", () => {
-    browser.storage.sync.set({
-        "insertHandle": insertHandle.value
+    const ownMastodonSplit = Mastodon.splitUserHandle(insertHandle.value);
+
+    return browser.storage.sync.set({
+        mastodonUsername: ownMastodonSplit.username,
+        mastodonServer: ownMastodonSplit.server,
     });
 });
 
-browser.storage.sync.get("insertHandle").then((handleObject) => {
-    insertHandle.value = handleObject.insertHandle;
+browser.storage.sync.get(["mastodonUsername", "mastodonServer"]).then((handleObject) => {
+    const mastodonHandle = Mastodon.concatUserHandle(handleObject.mastodonUsername, handleObject.mastodonServer);
+    insertHandle.value = mastodonHandle;
 });
