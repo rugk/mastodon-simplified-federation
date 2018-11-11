@@ -4,8 +4,8 @@
  * @module common/modules/Mastodon
  */
 
-// https://regex101.com/r/tZjwx7/1
-const MASTODON_HANDLE_SPLIT = /^@?(.+)@(.*)$/;
+// https://regex101.com/r/dlnnSq/1
+const MASTODON_HANDLE_SPLIT = /^@?(.+)@(.+)$/;
 
 /**
  * Do a webfinger request for Mastodon account at server.
@@ -18,9 +18,9 @@ const MASTODON_HANDLE_SPLIT = /^@?(.+)@(.*)$/;
  */
 function getWebfinger(mastodonServer, mastodonHandle) {
     // protcol specified HTTPS must be used
-    return fetch(new URL(`https://${mastodonServer}/.well-known/webfinger?resource=acct:${mastodonHandle}`)).then((response) => {
-        return response.json();
-    });
+    return fetch(new URL(`https://${mastodonServer}/.well-known/webfinger?resource=acct:${mastodonHandle}`)).then(
+        (response) => response.json()
+    );
 }
 
 /**
@@ -28,10 +28,15 @@ function getWebfinger(mastodonServer, mastodonHandle) {
  *
  * @function
  * @param {string} mastodonHandle
+ * @throws {TypeError}
  * @returns {{username: string, server: string}} username/server
  */
 export function splitUserHandle(mastodonHandle) {
     const matches = MASTODON_HANDLE_SPLIT.exec(mastodonHandle);
+
+    if (matches === null) {
+        throw new TypeError("invalid Mastodon handle");
+    }
 
     return {
         username: matches[1],
@@ -47,7 +52,7 @@ export function splitUserHandle(mastodonHandle) {
  * @function
  * @see https://github.com/tootsuite/mastodon/pull/8202
  * @param {{username: string, server: string}} mastodon User handle split by splitUserHandle
- * @param {string} uri a Mastodon hanlde (user account) to follow or toot URL
+ * @param {string} uri a Mastodon handle (user account) to follow or toot URL
  * @param {boolean} [skipCache=false] set to true to ignore the cache
  * @returns {Promise} resulting in String (URL)
  */

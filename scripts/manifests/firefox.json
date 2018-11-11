@@ -8,8 +8,7 @@
   "description": "__MSG_extensionDescription__",
   "homepage_url": "https://github.com/rugk/mastodon-simplified-federation",
 
-  // testing version allows loading unit test libraries from CDNs
-  "content_security_policy": "default-src 'self'; connect-src https:; style-src 'self' https://unpkg.com; script-src 'self' https://unpkg.com",
+  "content_security_policy": "default-src 'self'; connect-src https:",
   "icons": {
     "16": "icons/icon.svg",
     "32": "icons/icon.svg",
