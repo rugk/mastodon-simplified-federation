@@ -57,4 +57,4 @@ function init() {
     browser.runtime.onInstalled.addListener(handleInstalled);
 }
 
-init()
+init();
