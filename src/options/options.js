@@ -1,17 +1,12 @@
-import * as Mastodon from "/common/modules/Mastodon.js";
+/**
+ * Starter module for addon settings site.
+ *
+ * @requires modules/OptionHandler
+ */
 
-const insertHandle = document.getElementById("insertHandle");
+import * as AddonSettings from "/common/modules/AddonSettings/AddonSettings.js";
+import * as AutomaticSettings from "/common/modules/AutomaticSettings/AutomaticSettings.js";
 
-insertHandle.addEventListener("input", () => {
-    const ownMastodonSplit = Mastodon.splitUserHandle(insertHandle.value);
-
-    return browser.storage.sync.set({
-        mastodonUsername: ownMastodonSplit.username,
-        mastodonServer: ownMastodonSplit.server,
-    });
-});
-
-browser.storage.sync.get(["mastodonUsername", "mastodonServer"]).then((handleObject) => {
-    const mastodonHandle = Mastodon.concatUserHandle(handleObject.mastodonUsername, handleObject.mastodonServer);
-    insertHandle.value = mastodonHandle;
-});
+// init modules
+AutomaticSettings.setDefaultOptionProvider(AddonSettings.getDefaultValue);
+AutomaticSettings.init();
