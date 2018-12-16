@@ -18,7 +18,7 @@ import * as NetworkTools from "./NetworkTools.js";
  */
 async function triggerRemoteAction(uri) {
     // get and assemble Mastodon object
-    const ownMastodon = AddonSettings.get("ownMastodon");
+    const ownMastodon = await AddonSettings.get("ownMastodon");
 
     // skip the subscribe/interact API if it is not needed, because it is your
     // own server

@@ -77,7 +77,6 @@ function showMastodonHandleError(type, optionValue) {
  * @returns {Object}
  */
 function checkMastodonHandle(optionValue) {
-    console.info("CHECK", optionValue, mastodonHandleErrorShown, !mastodonHandleErrorShown);
     // default option, string not yet set
     if (optionValue === null) {
         showMastodonHandleError(MASTODON_HANDLE_IS_EMPTY, optionValue);
@@ -174,8 +173,6 @@ function prepareMastodonHandleForInput(param) {
  * @returns {void}
  */
 function checkMastodonHandleFast(optionValue) {
-    console.info(optionValue, mastodonHandleErrorShown, !mastodonHandleErrorShown);
-
     // if error has been hidden by typing only, and user reverts to invalid input
     // we need to show the error again
     // The problem is that for the same input the "change" event is not triggered.
