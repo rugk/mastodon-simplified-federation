@@ -4,6 +4,8 @@
  * @module common/modules/Mastodon
  */
 
+import * as AddonSettings from "/common/modules/AddonSettings/AddonSettings.js";
+
 // https://regex101.com/r/dlnnSq/2
 const MASTODON_HANDLE_SPLIT = /^@?([^@ ]+)@([^@ ]+)$/;
 
@@ -94,8 +96,7 @@ export function concatUserHandle(username, server) {
  */
 export async function getSubscribeApiUrl(mastodon, uri, skipCache = false) {
     const templatePlaceholder = "{uri}";
-    const cachedSubscriptionUriObject = await browser.storage.sync.get("subscriptionUri");
-    let apiTemplate = cachedSubscriptionUriObject.subscriptionUri;
+    let apiTemplate = await AddonSettings.get("subscriptionUri");
 
     // fetch from WebFinger, if needed
     if (skipCache || !apiTemplate || !apiTemplate.startsWith(`https://${mastodon.server}/`)) {

@@ -4,6 +4,7 @@
  * @module Detect/Mastodon.js
  */
 
+import * as AddonSettings from "/common/modules/AddonSettings/AddonSettings.js";
 import * as MastodonApi from "/common/modules/MastodonApi.js";
 
 import {INTERACTION_TYPE} from "../data/INTERACTION_TYPE.js";
@@ -56,8 +57,8 @@ export function getTootUrl(url) {
 
     // if this is your local server, you can obviously directly redirect and
     // use the local toot ID/URL
-    const fromStaticOwnServer = browser.storage.sync.get("mastodonServer").then((handleObject) => {
-        if (mastodonServer !== handleObject.mastodonServer.server) {
+    const fromStaticOwnServer = AddonSettings.get("ownMastodon").then((ownMastodon) => {
+        if (mastodonServer !== ownMastodon.server) {
             return Promise.reject(new Error("is not own server URL"));
         }
 

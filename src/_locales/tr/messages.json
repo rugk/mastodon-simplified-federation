@@ -1,0 +1,57 @@
+{
+  // manifest.json
+
+  // errors or other messages (mostly for settings)
+  "errorShowingMessage": {
+    "message": "Mesaj görüntülenemedi.",
+    "description": "When there is an error when showing the error/info/…."
+  },
+  "couldNotLoadOptions": {
+    "message": "Ayarlar yüklenemedi.",
+    "description": "When one or all settings could not be loaded."
+  },
+  "couldNotSaveOption": {
+    "message": "Ayarlar kaydedilemedi.",
+    "description": "When a setting could not be saved."
+  },
+  "messageUndoButton": {
+    "message": "Geri al",
+    "description": "The text of a button that undoes the last action."
+  },
+  "couldNotUndoAction": {
+    "message": "Geri alma işlemi başarısız.",
+    "description": "Shown when an action cannot be undone."
+  },
+  "resettingOptionsWorked": {
+    "message": "Bütün ayarlar varsayılan değerlere döndürüldü!",
+    "description": "The message shown, when the options of the settings were reset."
+  },
+  "resettingOptionsFailed": {
+    "message": "Seçenekleri sıfırlama başarısız oldu!",
+    "description": "The message shown, when the options of the settings could not have been reset."
+  },
+
+  // options
+  "someSettingsAreManaged": {
+    "message": "Bazı ayarlar sistem yöneticin tarafından düzenlendiği için değiştirilemez.",
+    "description": "The message, which appears, when settings are pre-defined (as managed options) by administrators."
+  },
+  "optionIsDisabledBecauseManaged": {
+    "message": "Bu özellik sistem yöneticin tarafından ayarlandığı için devredışı.",
+    "description": "The title (tooltip) shown, when hovering over a disabled, managed option."
+  },
+  "optionLearnMore": {
+    "message": "Daha fazla bilgi",
+    "description": "When a link to an explainer needs to be added, this is the link text."
+  },
+  "optionsResetButton": {
+    "message": "Bütün ayarları varsayılanlara sıfırla",
+    "description": "The button to delete all current settings and load the defaults, shown in the add-on settings."
+  },
+
+  // ARIA labels/descriptions
+  "dismissIconDescription": {
+    "message": "Bu mesajı kapat",
+    "description": "the label for the close button of the message box"
+  }
+}

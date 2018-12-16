@@ -24,6 +24,25 @@ async function handleInstalled(details) {
     }
 
     switch (details.previousVersion) {
+    case "0.8": {
+        console.log(`Doing upgrade from ${details.previousVersion}.`, details);
+
+        const oldData = await browser.storage.sync.get();
+
+        await browser.storage.sync.set({
+            ownMastodon: {
+                username: oldData.mastodonUsername,
+                server: oldData.mastodonServer
+            }
+        });
+
+        await browser.storage.sync.remove(["mastodonUsername", "mastodonServer"]);
+
+        console.info("Data upgrade successful.", await browser.storage.sync.get());
+
+        break;
+    }
+    // TODO: remove 0.7 code
     case "0.7": {
         console.log(`Doing upgrade from ${details.previousVersion}.`, details);
 
@@ -38,7 +57,7 @@ async function handleInstalled(details) {
 
         await browser.storage.sync.remove("insertHandle");
 
-        console.log("Data upgrade successful.", await browser.storage.sync.get());
+        console.info("Data upgrade successful.", await browser.storage.sync.get());
 
         break;
     }
@@ -57,4 +76,4 @@ function init() {
     browser.runtime.onInstalled.addListener(handleInstalled);
 }
 
-init()
+init();

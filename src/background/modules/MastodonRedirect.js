@@ -4,6 +4,7 @@
  * @module MastodonRedirects
  */
 
+import * as AddonSettings from "/common/modules/AddonSettings/AddonSettings.js";
 import * as Mastodon from "/common/modules/Mastodon.js";
 
 import * as NetworkTools from "./NetworkTools.js";
@@ -17,11 +18,7 @@ import * as NetworkTools from "./NetworkTools.js";
  */
 async function triggerRemoteAction(uri) {
     // get and assemble Mastodon object
-    const handleObject = await browser.storage.sync.get(["mastodonUsername", "mastodonServer"]);
-    const ownMastodon = {
-        username: handleObject.mastodonUsername,
-        server: handleObject.mastodonServer,
-    };
+    const ownMastodon = await AddonSettings.get("ownMastodon");
 
     // skip the subscribe/interact API if it is not needed, because it is your
     // own server

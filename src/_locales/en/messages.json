@@ -5,11 +5,80 @@
     "description": "Name of the extension."
   },
   "extensionNameShort": {
-    "message": "Mastodon - Simplified Federation!",
+    "message": "Mastodon – Simplified Federation!",
     "description": "Name of the extension."
   },
   "extensionDescription": {
     "message": "Simplifies following or interacting with other users on remote instances.",
     "description": "Description of the extension."
+  },
+
+  // errors or other messages (mostly for settings)
+  "errorShowingMessage": {
+    "message": "Could not show this message.",
+    "description": "When there is an error when showing the error/info/…."
+  },
+  "couldNotLoadOptions": {
+    "message": "Could not load settings.",
+    "description": "When one or all settings could not be loaded."
+  },
+  "couldNotSaveOption": {
+    "message": "Could not save this setting.",
+    "description": "When a setting could not be saved."
+  },
+  "messageUndoButton": {
+    "message": "Undo",
+    "description": "The text of a button that undoes the last action."
+  },
+  "couldNotUndoAction": {
+    "message": "Could not undo action.",
+    "description": "Shown when an action cannot be undone."
+  },
+  "resettingOptionsWorked": {
+    "message": "All settings are now back to defaults again!",
+    "description": "The message shown, when the options of the settings were reset."
+  },
+  "resettingOptionsFailed": {
+    "message": "Could not reset options!",
+    "description": "The message shown, when the options of the settings could not have been reset."
+  },
+
+  // errors or other messages for specific settings
+  "mastodonHandleIsEmpty": {
+    "message": "Please do enter a Mastodon handle. Without it, the add-on will not work.",
+    "description": "This is an error shown, when the user did not (yet) enter a Mastodon handle."
+  },
+  "mastodonHandleIsInvalid": {
+    "message": "The Mastodon handle you entered is invalid.",
+    "description": "This is an error shown, when the Mastodon handle the user entered is not valid."
+  },
+
+  // options
+  "someSettingsAreManaged": {
+    "message": "Some settings are managed by your system administrator and cannot be changed.",
+    "description": "The message, which appears, when settings are pre-defined (as managed options) by administrators."
+  },
+  "optionIsDisabledBecauseManaged": {
+    "message": "This option is disabled, because it has been configured by your system administrator.",
+    "description": "The title (tooltip) shown, when hovering over a disabled, managed option."
+  },
+  "optionLearnMore": {
+    "message": "Learn more",
+    "description": "When a link to an explainer needs to be added, this is the link text."
+  },
+  "optionsResetButton": {
+    "message": "Reset all settings to defaults",
+    "description": "The button to delete all current settings and load the defaults, shown in the add-on settings."
+  },
+
+  "optionMastodonHandle": {
+    "message": "Your Mastodon handle: ",
+    "description": "This is an option shown in the add-on settings. You can enter your handle in the form mastodon@server.com there."
+  },
+
+  // ARIA labels/descriptions
+  "dismissIconDescription": {
+    "message": "Close this message",
+    "description": "the label for the close button of the message box"
   }
 }

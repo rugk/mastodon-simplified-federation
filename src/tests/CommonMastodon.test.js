@@ -90,7 +90,7 @@ describe("common module: Mastodon", function () {
     });
 
     describe("concatUserHandle()", function () {
-        it('correctly concatenates user handle', function () {
+        it("correctly concatenates user handle", function () {
             chai.assert.strictEqual(
                 Mastodon.concatUserHandle("rugk_testing", "mastodon.social"),
                 "rugk_testing@mastodon.social",

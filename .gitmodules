@@ -1,0 +1,12 @@
+[submodule "src/common/modules/AutomaticSettings"]
+	path = src/common/modules/AutomaticSettings
+	url = https://github.com/TinyWebEx/AutomaticSettings
+[submodule "src/common/modules/MessageHandler"]
+	path = src/common/modules/MessageHandler
+	url = https://github.com/TinyWebEx/MessageHandler
+[submodule "src/common/modules/Localizer"]
+	path = src/common/modules/Localizer
+	url = https://github.com/TinyWebEx/Localizer
+[submodule "src/common/modules/AddonSettings"]
+	path = src/common/modules/AddonSettings
+	url = https://github.com/TinyWebEx/AddonSettings

@@ -1,7 +1,7 @@
 # Mastodon – Simplified Federation! <img align="right" height="100" width="100" src="assets/logo/logo_optimized.svg">
 
-[![Mozilla Add-on version](https://img.shields.io/amo/v/mastodon-simplified-federation.svg)](https://addons.mozilla.org/de/firefox/addon/mastodon-simplified-federation/)  
-[![Mozilla Add-on downloads](https://img.shields.io/amo/d/mastodon-simplified-federation.svg)](https://addons.mozilla.org/de/firefox/addon/mastodon-simplified-federation/)
+[![Mozilla Add-on version](https://img.shields.io/amo/v/mastodon-simplified-federation.svg)](https://addons.mozilla.org/de/firefox/addon/mastodon-simplified-federation/?src=external-github-shield-downloads)  
+[![Mozilla Add-on downloads](https://img.shields.io/amo/d/mastodon-simplified-federation.svg)](https://addons.mozilla.org/de/firefox/addon/mastodon-simplified-federation/?src=external-github-shield-downloads)
 [![Mozilla Add-on users](https://img.shields.io/amo/users/mastodon-simplified-federation.svg)](https://addons.mozilla.org/de/firefox/addon/mastodon-simplified-federation/statistics/)
 [![Mozilla Add-on stars](https://img.shields.io/amo/stars/mastodon-simplified-federation.svg)](https://addons.mozilla.org/de/firefox/addon/mastodon-simplified-federation/reviews/)
 
@@ -11,7 +11,7 @@ Simplifies following or interacting with other users on remote instances. Basica
 
 ## Download
 
-**[![Get it for Firefox!](assets/amobutton.png)](https://addons.mozilla.org/de/firefox/addon/mastodon-simplified-federation)**
+**[![Get it for Firefox!](https://addons.cdn.mozilla.net/static/img/addons-buttons/AMO-button_1.png)](https://addons.mozilla.org/de/firefox/addon/mastodon-simplified-federation?src=external-github-download)**
 
 ### Why?
 
@@ -23,13 +23,13 @@ Additionally, this add-on makes sure to keep your Mastodon handle **private**. I
 
 ### How does it work?
 
-* it intercepts any remote interaction popup/request
-* it tries to get the toot/account you want to interact with from the "Enter your Mastodon ID" popup
-  * for remote follows: It get's the account to follow from the URL
-  * for toot interactions: Currently it has to grab the toot URL the interaction is about from the HTML page
-* Afterwards it then redirects to the "remote_follow"/"remote_interaction" endpoint of your own Mastodon instance directly, thus skipping entering the Mastodon handle in that "foreign" page.
+1. It intercepts any remote interaction popup/request.
+2. It tries to get the toot/account you want to interact with from the "Enter your Mastodon ID" popup.
+  1. for remote follows: It get's the account to follow from the URL.
+  2. for toot interactions:
+     1. It gets the local toot ID from the URL.
+     2. It sends an additional web request to the remote server to get the remote toot ID.
+3. Afterwards it redirects you to the "remote_follow"/"remote_interaction" endpoint of your own Mastodon instance directly, thus skipping entering the Mastodon handle in that "foreign" page.
 
-## Support development
-
-You can support the development of this add-on on Liberapay:  
-[![Donate using Liberapay](https://liberapay.com/assets/widgets/donate.svg)](https://liberapay.com/rugk/donate)
+Due to the fact that it does not block loading of the "Enter your Mastodon ID" popup, it may – especially in the case of "toot interactions" – happen, that the "Enter your Mastodon ID" popup is shown anyway for some seconds. After some time, it should be redirected though.
+If it really fails, this behavior ensures you still have a fallback to be able to manually enter your Mastodon handle.
