@@ -14,6 +14,7 @@ import * as CommonMessages from "/common/modules/MessageHandler/CommonMessages.j
 const MASTODON_HANDLE_IS_INVALID = Symbol("invalid Mastodon handle");
 const MASTODON_HANDLE_IS_EMPTY = Symbol("empty Mastodon handle");
 let mastodonHandleErrorShown = null;
+let lastInvalidMastodonHandle = null;
 
 /**
  * Hides the error/warning shown for the Mastodon handle.
@@ -36,6 +37,36 @@ function hideMastodonError(options = {animate: true}) {
     mastodonHandleErrorShown = null;
 }
 
+
+/**
+ * Hides the error/warning shown for the Mastodon handle.
+ *
+ * @function
+ * @param {MASTODON_HANDLE_IS_EMPTY|MASTODON_HANDLE_IS_INVALID} type
+ * @param {string} optionValue
+ * @private
+ * @returns {void}
+ */
+function showMastodonHandleError(type, optionValue) {
+    // hide "old" error, if needed
+    hideMastodonError({animate: false});
+
+    switch (type) {
+    case MASTODON_HANDLE_IS_EMPTY:
+        CommonMessages.showWarning("mastodonHandleIsEmpty");
+        break;
+    case MASTODON_HANDLE_IS_INVALID:
+        CommonMessages.showError("mastodonHandleIsInvalid");
+        break;
+    default:
+        throw new TypeError("invalid error type has been given");
+    }
+
+    mastodonHandleErrorShown = type;
+    lastInvalidMastodonHandle = optionValue;
+}
+
+
 /**
  * Checks if the Mastodon handle is valid and shows an error, if needed.
  *
@@ -46,13 +77,10 @@ function hideMastodonError(options = {animate: true}) {
  * @returns {Object}
  */
 function checkMastodonHandle(optionValue) {
+    console.info("CHECK", optionValue, mastodonHandleErrorShown, !mastodonHandleErrorShown);
     // default option, string not yet set
     if (optionValue === null) {
-        // hide "old" error, if needed
-        hideMastodonError({animate: false});
-
-        CommonMessages.showWarning("mastodonHandleIsEmpty");
-        mastodonHandleErrorShown = MASTODON_HANDLE_IS_EMPTY;
+        showMastodonHandleError(MASTODON_HANDLE_IS_EMPTY, optionValue);
         // do NOT throw error as first loading has to suceed!
         return null;
     }
@@ -66,11 +94,7 @@ function checkMastodonHandle(optionValue) {
     }
 
     if (optionValue === "") {
-        // hide "old" error, if needed
-        hideMastodonError({animate: false});
-
-        CommonMessages.showWarning("mastodonHandleIsEmpty");
-        mastodonHandleErrorShown = MASTODON_HANDLE_IS_EMPTY;
+        showMastodonHandleError(MASTODON_HANDLE_IS_EMPTY, optionValue);
         throw new Error("empty Mastodon handle");
     }
 
@@ -78,11 +102,7 @@ function checkMastodonHandle(optionValue) {
     try {
         splitHandle = Mastodon.splitUserHandle(optionValue);
     } catch (e) {
-        // hide "old" error, if needed
-        hideMastodonError({animate: false});
-
-        CommonMessages.showError("mastodonHandleIsInvalid");
-        mastodonHandleErrorShown = MASTODON_HANDLE_IS_INVALID;
+        showMastodonHandleError(MASTODON_HANDLE_IS_INVALID, optionValue);
 
         // re-throw to prevent saving
         throw e;
@@ -154,6 +174,17 @@ function prepareMastodonHandleForInput(param) {
  * @returns {void}
  */
 function checkMastodonHandleFast(optionValue) {
+    console.info(optionValue, mastodonHandleErrorShown, !mastodonHandleErrorShown);
+
+    // if error has been hidden by typing only, and user reverts to invalid input
+    // we need to show the error again
+    // The problem is that for the same input the "change" event is not triggered.
+    if (!mastodonHandleErrorShown && lastInvalidMastodonHandle === optionValue) {
+        checkMastodonHandle(optionValue);
+        lastInvalidMastodonHandle = null;
+        return;
+    }
+
     if (!mastodonHandleErrorShown) {
         return;
     }
@@ -169,6 +200,9 @@ function checkMastodonHandleFast(optionValue) {
             Mastodon.splitUserHandle(optionValue);
 
         } catch (e) {
+            // cache value that is considered an error
+            lastInvalidMastodonHandle = optionValue;
+
             // ignore all errors
             return;
         }
