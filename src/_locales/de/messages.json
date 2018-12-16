@@ -43,6 +43,16 @@
     "description": "The message shown, when the options of the settings could not have been reset."
   },
 
+  // errors or other messages for specific settings
+  "mastodonHandleIsEmpty": {
+    "message": "Bitte gib ein mastodon-Handle ein. Ohne es wird es nicht funktionieren.",
+    "description": "This is an error shown, when the user did not (yet) enter a Mastodon handle."
+  },
+  "mastodonHandleIsInvalid": {
+    "message": "Das Mastodon-Handle, dass du eingeben hast, ist invalid.",
+    "description": "This is an error shown, when the Mastodon handle the user entered is not valid."
+  },
+
   // options
   "someSettingsAreManaged": {
     "message": "Einige Einstellung werden von deinem Systemadministrator festgelegt und können nicht geändert werden.",

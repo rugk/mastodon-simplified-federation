@@ -45,12 +45,12 @@
 		</div>
 		<form>
 			<ul>
-				<li>
+				<li class="browser-style">
 					<label data-i18n="__MSG_optionMastodonHandle__" for="insertHandle">Your Mastodon handle: </label>
-					<input class="setting save-on-change" type="text" id="insertHandle" name="insert-handle">
+					<input class="setting save-on-change trigger-on-update" type="text" id="insertHandle" name="ownMastodon" pattern="^@?([^@ ]+)@([^@ ]+)$">
 				</li>
 				<li>
-					<button data-i18n="__MSG_optionsResetButton__" type="button" name="reset-button" id="resetButton">Reset all settings to defaults</button>
+					<button class="browser-style" data-i18n="__MSG_optionsResetButton__" type="button" name="reset-button" id="resetButton">Reset all settings to defaults</button>
 				</li>
 			</ul>
 		</form>

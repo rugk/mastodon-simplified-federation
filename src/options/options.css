@@ -73,3 +73,9 @@ input[type=radio] ~ .helper-text {
   overflow-wrap: none;
 }
 
+/* workaround for missing invalid style, see https://bugzilla.mozilla.org/show_bug.cgi?id=1514567 */
+.browser-style > input[type=text]:invalid:not(:focus) {
+  border-color: var(--red-60); /* makes border quare for some reason on GNOME */
+  border-radius: 2px; /* looks better on GNOME, at least */
+  box-shadow: 0 0 0 2px var(--red-60-light-shadow);
+}
