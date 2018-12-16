@@ -27,12 +27,12 @@ async function handleInstalled(details) {
     case "0.8": {
         console.log(`Doing upgrade from ${details.previousVersion}.`, details);
 
-        const ownMastodon = await browser.storage.sync.get();
+        const oldData = await browser.storage.sync.get();
 
         await browser.storage.sync.set({
             ownMastodon: {
-                username: ownMastodon.username,
-                server: ownMastodon.server
+                username: oldData.mastodonUsername,
+                server: oldData.mastodonServer
             }
         });
 
