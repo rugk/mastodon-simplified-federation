@@ -7,8 +7,6 @@
  * @module InstallUpgrade
  */
 
-import * as Mastodon from "/common/modules/Mastodon.js";
-
 /**
  * Checks whether an upgrade is needed.
  *
@@ -37,25 +35,6 @@ async function handleInstalled(details) {
         });
 
         await browser.storage.sync.remove(["mastodonUsername", "mastodonServer"]);
-
-        console.info("Data upgrade successful.", await browser.storage.sync.get());
-
-        break;
-    }
-    // TODO: remove 0.7 code
-    case "0.7": {
-        console.log(`Doing upgrade from ${details.previousVersion}.`, details);
-
-        const ownMastodonSplit = await browser.storage.sync.get("insertHandle").then((handleObject) => {
-            return Mastodon.splitUserHandle(handleObject.insertHandle);
-        });
-
-        await browser.storage.sync.set({
-            mastodonUsername: ownMastodonSplit.username,
-            mastodonServer: ownMastodonSplit.server,
-        });
-
-        await browser.storage.sync.remove("insertHandle");
 
         console.info("Data upgrade successful.", await browser.storage.sync.get());
 
