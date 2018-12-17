@@ -9,7 +9,7 @@
     "description": "Name of the extension."
   },
   "extensionDescription": {
-    "message": "Simplifies following or interacting with other users on remote instances.",
+    "message": "Simplifies following or interacting with other users on remote (Mastodon) instances.",
     "description": "Description of the extension."
   },
 

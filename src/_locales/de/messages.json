@@ -9,7 +9,7 @@
     "description": "Name of the extension."
   },
   "extensionDescription": {
-    "message": "Vereinfacht das Folgen und Interagieren mit Nutzern auf anderen Instanzen.",
+    "message": "Vereinfacht das Folgen und Interagieren mit Nutzern auf anderen (Mastodon-)Instanzen.",
     "description": "Description of the extension."
   },
 
