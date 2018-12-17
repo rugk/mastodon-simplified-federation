@@ -1,3 +1,20 @@
-Dieses Add-on sendet keine Informationen zum Add-on-Autor oder einer Drittpartei.
+Definitionen:
+ADD-ON – die Software, für die diese Datenschutzrichtlinie gilt
+NUTZER – der Nutzer dieses ADD-ON's
+ENTFERNTER SERVER, ENTFERNTEN SERVER – ein Server im Internet, identifiziert durch eine Serveradresse (Domain-Name)
+ENTFERNTER NUTZER, ENTFERNTEN NUTZER – ein Nutzeraccount gespeichert auf einem Server im Internet, bestehend aus dem Namen des Nutzers und der Server-Adresse auf der ein Nutzer registriert ist, dem ENTFERNTEN SERVER
+ENTFERNTE NACHRICHT – jede Form eine Nachricht, eingeschlossen aber nicht limitiert auf Text-, Multimedia-, Audio- und Videonachrichten; veröffentlicht durch einen ENTFERNTEN NUTZER, gespeichert auf einem ENTFERNTEN SERVER
 
-Eine Erklärung aller Berechtigungen, die dieses Add-on erfragt kann auf https://github.com/rugk/offline-qr-code/blob/master/assets/texts/de/permissions.md gefunden werden.
+Dieses ADD-ON sendet keine personenbezogene Informationen zum Autor des ADD-ONs.
+
+EIGENER ACCOUNT, EIGENEN ACCOUNT – ein Nutzerkonto gespeichert auf einem Server im Internet, bestehend aus dem Namen des Nutzers und der Server-Adresse auf der ein Nutzer registriert ist, der NUTZER des ADD-ONs hat dieses Nutzerkonto in den Einstellungen des ADD-ONs als sein eigenes angegeben
+EIGENER SERVER, EIGENEN SERVER – ein Server im Internet, identifiziert durch eine Serveradresse (Domain-Name); der NUTZER des ADD-ONs hat in den Einstellung des ADD-ON's dieses als den Server angegeben, auf dem sein EIGENER ACCOUNT gespeichert ist
+
+Wenn eine Internetadresse (Uniform Resource Locator, URL) auf eine spezifischen Weise zugegriffen wird, die darauf hindeutet, dass der NUTZER einem ENTFERNTEN NUTZER folgen oder anderweitig mit ihm oder einer ENTFERNTEN NACHRICHT, veröffentlicht durch den ENTFERNTEN NUTZER auf dem ENTFERNTEN SERVER, interagieren will, kann es den NUTZER zu den in dem vom NUTZER in den Einstellungen des ADD-ONs als EIGENEN SERVER festgelegtem Server umleiten.
+Um dies zu tun, kann das ADD-ON den ENTFERNTEN SERVER und EIGENEN SERVER kontaktieren und Informationen über den ENTFERNTEN NUTZER und die ENTFERNTE NACHRICHT senden.
+Zusätzlich kann es Informationen über den EIGENEN ACCOUNT und EIGENEN SERVER and den EIGENEN SERVER senden.
+
+Das ADD-ON wird keinerlei Informationen über den EIGENEN ACCOUNT oder EIGENEN SERVER an einen ENTFERNTEN SERVER senden. Falls dieser Fall unbeabsichtigt auftreten sollte, so wird dies als Sicherheitslücke im ADD-ON behandelt.
+Es kann allerdings passieren, dass der ENTFERNTE SERVER der selbe ist wie der EIGENE SERVER. In diesem Fall arbeitet dass ADD-ON genauso und kann demzufolge alle Informationen an einen Server senden.
+
+Eine Erklärung aller Berechtigungen, die dieses ADD-ON erfragt kann auf https://github.com/rugk/mastodon-simplified-federation/blob/master/assets/texts/de/permissions.md gefunden werden.

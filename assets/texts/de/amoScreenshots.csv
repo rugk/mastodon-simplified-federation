@@ -1,0 +1,5 @@
+remoteFollow.png; "Wenn du jemanden auf einer entfernten Instanz folgen willst, …";
+remoteFollowRedirectCropped.png; "…wird dies automatisch umgeleitet,";
+interactWithToot.png; "…oder wenn du mit einem Toot von jemandem interagieren willst,";
+interactWithTootRedirect.png; "…, wird dies auch umgeleitet.";
+settings.png; "Alles geschieht automatisch im Hintergrund. Du musst nur dein Mastodon-Handle angeben.";

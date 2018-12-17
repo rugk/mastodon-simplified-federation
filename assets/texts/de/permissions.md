@@ -1,25 +1,18 @@
 # Erfragte Berechtigungen
 
-Für eine allgemeine Erklärung von Add-on-Berechtigungen siehe [diesen Support-Artikel](https://support.mozilla.org/kb/permission-request-messages-firefox-extensions).
+Für eine allgemeine Erklärung von Add-on-Berechtigungen siehe [diesen Support-Artikel]https://support.mozilla.org/de/kb/berechtigungsdialoge-der-firefox-erweiterungen).
 
 ## Berechtigungen bei Installation
 
-Zurzeit werden bei Installation des Add-ons oder beim Update keine Berechtigungen abgefragt.
-
-## Feature-spezifische (optionale) Berechtigungen
-
-Diese Berechtigungen werden bei bestimmten Aktionen abgefragt, wenn sie dafür benötigt werden.
-
-| Interne ID  | Berechtigung                                                       | Abgefragt bei…                 | Erklärung                                                                                                                                                                                                                               |
-|:------------|:-------------------------------------------------------------------|:-------------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `downloads` | Dateien herunterladen und die Download-Chronik lesen und verändern | Speichern des QR-Codes als SVG | Benötigt um den SVG-Download zu starten und dem Nutzer eine Möglichkeit zur Auswahl des Speicherortes zu geben. Dieses Add-on greift nicht auf Downloads zu, es benötigt diese Berechtigung nur, um den Download des Bildes zu starten. |
+| Interne ID                  | Berechtigung                               | Erklärung                                                                                                                                                                                                                                                                                                                                                                                       |
+|:----------------------------|:-------------------------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `http://*/*`, `https://*/*` | Auf Ihre Daten für alle Websites zugreifen | Benötigt um Zugriff auf jede Webseite eines Servers zu bekommen, die eine Mastodon-Instanz ist. Da jeder Server eine Mastodon-Instanz sein kann, benötigt dies Zugriff auf jede [HTTP](https://de.wikipedia.org/wiki/Hypertext_Transfer_Protocol)- und [HTTPS](https://de.wikipedia.org/wiki/Hypertext_Transfer_Protocol_Secure)-[URL](https://de.wikipedia.org/wiki/Uniform_Resource_Locator). |
 
 ## Versteckte Berechtigungen
 
 Zusätzlich verlangt dieses Add-on folgende Berechtigungen, welche in Firefox aber nicht abgefragt werden, da sie keine tiefgreifenden Berechtigungen sind.
 
-| Interne ID  | Berechtigung                      | Erklärung                                                                     |
-|:------------|:----------------------------------|:------------------------------------------------------------------------------|
-| `activeTab` | Auf aktuelle Webseite zugreifen   | Benötigt, um die URL des aktuellen Tabs für den QR-Code zu erhalten           |
-| `storage`   | Zugriff auf lokalen Speicher      | Benötigt um Einstellungen abzuspeichern                                       |
-| `menus`     | Browser-Kontextemnüs modifizieren | Benötigt um Kontextmenueinträge wie "QR-Code aus Auswahl" (etc.) hinzuzufügen |
+| Interne ID   | Berechtigung                 | Erklärung                                                                                                                                                   |
+|:-------------|:-----------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `webRequest` | Zugriff auf Webanfragen      | Benötigt um [URLs](https://de.wikipedia.org/wiki/Uniform_Resource_Locator) auf den Server, bei dem du deinen Mastodon-Account gespeichert hast, umzuleiten. |
+| `storage`    | Zugriff auf lokalen Speicher | Benötigt um Einstellungen abzuspeichern                                                                                                                     |

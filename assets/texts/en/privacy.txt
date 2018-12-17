@@ -1,3 +1,20 @@
-This add-on does not send any information to the add-on author or any third-party.
+Definitions:
+ADD-ON – the software that this policy applies to
+USER – the USER of the ADD-ON
+REMOTE SERVER – a server in the internet, identified by a server address (domain name)
+REMOTE USER – a USER account saved on a server in the internet, consists of a USER's name and the server address a USER is registered on, the REMOTE SERVER
+REMOTE MESSAGE – any form of message, including but not limited to text, multimedia, audio and video; published by a REMOTE USER and saved on a REMOTE SERVER
 
-An explanation of all permissions, this add-on requests, can be found at https://github.com/rugk/offline-qr-code/blob/master/assets/texts/en/permissions.md.
+This ADD-ON does not send any personally identifiable information to the ADD-ON author.
+
+OWN ACCOUNT – a USER account saved on a server in the internet, consists of a USER's name and the server address, the USER of the ADD-ON has declared in the settings of this ADD-ON that this account is owned by them
+OWN SERVER – the server in the internet, identified by a server address (domain name); the USER of the ADD-ON has declared in the settings of this ADD-ON to have saved it's OWN ACCOUNT on this server
+
+If an Uniform Resource Locator (URL) in a specified way is accessed, that indicates you are trying to follow REMOTE USER or otherwise interact with the REMOTE USER or a REMOTE MESSAGE published by a REMOTE USER on a REMOTE SERVER, it can redirect the USER to a server you have specified in the settings of the ADD-ON as an OWN SERVER.
+To do so, the ADD-ON may contact the REMOTE SERVER and LOCAL SERVER and send information about the REMOTE USER and REMOTE MESSAGE.
+Additionally, it may send information about the OWN ACCOUNT and OWN SERVER to OWN SERVER.
+
+The ADD-ON will not send information about your OWN ACCOUNT or OWN SERVER to any REMOTE SERVER. If that case should inadvertently happen, it is considered a vulnerability in the ADD-ON.
+It may happen, however, that the REMOTE SERVER is the same as the OWN SERVER. In such a case, the ADD-ON works the same and may thus send all the information to it's own server.
+
+An explanation of all permissions, this ADD-ON requests, can be found at https://github.com/rugk/mastodon-simplified-federation/blob/master/assets/texts/en/permissions.md.

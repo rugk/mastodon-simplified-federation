@@ -1,0 +1,1 @@
+Vereinfacht das Folgen und Interagieren mit Nutzern auf entfernten Mastodon-Instanzen im Fediverse. Es überspringt den "Gib dein Mastodon-Handle ein"-Popup und bringt dich ohne lästige Eingabe deines Mastodon-Handles direkt zu deiner eigenen Instanz.

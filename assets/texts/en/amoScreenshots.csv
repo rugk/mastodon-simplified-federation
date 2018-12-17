@@ -1,0 +1,5 @@
+remoteFollow.png; "If you follow someone from a remote instance…";
+remoteFollowRedirectCropped.png; "…it gets redirected automatically,";
+interactWithToot.png; "…or if you interact with a toot,";
+interactWithTootRedirect.png; "…, it also gets redirected.";
+settings.png; "Everything is done automatically in the background. You only need to enter one thing: your Mastodon handle.";

@@ -5,7 +5,7 @@
 [![Mozilla Add-on users](https://img.shields.io/amo/users/mastodon-simplified-federation.svg)](https://addons.mozilla.org/de/firefox/addon/mastodon-simplified-federation/statistics/)
 [![Mozilla Add-on stars](https://img.shields.io/amo/stars/mastodon-simplified-federation.svg)](https://addons.mozilla.org/de/firefox/addon/mastodon-simplified-federation/reviews/)
 
-Simplifies following or interacting with other users on remote instances. Basically, it skips the "Enter your Mastodon handle" interface and takes you directly to your own "home" instance, when you click on a "Follow" button or a reply/retoot/fav button on another instance. :smile:
+Simplifies following or interacting with other users on remote Mastodon instances in the Fediverse. Basically, it skips the "Enter your Mastodon handle" popup and takes you directly to your own "home" instance, saving you from cumbrously entering your Mastodon handle again and again in that input box when you click on a "Follow", "Retoot"/"Fav" or other remote interaction button on another instance. :smile:
 
 [Idea by](https://social.wxcafe.net/@akkes/100550833588126733) [@akkes](https://social.wxcafe.net/@akkes).
 
@@ -13,15 +13,19 @@ Simplifies following or interacting with other users on remote instances. Basica
 
 **[![Get it for Firefox!](https://addons.cdn.mozilla.net/static/img/addons-buttons/AMO-button_1.png)](https://addons.mozilla.org/de/firefox/addon/mastodon-simplified-federation?src=external-github-download)**
 
-### Why?
+## In …
+
+[![GIF demo showing how I click on a reply button and directly get to the toot site and how I click on follow and directly get to the page, where I can click Follow](assets/screencasts/mastodonSimplifiedFederationDemo.gif)]((assets/screencasts/mastodonSimplifiedFederationDemo.gif))
+
+## Why?
 
 You may wonder why to use this browser add-on. But actually, it's easy!
 
 You do not need to enter your Mastodon account handle anymore! (except for login :wink:) This makes interacting with remote instances much simpler.
 
-Additionally, this add-on makes sure to keep your Mastodon handle **private**. It will never expose it into any third-party site. As such, e.g., it does not – literally – enter your Mastodon ID into the input field you normally see, but basically "skips" this page. For the technical details, on how this works, see [How does it work?](#how-does-it-work) below.
+Additionally, this add-on makes sure to keep your Mastodon handle **private**. It will never expose it to any third-party site. Therefore it does not – literally – enter your Mastodon ID into the input field you normally see, but basically "skips" this page. For the technical details, on how this works, see [How does it work?](#how-does-it-work) below.
 
-### How does it work?
+## How does it work?
 
 1. It intercepts any remote interaction popup/request.
 2. It tries to get the toot/account you want to interact with from the "Enter your Mastodon ID" popup.
