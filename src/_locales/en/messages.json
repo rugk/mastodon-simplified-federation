@@ -80,7 +80,7 @@
     "description": "This is placeholder shown for the Mastodon handle input. Try to give an example on format the user has to use to enter the ID as  mastodon@server.com here. Do not use a real server name and do not promote any really existing user."
   },
   "optionMastodonHandleHelper": {
-    "message": "Please enter your Mastodon handle in the form username@serverdomain.",
+    "message": "Please enter your Mastodon handle in the form “username@serverdomain”.",
     "description": "An explanatory text shown to the user in the settings to explain what format they have to enter the Mastodon handle. It should not hint to any example (that's what the placeholder is for), but explain the general format."
   },
 

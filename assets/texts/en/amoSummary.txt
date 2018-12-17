@@ -1,1 +1,1 @@
-Simplifies following or interacting with other users on remote Mastodon instances in the Fediverse. It skips the "Enter your Mastodon handle" popup and takes you to your own "home" instance, without entering your Mastodon handle on remote instances.
+Simplifies following or interacting with other users on remote Mastodon instances in the Fediverse. It skips the “Enter your Mastodon handle” popup and takes you to your own “home” instance, without entering your Mastodon handle on remote instances.
