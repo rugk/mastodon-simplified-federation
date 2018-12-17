@@ -5,6 +5,5 @@
  */
 
 export const DEFAULT_SETTINGS = Object.freeze({
-    debugMode: false,
     ownMastodon: null
 });
