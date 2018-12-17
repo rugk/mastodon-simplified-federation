@@ -15,7 +15,7 @@ Simplifies following or interacting with other users on remote Mastodon instance
 
 ## In action…
 
-[![GIF demo showing how I click on a reply button and directly get to the toot site and how I click on follow and directly get to the page, where I can click Follow](assets/screencasts/mastodonSimplifiedFederationDemo.gif)]((assets/screencasts/mastodonSimplifiedFederationDemo.gif))
+[![GIF demo showing how I click on a reply button and directly get to the toot site and how I click on follow and directly get to the page, where I can click Follow](assets/screencasts/mastodonSimplifiedFederationDemo.gif)](assets/screencasts/mastodonSimplifiedFederationDemo.gif)
 
 ## Why?
 
