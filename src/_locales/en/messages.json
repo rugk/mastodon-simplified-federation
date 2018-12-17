@@ -75,6 +75,10 @@
     "message": "Your Mastodon handle: ",
     "description": "This is an option shown in the add-on settings. You can enter your handle in the form mastodon@server.com there."
   },
+  "optionMastodonHandlePlaceholder": {
+    "message": "you@mastodon.example",
+    "description": "This is placeholder shown for the Mastodon handle input. Try to give an example on format the user has to use to enter the ID as  mastodon@server.com here. Do not use a real server name and do not promote any really existing user."
+  },
 
   // ARIA labels/descriptions
   "dismissIconDescription": {
