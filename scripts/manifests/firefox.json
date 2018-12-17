@@ -28,7 +28,8 @@
 
   "permissions": [
     "storage",
-    "webRequest",
+    "webRequest",,
+    "http://*/*"
     "https://*/*"
   ],
 
