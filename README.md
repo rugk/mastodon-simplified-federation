@@ -11,7 +11,7 @@ Simplifies following or interacting with other users on remote Mastodon instance
 
 ## Download
 
-**[![Get it for Firefox!](https://addons.cdn.mozilla.net/static/img/addons-buttons/AMO-button_1.png)](https://addons.mozilla.org/de/firefox/addon/mastodon-simplified-federation?src=external-github-download)**
+**[![Get it for Firefox!](https://addons.cdn.mozilla.net/static/img/addons-buttons/AMO-button_1.png)](https://addons.mozilla.org/firefox/addon/mastodon-simplified-federation?src=external-github-download)**
 
 ## In action…
 
