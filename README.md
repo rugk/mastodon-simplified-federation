@@ -1,9 +1,9 @@
 # Mastodon – Simplified Federation! <img align="right" height="100" width="100" src="assets/logo/logo_optimized.svg">
 
-[![Mozilla Add-on version](https://img.shields.io/amo/v/mastodon-simplified-federation.svg)](https://addons.mozilla.org/de/firefox/addon/mastodon-simplified-federation/?src=external-github-shield-downloads)  
-[![Mozilla Add-on downloads](https://img.shields.io/amo/d/mastodon-simplified-federation.svg)](https://addons.mozilla.org/de/firefox/addon/mastodon-simplified-federation/?src=external-github-shield-downloads)
-[![Mozilla Add-on users](https://img.shields.io/amo/users/mastodon-simplified-federation.svg)](https://addons.mozilla.org/de/firefox/addon/mastodon-simplified-federation/statistics/)
-[![Mozilla Add-on stars](https://img.shields.io/amo/stars/mastodon-simplified-federation.svg)](https://addons.mozilla.org/de/firefox/addon/mastodon-simplified-federation/reviews/)
+[![Mozilla Add-on version](https://img.shields.io/amo/v/mastodon-simplified-federation.svg)](https://addons.mozilla.org/firefox/addon/mastodon-simplified-federation/?src=external-github-shield-downloads)  
+[![Mozilla Add-on downloads](https://img.shields.io/amo/d/mastodon-simplified-federation.svg)](https://addons.mozilla.org/firefox/addon/mastodon-simplified-federation/?src=external-github-shield-downloads)
+[![Mozilla Add-on users](https://img.shields.io/amo/users/mastodon-simplified-federation.svg)](https://addons.mozilla.org/firefox/addon/mastodon-simplified-federation/statistics/)
+[![Mozilla Add-on stars](https://img.shields.io/amo/stars/mastodon-simplified-federation.svg)](https://addons.mozilla.org/firefox/addon/mastodon-simplified-federation/reviews/)
 
 Simplifies following or interacting with other users on remote Mastodon instances in the Fediverse. Basically, it skips the "Enter your Mastodon handle" popup and takes you directly to your own "home" instance, saving you from cumbrously entering your Mastodon handle again and again in that input box when you click on a "Follow", "Retoot"/"Fav" or other remote interaction button on another instance. :smile:
 
