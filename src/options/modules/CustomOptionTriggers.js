@@ -92,11 +92,13 @@ function checkMastodonHandle(optionValue) {
         return null;
     }
 
+    // simple empty check
     if (optionValue === "") {
         showMastodonHandleError(MASTODON_HANDLE_IS_EMPTY, optionValue);
         throw new Error("empty Mastodon handle");
     }
 
+    // check vadility (syntax)
     let splitHandle;
     try {
         splitHandle = Mastodon.splitUserHandle(optionValue);
@@ -106,6 +108,8 @@ function checkMastodonHandle(optionValue) {
         // re-throw to prevent saving
         throw e;
     }
+
+    // check existance
 
     // if saving worked, maybe we need to hide the error though
     hideMastodonError();
