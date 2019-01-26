@@ -15,6 +15,14 @@ export const CATCH_URLS = new Map();
 CATCH_URLS.set(REMOTE_FOLLOW_REGEX, INTERACTION_TYPE.FOLLOW);
 
 /**
+ * Whether to enable replacing the previous site when redirecting or not.
+ *
+ * @public
+ * @type {boolean}
+ */
+export const ENABLE_LOAD_REPLACE = false;
+
+/**
  * Find the follow URL.
  *
  * @function

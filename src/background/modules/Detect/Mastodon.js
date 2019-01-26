@@ -25,6 +25,14 @@ CATCH_URLS.set(REMOTE_FOLLOW_REGEX, INTERACTION_TYPE.FOLLOW);
 CATCH_URLS.set(REMOTE_INTERACT_REGEX, INTERACTION_TYPE.TOOT_INTERACT);
 
 /**
+ * Whether to enable replacing the previous site when redirecting or not.
+ *
+ * @public
+ * @type {boolean}
+ */
+export const ENABLE_LOAD_REPLACE = true;
+
+/**
  * Scrapes the toot URL from the HTML page, if needed.
  *
  * @private
