@@ -4,7 +4,7 @@
  * @module Detect/Mastodon.js
  */
 
-import * as NetworkTools from "../NetworkTools.js";
+import * as NetworkTools from "/common/modules/NetworkTools.js";
 
 import * as AddonSettings from "/common/modules/AddonSettings/AddonSettings.js";
 import * as MastodonApi from "/common/modules/MastodonApi.js";

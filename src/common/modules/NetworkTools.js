@@ -4,7 +4,7 @@
  * @module NetworkTools
  */
 
-import {ADDON_NAME_SHORT, ADDON_NAME, ADDON_VERSION, ADDON_NAME, BROWSER_IDENTIFIER} from "/common/modules/GlobalConstants.js";
+import {ADDON_NAME_SHORT, ADDON_VERSION, BROWSER_IDENTIFIER} from "/common/modules/GlobalConstants.js";
 
 /**
  * Convert URL parameter to string, if needed.
@@ -34,26 +34,28 @@ function convertUrlToString(url) {
  */
 export function fetch(input, init = {}, ...args) {
     const USER_AGENT_HEADER = "User-Agent";
-    const USER_AGENT_VALUE = `${ADDON_NAME_SHORT} (${ADDON_NAME}, v${ADDON_VERSION}, https://github.com/rugk/mastodon-auto-follow, on ${BROWSER_IDENTIFIER})`;
+    const USER_AGENT_VALUE = `${ADDON_NAME_SHORT} (v${ADDON_VERSION}, https://github.com/rugk/mastodon-auto-follow, on ${BROWSER_IDENTIFIER})`;
 
     // init header object, if needed
     if (!(init.headers instanceof Headers)) {
         init.headers = new Headers();
     }
 
-    // adjuts header, if not already set
+    // adjusts header, if not already set
     if (init.headers instanceof Headers) {
         if (!init.headers.has(USER_AGENT_HEADER)) {
             init.headers.append(USER_AGENT_HEADER, USER_AGENT_VALUE);
         }
     } else {
+        // adjust plain object version, if that is used
         if (!(USER_AGENT_HEADER in init.headers)) {
             // is object literal
             init.headers[USER_AGENT_HEADER] = USER_AGENT_VALUE;
         }
     }
 
-    return fetch(input, init, ...args);
+    // continue with global fetch
+    return window.fetch(input, init, ...args);
 }
 
 /**

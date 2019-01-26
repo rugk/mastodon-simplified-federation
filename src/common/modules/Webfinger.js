@@ -6,6 +6,7 @@
  */
 
 import { UnknownAccountError } from "/common/modules/Errors.js";
+import * as NetworkTools from "/common/modules/NetworkTools.js";
 
 /**
  * Do a webfinger request for Mastodon account at server.
@@ -17,7 +18,7 @@ import { UnknownAccountError } from "/common/modules/Errors.js";
  */
 function queryWebfinger(mastodonServer, mastodonHandle) {
     // Protocol MUST BE HTTPS (as per RFC 7033 4.2.)
-    return fetch(new URL(`https://${mastodonServer}/.well-known/webfinger?resource=acct:${mastodonHandle}`)).then((response) => {
+    return NetworkTools.fetch(new URL(`https://${mastodonServer}/.well-known/webfinger?resource=acct:${mastodonHandle}`)).then((response) => {
         if (!response.ok) {
             console.error(`Error when fetching WebFinger for "${mastodonHandle}":`, response);
 

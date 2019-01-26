@@ -7,7 +7,7 @@
 import * as AddonSettings from "/common/modules/AddonSettings/AddonSettings.js";
 import * as Mastodon from "/common/modules/Mastodon.js";
 
-import * as NetworkTools from "./NetworkTools.js";
+import * as NetworkTools from "/common/modules/NetworkTools.js";
 
 let loadReplace = true; // default
 

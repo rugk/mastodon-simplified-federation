@@ -4,6 +4,8 @@
  * @module common/modules/MastodonApi
  */
 
+import * as NetworkTools from "/common/modules/NetworkTools.js";
+
 /**
  * Mastodon Server API error
  *
@@ -46,7 +48,7 @@ class MastodonApiError extends Error {
  */
 function getMastodonInstanceInfo(mastodonServer) {
     // protcol specified HTTPS must be used
-    return fetch(new URL(`https://${mastodonServer}/api/v1/instance`)).then((response) => {
+    return NetworkTools.fetch(new URL(`https://${mastodonServer}/api/v1/instance`)).then((response) => {
         if (!response.ok) {
             throw new MastodonApiError(mastodonServer, response, `"${mastodonServer}" is no Mastodon server.`);
         }
@@ -88,7 +90,7 @@ export function isMastodonServer(mastodonServer) {
  */
 export function getTootStatus(mastodonServer, localTootId) {
     // protcol specified HTTPS must be used
-    return fetch(new URL(`https://${mastodonServer}/api/v1/statuses/${localTootId}`)).then((response) => {
+    return NetworkTools.fetch(new URL(`https://${mastodonServer}/api/v1/statuses/${localTootId}`)).then((response) => {
         if (!response.ok) {
             throw new MastodonApiError(mastodonServer, response, `"${mastodonServer}" .`);
         }

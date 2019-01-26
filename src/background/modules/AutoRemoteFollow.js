@@ -9,7 +9,7 @@ import {INTERACTION_TYPE} from "./data/INTERACTION_TYPE.js";
 import * as MastodonDetect from "./Detect/Mastodon.js";
 import * as GnuSocialDetect from "./Detect/GnuSocial.js";
 
-import * as NetworkTools from "./NetworkTools.js";
+import * as NetworkTools from "/common/modules/NetworkTools.js";
 import * as MastodonRedirect from "./MastodonRedirect.js";
 
 const FEDIVERSE_TYPE = Object.freeze({
