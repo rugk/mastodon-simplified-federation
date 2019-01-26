@@ -4,6 +4,8 @@
  * @module NetworkTools
  */
 
+import {ADDON_NAME_SHORT, ADDON_NAME, ADDON_VERSION, ADDON_NAME, BROWSER_IDENTIFIER} from "/common/modules/GlobalConstants.js";
+
 /**
  * Convert URL parameter to string, if needed.
  *
@@ -17,6 +19,41 @@ function convertUrlToString(url) {
     }
 
     return url;
+}
+
+/**
+ * A small fetch wrapper.
+ *
+ * Just adjusts fetch request, so they are common enough.
+ *
+ * @public
+ * @param {USVString|Request} input
+ * @param {Object} [init]
+ * @returns {string}
+ * @see {@link https://developer.mozilla.org/docs/Web/API/WindowOrWorkerGlobalScope/fetch}
+ */
+export function fetch(input, init = {}, ...args) {
+    const USER_AGENT_HEADER = "User-Agent";
+    const USER_AGENT_VALUE = `${ADDON_NAME_SHORT} (${ADDON_NAME}, v${ADDON_VERSION}, https://github.com/rugk/mastodon-auto-follow, on ${BROWSER_IDENTIFIER})`;
+
+    // init header object, if needed
+    if (!(init.headers instanceof Headers)) {
+        init.headers = new Headers();
+    }
+
+    // adjuts header, if not already set
+    if (init.headers instanceof Headers) {
+        if (!init.headers.has(USER_AGENT_HEADER)) {
+            init.headers.append(USER_AGENT_HEADER, USER_AGENT_VALUE);
+        }
+    } else {
+        if (!(USER_AGENT_HEADER in init.headers)) {
+            // is object literal
+            init.headers[USER_AGENT_HEADER] = USER_AGENT_VALUE;
+        }
+    }
+
+    return fetch(input, init, ...args);
 }
 
 /**
