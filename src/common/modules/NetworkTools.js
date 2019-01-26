@@ -1,5 +1,8 @@
 /**
- * Provides small wrapper functions around browser APIs for listening to web requests.
+ * Provides small wrapper functions around browser APIs for
+ * * listening to web requests
+ * * redirecting requests
+ * * fetching data/making web requests
  *
  * @module NetworkTools
  */
