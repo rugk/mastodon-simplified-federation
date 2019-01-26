@@ -48,6 +48,13 @@ function scrapeTootUrlFromPage(url) {
             // I have no idea, why it is an array, here.
             followUrl = followUrl[0];
 
+            // verify it is a real URL
+            try {
+                new URL(followUrl);
+            } catch (e) {
+                throw new Error(`HTML scraping returned invalid URL: ${followUrl}`);
+            }
+
             return followUrl;
         });
     });
