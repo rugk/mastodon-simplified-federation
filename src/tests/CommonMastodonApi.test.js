@@ -5,7 +5,7 @@ import "https://unpkg.com/sinon@6.1.5/pkg/sinon.js"; /* globals sinon */
 import * as MastodonApi from "/common/modules/MastodonApi.js";
 
 describe("common module: MastodonApi", function () {
-    describe("getSubscribeApiUrl()", function () {
+    describe("getTootStatus()", function () {
         afterEach(function() {
             sinon.restore();
         });
