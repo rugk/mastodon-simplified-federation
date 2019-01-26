@@ -31,11 +31,8 @@ async function triggerRemoteAction(uri) {
 
     const url = (new URL(mastodonApiUrl)).toString();
 
-    // observe triggered request, so we can make sure it
-    const verifyRequest = async (requestDetails) => {
-        // cleanup listener
-        NetworkTools.webRequestListenStop("onCompleted", verifyRequest);
-
+    // observe triggered request, so we can make sure it worked
+    NetworkTools.waitForWebRequest(url, async (requestDetails) => {
         // if everything is okay, we are fine with that
         if (requestDetails.statusCode === 200) {
             return;
@@ -46,9 +43,7 @@ async function triggerRemoteAction(uri) {
         const mastodonApiUrl = await Mastodon.getSubscribeApiUrl(ownMastodon, uri, true);
 
         NetworkTools.redirectToWebsite(mastodonApiUrl, false);
-    };
-
-    NetworkTools.webRequestListen(url, "onCompleted", verifyRequest);
+    });
 
     // finally redirect
     return NetworkTools.redirectToWebsite(url, false);

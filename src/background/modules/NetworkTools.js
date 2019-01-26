@@ -5,6 +5,21 @@
  */
 
 /**
+ * Convert URL parameter to string, if needed.
+ *
+ * @private
+ * @param {string|URL} url
+ * @returns {string}
+ */
+function convertUrlToString(url) {
+    if (url instanceof URL) {
+        return url.href;
+    }
+
+    return url;
+}
+
+/**
  * Listen to a web request of this URL.
  *
  * @public
@@ -54,9 +69,8 @@ export function webRequestListenStop(onAction, handleWebRequest) {
  * @see {@link https://developer.mozilla.org/docs/Mozilla/Add-ons/WebExtensions/API/tabs/update}
  */
 export function redirectToWebsite(url, loadReplace = true) {
-    if (url instanceof URL) {
-        url = (new URL(url)).toString();
-    }
+    // convert URL object, if needed
+    url = convertUrlToString(url);
 
     // Firefox for Android e.g. does not support "loadReplace"
     try {
@@ -68,7 +82,6 @@ export function redirectToWebsite(url, loadReplace = true) {
         return browser.tabs.update({ url });
     }
 }
-
 
 /**
  * Waits until the loading of a specific URL completes.
@@ -98,7 +111,7 @@ export function waitForWebRequest(url, callback, onAction = "onCompleted", timeo
             timerId = setTimeout(() => {
                 // cleanup listener
                 webRequestListenStop(onAction, listenForPageLoad);
-                reject(new Error("Waiting for request timed out."));
+                reject(new Error(`Waiting for request for URL "${url}" timed out.`));
             }, timeout);
         }
 
@@ -114,9 +127,7 @@ export function waitForWebRequest(url, callback, onAction = "onCompleted", timeo
         };
 
         // convert URL object, if needed
-        if (url instanceof URL) {
-            url = url.href;
-        }
+        url = convertUrlToString(url);
 
         webRequestListen(url, onAction, listenForPageLoad);
     });
