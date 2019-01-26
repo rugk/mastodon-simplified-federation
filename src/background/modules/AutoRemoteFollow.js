@@ -48,9 +48,13 @@ async function handleWebRequest(requestDetails) {
         return Promise.resolve();
     case FEDIVERSE_TYPE.MASTODON:
         detectModule = MastodonDetect;
+
+        MastodonRedirect.enableLoadReplace(true);
         break;
     case FEDIVERSE_TYPE.GNU_SOCIAL:
         detectModule = GnuSocialDetect;
+
+        MastodonRedirect.enableLoadReplace(false);
         break;
     default:
         throw new Error(`unknown fediverse type: ${software.toString()}`);

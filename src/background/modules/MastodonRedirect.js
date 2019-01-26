@@ -9,6 +9,23 @@ import * as Mastodon from "/common/modules/Mastodon.js";
 
 import * as NetworkTools from "./NetworkTools.js";
 
+let loadReplace = true; // default
+
+/**
+ * Enable or disable replacing of the current website when redirecting.
+ *
+ * @private
+ * @param {boolean} newLoadReplace
+ * @returns {void}
+ */
+export function enableLoadReplace(newLoadReplace) {
+    if (newLoadReplace !== true && newLoadReplace !== false) {
+        throw new TypeError(`Expected boolean, but got ${typeof newLoadReplace}.`);
+    }
+
+    loadReplace = newLoadReplace;
+}
+
 /**
  * Redirects to a API endpoint of Mastodon for remote following.
  *
@@ -24,7 +41,7 @@ async function triggerRemoteAction(uri) {
     // own server
     if (uri.startsWith(`https://${ownMastodon.server}`)) {
         // just redirect to given input URL, if it is one the same server
-        return NetworkTools.redirectToWebsite(uri, false);
+        return NetworkTools.redirectToWebsite(uri, loadReplace);
     }
 
     const mastodonApiUrl = await Mastodon.getSubscribeApiUrl(ownMastodon, uri);
@@ -42,11 +59,13 @@ async function triggerRemoteAction(uri) {
         // (the API endpoint could have been changed)
         const mastodonApiUrl = await Mastodon.getSubscribeApiUrl(ownMastodon, uri, true);
 
-        NetworkTools.redirectToWebsite(mastodonApiUrl, false);
+        // redirect and always replace site, as before an invalid site has been loaded
+        // (we never need to preserve an invalid site)
+        NetworkTools.redirectToWebsite(mastodonApiUrl, true);
     });
 
     // finally redirect
-    return NetworkTools.redirectToWebsite(url, false);
+    return NetworkTools.redirectToWebsite(url, loadReplace);
 }
 
 /**
