@@ -91,7 +91,7 @@ export async function getSubscribeApiTemplate(mastodon, skipCache = false) {
 
     // default URI, if no cached value & ignore errors
     let apiTemplate = null;
-    apiTemplate = await Webfinger.getWebfingerInfo(mastodon, "http://ostatus.org/schema/1.0/subscribe", "subscriptionUri", skipCache)
+    apiTemplate = await Webfinger.getWebfingerInfo(mastodon, "http://ostatus.org/schema/1.0/subscribe")
         .then((subscripeObject) => subscripeObject.template)
         .catch();
 
@@ -103,7 +103,6 @@ export async function getSubscribeApiTemplate(mastodon, skipCache = false) {
     browser.storage.sync.set({
         subscriptionUri: apiTemplate
     });
-    console.log(apiTemplate);
 
     return apiTemplate;
 }
@@ -123,4 +122,16 @@ export async function getSubscribeApiTemplate(mastodon, skipCache = false) {
 export async function getSubscribeApiUrl(mastodon, uri, skipCache = false) {
     const apiTemplate = await getSubscribeApiTemplate(mastodon, uri, skipCache);
     return apiTemplate.replace(SUBSCRIBE_TEMPLATE_PLACEHOLDER, uri);
+}
+
+/**
+ * Returns the link of an account.
+ *
+ * @public
+ * @param {{username: string, server: string}} mastodon User handle split by splitUserHandle
+ * @returns {Promise} resulting in boolean
+ */
+export function getAccountLink(mastodon) {
+    return Webfinger.getWebfingerInfo(mastodon, "self")
+        .then((subscripeObject) => subscripeObject.href);
 }

@@ -52,6 +52,18 @@
     "message": "Das Mastodon-Handle, dass du eingeben hast, ist invalid.",
     "description": "This is an error shown, when the Mastodon handle the user entered is not valid."
   },
+  "mastodonHandleDoesNotExist": {
+    "message": "Das Mastodon-Handle, dass du eingeben hast, existiert auf dem Server nicht.",
+    "description": "This is an error shown, when the Mastodon handle the user entered does not exist on the server, i.e. the server returns a 404 error."
+  },
+  "mastodonHandleServerCouldNotBeContacted": {
+    "message": "Der eingebenen Mastodon-Server konnte nicht kontaktiert werden.",
+    "description": "This is an error shown, when the last part of Mastodon handle (= the server) could not be contacted, due to a network (likely DNS) error and thus likely due to a typo or another problem."
+  },
+  "mastodonHandleCheckFailed": {
+    "message": "Verifikation des eingegebenen Mastodon-Handles ist fehlgeschlagen.",
+    "description": "This is an error shown, when the server that has been contacted to verify the handle returned an unexpected response."
+  },
 
   // options
   "someSettingsAreManaged": {

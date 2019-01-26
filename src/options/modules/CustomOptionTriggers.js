@@ -6,6 +6,8 @@
 
 import isPlainObject from "/common/modules/lodash/isPlainObject.js";
 
+import { UnknownAccountError } from "/common/modules/Errors.js";
+
 import * as Mastodon from "/common/modules/Mastodon.js";
 import * as AutomaticSettings from "/common/modules/AutomaticSettings/AutomaticSettings.js";
 import * as CommonMessages from "/common/modules/MessageHandler/CommonMessages.js";
@@ -13,6 +15,10 @@ import * as CommonMessages from "/common/modules/MessageHandler/CommonMessages.j
 // Mastodon handle state management
 const MASTODON_HANDLE_IS_INVALID = Symbol("invalid Mastodon handle");
 const MASTODON_HANDLE_IS_EMPTY = Symbol("empty Mastodon handle");
+const MASTODON_HANDLE_IS_NON_EXISTANT = Symbol("Mastodon account does not exist");
+const MASTODON_HANDLE_NETWORK_ERROR = Symbol("Mastodon server is likely wrong");
+const MASTODON_HANDLE_CHECK_FAILED = Symbol("Could not check Mastodon handle");
+
 let mastodonHandleErrorShown = null;
 let lastInvalidMastodonHandle = null;
 
@@ -30,6 +36,9 @@ function hideMastodonError(options = {animate: true}) {
         CommonMessages.hideWarning(options);
         break;
     case MASTODON_HANDLE_IS_INVALID:
+    case MASTODON_HANDLE_IS_NON_EXISTANT:
+    case MASTODON_HANDLE_NETWORK_ERROR:
+    case MASTODON_HANDLE_CHECK_FAILED:
         CommonMessages.hideError(options);
         break;
     }
@@ -58,6 +67,15 @@ function showMastodonHandleError(type, optionValue) {
     case MASTODON_HANDLE_IS_INVALID:
         CommonMessages.showError("mastodonHandleIsInvalid");
         break;
+    case MASTODON_HANDLE_IS_NON_EXISTANT:
+        CommonMessages.showError("mastodonHandleDoesNotExist");
+        break;
+    case MASTODON_HANDLE_NETWORK_ERROR:
+        CommonMessages.showError("mastodonHandleServerCouldNotBeContacted");
+        break;
+    case MASTODON_HANDLE_CHECK_FAILED:
+        CommonMessages.showError("mastodonHandleCheckFailed");
+        break;
     default:
         throw new TypeError("invalid error type has been given");
     }
@@ -66,7 +84,6 @@ function showMastodonHandleError(type, optionValue) {
     lastInvalidMastodonHandle = optionValue;
 }
 
-
 /**
  * Checks if the Mastodon handle is valid and shows an error, if needed.
  *
@@ -74,9 +91,9 @@ function showMastodonHandleError(type, optionValue) {
  * @private
  * @param  {boolean} optionValue
  * @param  {string} [option]
- * @returns {Object}
+ * @returns {Promise} (split mastodon handle & accountLink)
  */
-function checkMastodonHandle(optionValue) {
+async function checkMastodonHandle(optionValue) {
     // default option, string not yet set
     if (optionValue === null) {
         showMastodonHandleError(MASTODON_HANDLE_IS_EMPTY, optionValue);
@@ -102,19 +119,32 @@ function checkMastodonHandle(optionValue) {
     let splitHandle;
     try {
         splitHandle = Mastodon.splitUserHandle(optionValue);
-    } catch (e) {
+    } catch (error) {
         showMastodonHandleError(MASTODON_HANDLE_IS_INVALID, optionValue);
 
         // re-throw to prevent saving
-        throw e;
+        throw error;
     }
 
     // check existance
+    const accountLink = await Mastodon.getAccountLink(splitHandle).catch((error) => {
+        if (error instanceof UnknownAccountError) {
+            showMastodonHandleError(MASTODON_HANDLE_IS_NON_EXISTANT, optionValue);
+        } else if (error instanceof TypeError) {
+            // error by .fetch, likely unknown/wrong server
+            showMastodonHandleError(MASTODON_HANDLE_NETWORK_ERROR, optionValue);
+        } else {
+            showMastodonHandleError(MASTODON_HANDLE_CHECK_FAILED, optionValue);
+        }
+
+        // re-throw to prevent saving
+        throw error;
+    });
 
     // if saving worked, maybe we need to hide the error though
     hideMastodonError();
     mastodonHandleErrorShown = null;
-    return splitHandle;
+    return {splitHandle, accountLink};
 }
 
 /**
@@ -130,7 +160,10 @@ function checkMastodonHandle(optionValue) {
  */
 function saveMastodonHandle(param) {
     // our split handle from {@see checkMastodonHandle()} is saved in saveTriggerValues
-    const splitHandle = param.saveTriggerValues[0];
+    const splitHandle = param.saveTriggerValues[0].splitHandle;
+
+    // while we have time, also pre-query subscribe API template
+    Mastodon.getSubscribeApiTemplate(splitHandle, true);
 
     return AutomaticSettings.Trigger.overrideContinue(splitHandle);
 }
