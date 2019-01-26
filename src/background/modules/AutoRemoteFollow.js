@@ -80,7 +80,7 @@ async function handleWebRequest(requestDetails) {
  * @function
  * @private
  * @param {URL} url
- * @returns {[FEDIVERSE_TYPE, Symbol]|null}
+ * @returns {[FEDIVERSE_TYPE, Symbol]|[null, null]}
  */
 function getInteractionType(url) {
     for (const fedType of Object.values(FEDIVERSE_TYPE)) {
@@ -101,7 +101,7 @@ function getInteractionType(url) {
  * @returns {Promise}
  */
 function init() {
-    NetworkTools.webRequestListen("https://*/*", "onBeforeRequest", handleWebRequest);
+    NetworkTools.webRequestListen(["http://*/*", "https://*/*"], "onBeforeRequest", handleWebRequest);
 }
 
 init();

@@ -8,16 +8,21 @@
  * Listen to a web request of this URL.
  *
  * @public
- * @param {string} expectedUrl
+ * @param {string|Array} expectedUrl one or more URLs
  * @param {string} onAction
  * @param {function} handleWebRequest
  * @param {string[]} [extraInfoSpec] {@link https://developer.mozilla.org/docs/Mozilla/Add-ons/WebExtensions/API/webRequest/onBeforeRequest}
  * @returns {void}
  */
 export function webRequestListen(expectedUrl, onAction, handleWebRequest, extraInfoSpec) {
+    let urls = expectedUrl;
+    if (!Array.isArray(urls)) {
+        urls = [expectedUrl];
+    }
+
     return browser.webRequest[onAction].addListener(
         handleWebRequest,
-        {urls: [expectedUrl], types: ["main_frame"]},
+        {urls: urls, types: ["main_frame"]},
         extraInfoSpec
     );
 }
