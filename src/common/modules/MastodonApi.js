@@ -4,7 +4,6 @@
  * @module common/modules/MastodonApi
  */
 
-
 /**
  * Mastodon Server API error
  *
