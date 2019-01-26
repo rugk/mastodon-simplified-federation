@@ -32,32 +32,24 @@ CATCH_URLS.set(REMOTE_INTERACT_REGEX, INTERACTION_TYPE.TOOT_INTERACT);
  * @returns {Promise}
  */
 function scrapeTootUrlFromPage(url) {
-    return new Promise((resolve, reject) => {
-        const listenForPageLoad = () => {
-            // cleanup listener
-            NetworkTools.webRequestListenStop("onCompleted", listenForPageLoad);
+    return NetworkTools.waitForWebRequest(url, () => {
+        // inject content script to get toot URL
+        // default = current tab
+        return browser.tabs.executeScript(
+            {
+                file: "/content_script/mastodonFindTootUrl.js",
+                runAt: "document_end"
+            }
+        ).then((followUrl) => {
+            if (!followUrl) {
+                throw new Error("Could not get toot URL from Mastodon page.");
+            }
 
-            // inject content script to load
-            // default = current tab
-            browser.tabs.executeScript(
-                {
-                    file: "/content_script/mastodonFindTootUrl.js",
-                    runAt: "document_end"
-                }
-            ).then((followUrl) => {
-                if (!followUrl) {
-                    throw new Error("Could not get toot URL from Mastodon page.");
-                }
+            // I have no idea, why it is an array, here.
+            followUrl = followUrl[0];
 
-                // I have no idea, why it is an array, here.
-                followUrl = followUrl[0];
-
-                resolve(followUrl);
-                return followUrl;
-            }).catch(reject);
-        };
-
-        NetworkTools.webRequestListen(url.href, "onCompleted", listenForPageLoad);
+            return followUrl;
+        });
     });
 }
 

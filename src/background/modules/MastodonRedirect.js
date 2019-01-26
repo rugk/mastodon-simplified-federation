@@ -13,7 +13,7 @@ import * as NetworkTools from "./NetworkTools.js";
  * Redirects to a API endpoint of Mastodon for remote following.
  *
  * @private
- * @param {string} uri a Mastodon hanlde (user account) to follow or toot URL
+ * @param {string} uri a Mastodon handle (user account) to follow or toot URL
  * @returns {Promise}
  */
 async function triggerRemoteAction(uri) {
