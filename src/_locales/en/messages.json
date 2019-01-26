@@ -57,8 +57,12 @@
     "description": "This is an error shown, when the Mastodon handle the user entered does not exist on the server, i.e. the server returns a 404 error."
   },
   "mastodonHandleServerCouldNotBeContacted": {
-    "message": "The entered Mastodon server could not be contacted.",
+    "message": "The entered (Mastodon) server could not be contacted.",
     "description": "This is an error shown, when the last part of Mastodon handle (= the server) could not be contacted, due to a network (likely DNS) error and thus likely due to a typo or another problem."
+  },
+  "isNoMastodonServer": {
+    "message": "The entered server is no instance of Mastodon.",
+    "description": "This is an error shown, when the last part of Mastodon handle (= the server) is actually no Mastodon server."
   },
   "mastodonHandleCheckFailed": {
     "message": "Verification of the entered Mastodon handle failed.",
