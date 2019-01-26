@@ -132,18 +132,30 @@ async function checkMastodonHandle(optionValue) {
         throw error;
     }
 
+    // check whether server is really a Mastodon server
+    const isMastodonServer = await MastodonApi.isMastodonServer(splitHandle.server).catch((error) => {
+        if (error instanceof TypeError) {
+            // error by .fetch, likely unknown/wrong server
+            showMastodonHandleError(MASTODON_HANDLE_NETWORK_ERROR, optionValue);
+        } else {
+            showMastodonHandleError(MASTODON_HANDLE_CHECK_FAILED, optionValue);
+        }
+
+        // re-throw to prevent saving
+        throw error;
+    }).then((isMastodonServer) => {
+        // ignore, if it is a valid Mastodon server
+        if (isMastodonServer) {
+            return true;
+        }
+
+        showMastodonHandleError(MASTODON_NO_MASTODON_SERVER, optionValue);
+
+        throw new Error("is no mastodon server!");
+    });
+
     // check existance of handle (and/on) server
-    const accountLink = await Mastodon.getAccountLink(splitHandle).catch(async (error) => {
-        const isMastodonServer = await MastodonApi.isMastodonServer(splitHandle.server).then((isMastodonServer) => {
-            // ignore, if it is a valid Mastodon server
-            if (isMastodonServer) {
-                return true;
-            }
-
-            showMastodonHandleError(MASTODON_NO_MASTODON_SERVER, optionValue);
-            return false;
-        }).catch(console.error);
-
+    const accountLink = await Mastodon.getAccountLink(splitHandle).catch((error) => {
         // only if we are sure it is no Mastodon server display that as a result
         if (isMastodonServer === false) {
             // re-throw to prevent saving
