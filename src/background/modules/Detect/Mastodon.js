@@ -97,7 +97,7 @@ export function getTootUrl(url) {
     // use the local toot ID/URL
     const fromStaticOwnServer = AddonSettings.get("ownMastodon").then((ownMastodon) => {
         if (mastodonServer !== ownMastodon.server) {
-            return Promise.reject(new Error("is not own server URL"));
+            return Promise.reject(new Error(`${mastodonServer} is not own server.`));
         }
 
         // this does skip the usual subscripe/interact API
@@ -122,6 +122,12 @@ export function getTootUrl(url) {
     return fromStaticOwnServer.catch(() => {
         // prefer fastest result
         return Promise.race([getFromApiQuery, scrapFromHtml]);
+    }).then((url) => {
+        // log result for debugging purposes
+        console.log(`Got toot URL "${url}".`, {fromStaticOwnServer, getFromApiQuery, scrapFromHtml});
+
+        // pass through
+        return url;
     });
 }
 
