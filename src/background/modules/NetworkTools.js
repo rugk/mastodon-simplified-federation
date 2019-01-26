@@ -44,10 +44,11 @@ export function webRequestListenStop(onAction, handleWebRequest) {
  *
  * @public
  * @param {string|URL} url
+ * @param {boolean} loadReplace whether to replace the existing site
  * @returns {Promise}
  * @see {@link https://developer.mozilla.org/docs/Mozilla/Add-ons/WebExtensions/API/tabs/update}
  */
-export function redirectToWebsite(url) {
+export function redirectToWebsite(url, loadReplace = true) {
     if (url instanceof URL) {
         url = (new URL(url)).toString();
     }
@@ -55,8 +56,8 @@ export function redirectToWebsite(url) {
     // Firefox for Android e.g. does not support "loadReplace"
     try {
         return browser.tabs.update({
-            loadReplace: true,
-            url: url
+            loadReplace,
+            url
         });
     } catch (e) {
         return browser.tabs.update({ url });

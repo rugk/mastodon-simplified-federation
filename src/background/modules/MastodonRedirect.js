@@ -24,7 +24,7 @@ async function triggerRemoteAction(uri) {
     // own server
     if (uri.startsWith(`https://${ownMastodon.server}`)) {
         // just redirect to given input URL, if it is one the same server
-        return NetworkTools.redirectToWebsite(uri);
+        return NetworkTools.redirectToWebsite(uri, false);
     }
 
     const mastodonApiUrl = await Mastodon.getSubscribeApiUrl(ownMastodon, uri);
@@ -45,13 +45,13 @@ async function triggerRemoteAction(uri) {
         // (the API endpoint could have been changed)
         const mastodonApiUrl = await Mastodon.getSubscribeApiUrl(ownMastodon, uri, true);
 
-        NetworkTools.redirectToWebsite(mastodonApiUrl);
+        NetworkTools.redirectToWebsite(mastodonApiUrl, false);
     };
 
     NetworkTools.webRequestListen(url, "onCompleted", verifyRequest);
 
     // finally redirect
-    return NetworkTools.redirectToWebsite(url);
+    return NetworkTools.redirectToWebsite(url, false);
 }
 
 /**
