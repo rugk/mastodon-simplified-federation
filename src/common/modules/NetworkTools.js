@@ -34,7 +34,7 @@ function convertUrlToString(url) {
  */
 export function fetch(input, init = {}, ...args) {
     const USER_AGENT_HEADER = "User-Agent";
-    const USER_AGENT_VALUE = `${ADDON_NAME_SHORT} (v${ADDON_VERSION}, https://github.com/rugk/mastodon-auto-follow, on ${BROWSER_IDENTIFIER})`;
+    const USER_AGENT_VALUE = `${ADDON_NAME_SHORT} (v${ADDON_VERSION}; https://github.com/rugk/mastodon-auto-follow; on ${BROWSER_IDENTIFIER})`;
 
     // init header object, if needed
     if (!(init.headers instanceof Headers)) {
