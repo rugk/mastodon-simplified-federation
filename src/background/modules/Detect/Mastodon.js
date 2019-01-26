@@ -4,6 +4,8 @@
  * @module Detect/Mastodon.js
  */
 
+import * as NetworkTools from "../NetworkTools.js";
+
 import * as AddonSettings from "/common/modules/AddonSettings/AddonSettings.js";
 import * as MastodonApi from "/common/modules/MastodonApi.js";
 
@@ -23,6 +25,43 @@ CATCH_URLS.set(REMOTE_FOLLOW_REGEX, INTERACTION_TYPE.FOLLOW);
 CATCH_URLS.set(REMOTE_INTERACT_REGEX, INTERACTION_TYPE.TOOT_INTERACT);
 
 /**
+ * Scrapes the toot URL from the HTML page, if needed.
+ *
+ * @private
+ * @param {URL} url
+ * @returns {Promise}
+ */
+function scrapeTootUrlFromPage(url) {
+    return new Promise((resolve, reject) => {
+        const listenForPageLoad = () => {
+            // cleanup listener
+            NetworkTools.webRequestListenStop("onCompleted", listenForPageLoad);
+
+            // inject content script to load
+            // default = current tab
+            browser.tabs.executeScript(
+                {
+                    file: "/content_script/mastodonFindTootUrl.js",
+                    runAt: "document_end"
+                }
+            ).then((followUrl) => {
+                if (!followUrl) {
+                    throw new Error("Could not get toot URL from Mastodon page.");
+                }
+
+                // I have no idea, why it is an array, here.
+                followUrl = followUrl[0];
+
+                resolve(followUrl);
+                return followUrl;
+            }).catch(reject);
+        };
+
+        NetworkTools.webRequestListen(url.href, "onCompleted", listenForPageLoad);
+    });
+}
+
+/**
  * Returns the (local) toot ID of the given interact page.
  *
  * Note the returned ID is the local one of the current server, as it is just
@@ -36,7 +75,7 @@ CATCH_URLS.set(REMOTE_INTERACT_REGEX, INTERACTION_TYPE.TOOT_INTERACT);
  * @param {URL} url
  * @returns {string}
  */
-export function getTootId(url) {
+function getTootId(url) {
     // just find number at the end
     return url.pathname.substring(url.pathname.lastIndexOf("/") + 1);
 }
@@ -70,6 +109,9 @@ export function getTootUrl(url) {
         return newUrl;
     });
 
+    // try scrape method
+    const scrapFromHtml = scrapeTootUrlFromPage(url);
+
     // thanks https://discourse.joinmastodon.org/t/how-to-get-url-of-toot-from-toot-id/1335/2?u=rugk
     const getFromApiQuery = MastodonApi.getTootStatus(mastodonServer, localTootId).then((tootStatus) => {
         return tootStatus.url;
@@ -79,7 +121,8 @@ export function getTootUrl(url) {
     // will often fail and we can ignore the error and test the other universal
     // methods.
     return fromStaticOwnServer.catch(() => {
-        return getFromApiQuery;
+        // prefer fastest result
+        return Promise.race([getFromApiQuery, scrapFromHtml]);
     });
 }
 
