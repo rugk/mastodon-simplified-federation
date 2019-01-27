@@ -1,5 +1,5 @@
 /**
- * This mdoules contains the custom triggers for some options that are added.
+ * This modules contains the custom triggers for some options that are added.
  *
  * @module modules/CustomOptionTriggers
  */
@@ -11,82 +11,22 @@ import { UnknownAccountError } from "/common/modules/Errors.js";
 import * as Mastodon from "/common/modules/Mastodon.js";
 import * as MastodonApi from "/common/modules/MastodonApi.js";
 import * as AutomaticSettings from "/common/modules/AutomaticSettings/AutomaticSettings.js";
-import * as CommonMessages from "/common/modules/MessageHandler/CommonMessages.js";
+import * as MastodonHandleError from "/common/modules/MastodonHandleError.js";
 
-// Mastodon handle state management
-const MASTODON_HANDLE_IS_INVALID = Symbol("invalid Mastodon handle");
-const MASTODON_HANDLE_IS_EMPTY = Symbol("empty Mastodon handle");
-const MASTODON_HANDLE_IS_NON_EXISTANT = Symbol("Mastodon account does not exist");
-const MASTODON_HANDLE_NETWORK_ERROR = Symbol("Mastodon server could not be contacted, network error.");
-const MASTODON_NO_MASTODON_SERVER = Symbol("Server is no Mastodon server");
-const MASTODON_HANDLE_CHECK_FAILED = Symbol("Could not check Mastodon handle");
-
-let mastodonHandleErrorShown = null;
 let lastInvalidMastodonHandle = null;
 
 /**
  * Hides the error/warning shown for the Mastodon handle.
  *
  * @function
- * @param {Object} options
- * @private
- * @returns {void}
- */
-function hideMastodonError(options = {animate: true}) {
-    switch (mastodonHandleErrorShown) {
-    case MASTODON_HANDLE_IS_EMPTY:
-        CommonMessages.hideWarning(options);
-        break;
-    case MASTODON_HANDLE_IS_INVALID:
-    case MASTODON_HANDLE_IS_NON_EXISTANT:
-    case MASTODON_HANDLE_NETWORK_ERROR:
-    case MASTODON_NO_MASTODON_SERVER:
-    case MASTODON_HANDLE_CHECK_FAILED:
-        CommonMessages.hideError(options);
-        break;
-    }
-
-    mastodonHandleErrorShown = null;
-}
-
-
-/**
- * Hides the error/warning shown for the Mastodon handle.
- *
- * @function
- * @param {MASTODON_HANDLE_IS_EMPTY|MASTODON_HANDLE_IS_INVALID} type
+ * @param {MASTODON_HANDLE_ERROR} type
  * @param {string} optionValue
  * @private
  * @returns {void}
  */
 function showMastodonHandleError(type, optionValue) {
-    // hide "old" error, if needed
-    hideMastodonError({animate: false});
+    MastodonHandleError.showMastodonHandleError(type);
 
-    switch (type) {
-    case MASTODON_HANDLE_IS_EMPTY:
-        CommonMessages.showWarning("mastodonHandleIsEmpty");
-        break;
-    case MASTODON_HANDLE_IS_INVALID:
-        CommonMessages.showError("mastodonHandleIsInvalid");
-        break;
-    case MASTODON_HANDLE_IS_NON_EXISTANT:
-        CommonMessages.showError("mastodonHandleDoesNotExist");
-        break;
-    case MASTODON_HANDLE_NETWORK_ERROR:
-        CommonMessages.showError("mastodonHandleServerCouldNotBeContacted");
-        break;
-    case MASTODON_NO_MASTODON_SERVER:
-        CommonMessages.showError("isNoMastodonServer");
-        break;
-    case MASTODON_HANDLE_CHECK_FAILED:
-        CommonMessages.showError("mastodonHandleCheckFailed");
-        break;
-    default:
-        throw new TypeError("invalid error type has been given");
-    }
-
-    mastodonHandleErrorShown = type;
     lastInvalidMastodonHandle = optionValue;
 }
 
@@ -102,7 +42,7 @@ function showMastodonHandleError(type, optionValue) {
 async function checkMastodonHandle(optionValue) {
     // default option, string not yet set
     if (optionValue === null) {
-        showMastodonHandleError(MASTODON_HANDLE_IS_EMPTY, optionValue);
+        showMastodonHandleError(MastodonHandleError.MASTODON_HANDLE_ERROR.IS_EMPTY, optionValue);
         // do NOT throw error as first loading has to suceed!
         return null;
     }
@@ -110,14 +50,14 @@ async function checkMastodonHandle(optionValue) {
     // ignore options directly loaded from the settings, these are always valid
     if (isPlainObject(optionValue)) {
         // hide "old" error, if needed
-        hideMastodonError({animate: false});
+        MastodonHandleError.hideMastodonError({animate: false});
 
         return null;
     }
 
     // simple empty check
     if (optionValue === "") {
-        showMastodonHandleError(MASTODON_HANDLE_IS_EMPTY, optionValue);
+        showMastodonHandleError(MastodonHandleError.MASTODON_HANDLE_ERROR.IS_EMPTY, optionValue);
         throw new Error("empty Mastodon handle");
     }
 
@@ -126,7 +66,7 @@ async function checkMastodonHandle(optionValue) {
     try {
         splitHandle = Mastodon.splitUserHandle(optionValue);
     } catch (error) {
-        showMastodonHandleError(MASTODON_HANDLE_IS_INVALID, optionValue);
+        showMastodonHandleError(MastodonHandleError.MASTODON_HANDLE_ERROR.SYNTAX_IS_INVALID, optionValue);
 
         // re-throw to prevent saving
         throw error;
@@ -136,9 +76,9 @@ async function checkMastodonHandle(optionValue) {
     const isMastodonServer = await MastodonApi.isMastodonServer(splitHandle.server).catch((error) => {
         if (error instanceof TypeError) {
             // error by .fetch, likely unknown/wrong server
-            showMastodonHandleError(MASTODON_HANDLE_NETWORK_ERROR, optionValue);
+            showMastodonHandleError(MastodonHandleError.MASTODON_HANDLE_ERROR.NETWORK_ERROR, optionValue);
         } else {
-            showMastodonHandleError(MASTODON_HANDLE_CHECK_FAILED, optionValue);
+            showMastodonHandleError(MastodonHandleError.MASTODON_HANDLE_ERROR.HANDLE_CHECK_FAILED, optionValue);
         }
 
         // re-throw to prevent saving
@@ -149,7 +89,7 @@ async function checkMastodonHandle(optionValue) {
             return true;
         }
 
-        showMastodonHandleError(MASTODON_NO_MASTODON_SERVER, optionValue);
+        showMastodonHandleError(MastodonHandleError.MASTODON_HANDLE_ERROR.NO_MASTODON_SERVER, optionValue);
 
         throw new Error("is no mastodon server!");
     });
@@ -163,12 +103,12 @@ async function checkMastodonHandle(optionValue) {
         }
 
         if (error instanceof UnknownAccountError) {
-            showMastodonHandleError(MASTODON_HANDLE_IS_NON_EXISTANT, optionValue);
+            showMastodonHandleError(MastodonHandleError.MASTODON_HANDLE_ERROR.ACCOUNT_NON_EXISTANT, optionValue);
         } else if (error instanceof TypeError) {
             // error by .fetch, likely unknown/wrong server
-            showMastodonHandleError(MASTODON_HANDLE_NETWORK_ERROR, optionValue);
+            showMastodonHandleError(MastodonHandleError.MASTODON_HANDLE_ERROR.NETWORK_ERROR, optionValue);
         } else {
-            showMastodonHandleError(MASTODON_HANDLE_CHECK_FAILED, optionValue);
+            showMastodonHandleError(MastodonHandleError.MASTODON_HANDLE_ERROR.HANDLE_CHECK_FAILED, optionValue);
         }
 
         // re-throw to prevent saving
@@ -176,8 +116,7 @@ async function checkMastodonHandle(optionValue) {
     });
 
     // if saving worked, maybe we need to hide the error though
-    hideMastodonError();
-    mastodonHandleErrorShown = null;
+    MastodonHandleError.hideMastodonError();
     return {splitHandle, accountLink};
 }
 
@@ -247,26 +186,26 @@ function checkMastodonHandleFast(optionValue) {
     // if error has been hidden by typing only, and user reverts to invalid input
     // we need to show the error again
     // The problem is that for the same input the "change" event is not triggered.
-    if (!mastodonHandleErrorShown && lastInvalidMastodonHandle === optionValue) {
+    if (!MastodonHandleError.isErrorShown() && lastInvalidMastodonHandle === optionValue) {
         checkMastodonHandle(optionValue);
         lastInvalidMastodonHandle = null;
         return;
     }
 
-    if (!mastodonHandleErrorShown) {
+    if (!MastodonHandleError.isErrorShown()) {
         return;
     }
 
-    switch (mastodonHandleErrorShown) {
-    case MASTODON_HANDLE_IS_EMPTY:
+    // TODO: do not hardcode checks again(?)
+    switch (MastodonHandleError.getErrorShown()) {
+    case MastodonHandleError.MASTODON_HANDLE_ERROR.IS_EMPTY:
         if (optionValue !== "") {
             return;
         }
         break;
-    case MASTODON_HANDLE_IS_INVALID:
+    case MastodonHandleError.MASTODON_HANDLE_ERROR.SYNTAX_IS_INVALID:
         try {
             Mastodon.splitUserHandle(optionValue);
-
         } catch (e) {
             // cache value that is considered an error
             lastInvalidMastodonHandle = optionValue;
@@ -278,7 +217,7 @@ function checkMastodonHandleFast(optionValue) {
     }
 
     // if it works, the user managed to fix the previously reported error! :)
-    hideMastodonError();
+    MastodonHandleError.hideMastodonError();
 }
 
 /**
