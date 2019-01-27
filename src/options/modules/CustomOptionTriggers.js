@@ -4,31 +4,13 @@
  * @module modules/CustomOptionTriggers
  */
 
-import isPlainObject from "/common/modules/lodash/isPlainObject.js";
-
-import { UnknownAccountError } from "/common/modules/Errors.js";
-
 import * as Mastodon from "/common/modules/Mastodon.js";
-import * as MastodonApi from "/common/modules/MastodonApi.js";
 import * as AutomaticSettings from "/common/modules/AutomaticSettings/AutomaticSettings.js";
-import * as MastodonHandleError from "/common/modules/MastodonHandleError.js";
+
+import * as MastodonHandleError from "/common/modules/MastodonHandle/ConfigError.js";
+import * as MastodonHandleCheck from "/common/modules/MastodonHandle/ConfigCheck.js";
 
 let lastInvalidMastodonHandle = null;
-
-/**
- * Hides the error/warning shown for the Mastodon handle.
- *
- * @function
- * @param {MASTODON_HANDLE_ERROR} type
- * @param {string} optionValue
- * @private
- * @returns {void}
- */
-function showMastodonHandleError(type, optionValue) {
-    MastodonHandleError.showMastodonHandleError(type);
-
-    lastInvalidMastodonHandle = optionValue;
-}
 
 /**
  * Checks if the Mastodon handle is valid and shows an error, if needed.
@@ -40,79 +22,13 @@ function showMastodonHandleError(type, optionValue) {
  * @returns {Promise} (split mastodon handle & accountLink)
  */
 async function checkMastodonHandle(optionValue) {
-    // default option, string not yet set
-    if (optionValue === null) {
-        showMastodonHandleError(MastodonHandleError.MASTODON_HANDLE_ERROR.IS_EMPTY, optionValue);
-        // do NOT throw error as first loading has to suceed!
-        return null;
-    }
-
-    // ignore options directly loaded from the settings, these are always valid
-    if (isPlainObject(optionValue)) {
-        // hide "old" error, if needed
-        MastodonHandleError.hideMastodonError({animate: false});
-
-        return null;
-    }
-
-    // simple empty check
-    if (optionValue === "") {
-        showMastodonHandleError(MastodonHandleError.MASTODON_HANDLE_ERROR.IS_EMPTY, optionValue);
-        throw new Error("empty Mastodon handle");
-    }
-
-    // check vadility (syntax)
-    let splitHandle;
-    try {
-        splitHandle = Mastodon.splitUserHandle(optionValue);
-    } catch (error) {
-        showMastodonHandleError(MastodonHandleError.MASTODON_HANDLE_ERROR.SYNTAX_IS_INVALID, optionValue);
-
-        // re-throw to prevent saving
-        throw error;
-    }
-
-    // check whether server is really a Mastodon server
-    const isMastodonServer = await MastodonApi.isMastodonServer(splitHandle.server).catch((error) => {
-        if (error instanceof TypeError) {
-            // error by .fetch, likely unknown/wrong server
-            showMastodonHandleError(MastodonHandleError.MASTODON_HANDLE_ERROR.NETWORK_ERROR, optionValue);
-        } else {
-            showMastodonHandleError(MastodonHandleError.MASTODON_HANDLE_ERROR.HANDLE_CHECK_FAILED, optionValue);
-        }
-
-        // re-throw to prevent saving
-        throw error;
-    }).then((isMastodonServer) => {
-        // ignore, if it is a valid Mastodon server
-        if (isMastodonServer) {
-            return true;
-        }
-
-        showMastodonHandleError(MastodonHandleError.MASTODON_HANDLE_ERROR.NO_MASTODON_SERVER, optionValue);
-
-        throw new Error("is no mastodon server!");
+    MastodonHandleCheck.setErrorCallback((type, optionValue) => {
+        lastInvalidMastodonHandle = optionValue;
     });
 
-    // check existance of handle (and/on) server
-    const accountLink = await Mastodon.getAccountLink(splitHandle).catch((error) => {
-        // only if we are sure it is no Mastodon server display that as a result
-        if (isMastodonServer === false) {
-            // re-throw to prevent saving
-            throw error;
-        }
-
-        if (error instanceof UnknownAccountError) {
-            showMastodonHandleError(MastodonHandleError.MASTODON_HANDLE_ERROR.ACCOUNT_NON_EXISTANT, optionValue);
-        } else if (error instanceof TypeError) {
-            // error by .fetch, likely unknown/wrong server
-            showMastodonHandleError(MastodonHandleError.MASTODON_HANDLE_ERROR.NETWORK_ERROR, optionValue);
-        } else {
-            showMastodonHandleError(MastodonHandleError.MASTODON_HANDLE_ERROR.HANDLE_CHECK_FAILED, optionValue);
-        }
-
-        // re-throw to prevent saving
-        throw error;
+    const {splitHandle, accountLink} = await MastodonHandleCheck.verifyUserConfig(optionValue, {
+        ignoreSplitHandles: true,
+        doNotThrowForNull: true,
     });
 
     // if saving worked, maybe we need to hide the error though
@@ -197,27 +113,14 @@ function checkMastodonHandleFast(optionValue) {
     }
 
     // TODO: do not hardcode checks again(?)
-    switch (MastodonHandleError.getErrorShown()) {
-    case MastodonHandleError.MASTODON_HANDLE_ERROR.IS_EMPTY:
-        if (optionValue !== "") {
-            return;
-        }
-        break;
-    case MastodonHandleError.MASTODON_HANDLE_ERROR.SYNTAX_IS_INVALID:
-        try {
-            Mastodon.splitUserHandle(optionValue);
-        } catch (e) {
-            // cache value that is considered an error
-            lastInvalidMastodonHandle = optionValue;
-
-            // ignore all errors
-            return;
-        }
-        break;
-    }
-
-    // if it works, the user managed to fix the previously reported error! :)
-    MastodonHandleError.hideMastodonError();
+    MastodonHandleCheck.verifyUserConfig(optionValue, {
+        ignoreSplitHandles: true,
+        doNotThrowForNull: true,
+        networkChecks: false
+    }).then(() => {
+        // if it works, the user managed to fix the previously reported error! :)
+        MastodonHandleError.hideMastodonError();
+    });
 }
 
 /**

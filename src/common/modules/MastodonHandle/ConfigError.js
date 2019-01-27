@@ -1,7 +1,7 @@
 /**
  * This mdoules contains the custom triggers for some options that are added.
  *
- * @module MastodonHandleError
+ * @module MastodonHandle/ConfigError
  */
 
 import * as CommonMessages from "/common/modules/MessageHandler/CommonMessages.js";
