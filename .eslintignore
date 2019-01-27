@@ -1,2 +1,1 @@
-src/common/lib/*
-src/popup/lib/*
+src/common/modules/lodash/*
