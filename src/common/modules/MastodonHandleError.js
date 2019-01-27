@@ -43,6 +43,12 @@ export function hideMastodonError(options = {animate: true}) {
     case MASTODON_HANDLE_ERROR.HANDLE_CHECK_FAILED:
         CommonMessages.hideError(options);
         break;
+    case null:
+        // no error show, so cannot hide anything
+        // console.warn("Tried to hide Mastodon handle error altghough no one is shown.");
+        return;
+    default:
+        throw new Error(`invalid error type "${getErrorShown()}" is saved`);
     }
 
     mastodonHandleErrorShown = null;
@@ -79,11 +85,12 @@ export function showMastodonHandleError(type) {
         CommonMessages.showError("mastodonHandleCheckFailed");
         break;
     default:
-        throw new TypeError("invalid error type has been given");
+        throw new TypeError(`invalid error type "${type.toString()}" has been given`);
     }
 
     mastodonHandleErrorShown = type;
 }
+
 /**
  * Returns the error that is currently shown.
  *
