@@ -10,13 +10,13 @@ import * as NetworkTools from "/common/modules/NetworkTools.js";
  * Mastodon Server API error
  *
  * @class
- * @see {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error#Custom_Error_Types}
+ * @see {@link https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Error#Custom_Error_Types}
  */
 class MastodonApiError extends Error {
     /**
      * Error to use, when the Mastodon API returns an error.
      *
-     * @see {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error#Custom_Error_Types}
+     * @see {@link https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Error#Custom_Error_Types}
      * @param {string} mastodonServer the affected server
      * @param {Response} response result of fetch
      */

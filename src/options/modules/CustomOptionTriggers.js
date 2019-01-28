@@ -4,13 +4,17 @@
  * @module modules/CustomOptionTriggers
  */
 
+import isPlainObject from "/common/modules/lodash/isPlainObject.js";
+
 import * as Mastodon from "/common/modules/Mastodon.js";
 import * as AutomaticSettings from "/common/modules/AutomaticSettings/AutomaticSettings.js";
 
 import * as MastodonHandleError from "/common/modules/MastodonHandle/ConfigError.js";
 import * as MastodonHandleCheck from "/common/modules/MastodonHandle/ConfigCheck.js";
 
-let lastInvalidMastodonHandle = null;
+// whether the handle was once entered in a valid way
+let validSyntaxHandleOnceEntered = false;
+let lastInvalidHandleWithError = null;
 
 /**
  * Checks if the Mastodon handle is valid and shows an error, if needed.
@@ -18,18 +22,56 @@ let lastInvalidMastodonHandle = null;
  * @function
  * @private
  * @param  {boolean} optionValue
- * @param  {string} [option]
+ * @param  {string} option
+ * @param  {Object} event
  * @returns {Promise} (split mastodon handle & accountLink)
  */
-async function checkMastodonHandle(optionValue) {
-    MastodonHandleCheck.setErrorCallback((type, optionValue) => {
-        lastInvalidMastodonHandle = optionValue;
-    });
+async function checkMastodonHandle(optionValue, option, event) {
+    // ignore options directly loaded from the settings, these are always valid
+    if (isPlainObject(optionValue)) {
+        return {splitHandle: optionValue};
+    }
 
-    const {splitHandle, accountLink} = await MastodonHandleCheck.verifyUserConfig(optionValue, {
-        ignoreSplitHandles: true,
-        doNotThrowForNull: true,
-    });
+    let splitHandle, accountLink;
+    try {
+        const splitHandle = MastodonHandleCheck.verifyStatically(optionValue);
+
+        // if it does not throw, it has been verified
+        validSyntaxHandleOnceEntered = true;
+
+        await MastodonHandleCheck.verifyAccount(splitHandle).then((networkResults) => {
+            accountLink = networkResults.accountLink;
+        });
+    } catch (error) {
+        // if user clears input field (i.e. they enter a new handle), reset syntax check
+        // and show no error
+        if (validSyntaxHandleOnceEntered && error.errorType === MastodonHandleError.ERROR_TYPE.IS_EMPTY) {
+            validSyntaxHandleOnceEntered = false;
+        }
+
+        // show error to user only when they already entered a valid syntax or
+        // explicitly left the element
+        //
+        // Or, if the last input with error is entered again…
+        // ..., because if error has been hidden by typing only, and user reverts
+        // to invalid input we need to show the error again
+        // The problem is that for the same input the "change" event is not triggered.
+        if (validSyntaxHandleOnceEntered || event.type === "change" || lastInvalidHandleWithError === optionValue) {
+            MastodonHandleError.showMastodonHandleError(error);
+
+            lastInvalidHandleWithError = optionValue;
+        } else {
+            MastodonHandleError.hideMastodonError();
+        }
+
+        if (error.errorType === MastodonHandleError.ERROR_TYPE.NOT_CONFIGURED) {
+            // do NOT throw error as first loading has to suceed!
+            return null;
+        }
+
+        // re-throw error to prevent saving
+        throw error;
+    }
 
     // if saving worked, maybe we need to hide the error though
     MastodonHandleError.hideMastodonError();
@@ -87,43 +129,6 @@ function prepareMastodonHandleForInput(param) {
 }
 
 /**
- * Checks whether Mastodon handle is valid again, and – if so – hides the errors.
- *
- * Note this does not show any errors in order not to annoy a user when they are
- * typing.
- *
- * @function
- * @private
- * @param  {boolean} optionValue
- * @param  {string} [option]
- * @returns {void}
- */
-function checkMastodonHandleFast(optionValue) {
-    // if error has been hidden by typing only, and user reverts to invalid input
-    // we need to show the error again
-    // The problem is that for the same input the "change" event is not triggered.
-    if (!MastodonHandleError.isErrorShown() && lastInvalidMastodonHandle === optionValue) {
-        checkMastodonHandle(optionValue);
-        lastInvalidMastodonHandle = null;
-        return;
-    }
-
-    if (!MastodonHandleError.isErrorShown()) {
-        return;
-    }
-
-    // TODO: do not hardcode checks again(?)
-    MastodonHandleCheck.verifyUserConfig(optionValue, {
-        ignoreSplitHandles: true,
-        doNotThrowForNull: true,
-        networkChecks: false
-    }).then(() => {
-        // if it works, the user managed to fix the previously reported error! :)
-        MastodonHandleError.hideMastodonError();
-    });
-}
-
-/**
  * Binds the triggers.
  *
  * This is basically the "init" method.
@@ -138,8 +143,6 @@ export function registerTrigger() {
 
     // register triggers
     AutomaticSettings.Trigger.registerSave("ownMastodon", checkMastodonHandle);
-
-    AutomaticSettings.Trigger.registerUpdate("ownMastodon", checkMastodonHandleFast);
 
     // handle loading of options correctly
     AutomaticSettings.Trigger.registerAfterLoad(AutomaticSettings.Trigger.RUN_ALL_SAVE_TRIGGER);
