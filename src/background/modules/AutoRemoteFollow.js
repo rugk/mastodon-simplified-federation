@@ -12,6 +12,11 @@ import * as GnuSocialDetect from "./Detect/GnuSocial.js";
 import * as NetworkTools from "/common/modules/NetworkTools.js";
 import * as MastodonRedirect from "./MastodonRedirect.js";
 
+import * as AddonSettings from "/common/modules/AddonSettings/AddonSettings.js";
+import * as MastodonHandleCheck from "/common/modules/MastodonHandle/ConfigCheck.js";
+import * as MastodonHandleError from "/common/modules/MastodonHandle/ConfigError.js";
+import * as Notifications from "/common/modules/Notifications.js";
+
 const FEDIVERSE_TYPE = Object.freeze({
     MASTODON: Symbol("Mastodon"),
     GNU_SOCIAL: Symbol("GNU Social")
@@ -22,15 +27,14 @@ const FEDIVERSE_MODULE = Object.freeze({
 });
 
 /**
- * Listens for Mastodon requests at web request change.
+ * Analyses the web request.
  *
  * @function
  * @private
  * @param {Object} requestDetails
- * @throws {Error}
  * @returns {Promise}
  */
-async function handleWebRequest(requestDetails) {
+async function analyzeRequest(requestDetails) {
     // ignore when URL is not changed
     if (!requestDetails.url) {
         return Promise.reject(new Error("URL info not available"));
@@ -40,11 +44,11 @@ async function handleWebRequest(requestDetails) {
 
     const [software, interaction] = getInteractionType(url);
 
-    // detect, which network/fsoftware it uses
+    // detect, which network/software it uses
     let detectModule;
     switch (software) {
     case null:
-        // ignore unrelated sites
+        // ignore unrelated sites, resolves so error handling is not triggered
         return Promise.resolve();
     case FEDIVERSE_TYPE.MASTODON:
         detectModule = MastodonDetect;
@@ -74,6 +78,36 @@ async function handleWebRequest(requestDetails) {
     default:
         throw new Error(`unknown interaction type: ${interaction.toString()}`);
     }
+}
+
+/**
+ * Listens for Mastodon requests at web request change.
+ *
+ * @function
+ * @private
+ * @param {Object} requestDetails
+ * @returns {Promise}
+ */
+function handleWebRequest(requestDetails) {
+    return analyzeRequest(requestDetails).catch(async (e) => {
+        // open options on click
+        const openOptions = () => {
+            browser.notifications.onClicked.removeListener(openOptions);
+            browser.runtime.openOptionsPage();
+        };
+        browser.notifications.onClicked.addListener(openOptions);
+
+        // verify that Mastodon handle is correctly saved
+        const mastodonHandle = await AddonSettings.get("ownMastodon");
+        MastodonHandleCheck.verifyComplete(mastodonHandle).then(() => {
+            Notifications.showNotification("couldNotRedirect");
+        }).catch((error) => {
+            Notifications.showNotification(MastodonHandleError.getMastodonErrorString(error));
+        });
+
+        // still throw out for debugging
+        throw e;
+    });
 }
 
 /**

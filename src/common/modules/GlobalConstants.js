@@ -6,7 +6,7 @@
 
 export const ADDON_VERSION = (browser.runtime.getManifest()).version;
 export const ADDON_NAME = (browser.runtime.getManifest()).name;
-export const ADDON_NAME_SHORT = "MastodonSimplifiedFederation";
+export const ADDON_NAME_INTERNAL = "MastodonSimplifiedFederation";
 
 // yes, pseudo-constants
 export let BROWSER_IDENTIFIER = "N/A";

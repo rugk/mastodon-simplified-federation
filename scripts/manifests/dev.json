@@ -30,6 +30,7 @@
   "permissions": [
     "storage",
     "webRequest",
+    "notifications",
     "http://*/*",
     "https://*/*"
   ],

@@ -113,8 +113,9 @@ export async function verifyAccount(splitHandle) {
  * @returns {Promise} Object with `splitHandle` and `accountLink` for link to user account
  * @throws {ConfigError.MastodonHandleError} rejects if invalid
  */
-export function verifyComplete(mastodonHandle) {
-    const splitHandle = verifyStatically(mastodonHandle);
+export async function verifyComplete(mastodonHandle) {
+    // using await and async here, so error is converted into rejected promise
+    const splitHandle = await verifyStatically(mastodonHandle);
 
     return verifyAccount(splitHandle).then((networkResults) => {
         // combine results

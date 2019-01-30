@@ -103,10 +103,40 @@ export function hideMastodonError(options = {animate: true}) {
 function getErrorType(type) {
     if (type instanceof MastodonHandleError) {
         return type.errorType;
-    } else if (type in ERROR_TYPE) {
+    } else if (Object.values(ERROR_TYPE).includes(type)) {
         return type;
     } else {
         throw new TypeError(`Input error type "${type.toString()}" is invalid.`);
+    }
+}
+
+/**
+ * Return the (i18n) message for an error.
+ *
+ * @public
+ * @param {ERROR_TYPE|MastodonHandleError} type error type or error itself
+ * @returns {string}
+ * @throws {TypeError} if invalid type is passed
+ */
+export function getMastodonErrorString(type) {
+    type = getErrorType(type);
+
+    switch (type) {
+    case ERROR_TYPE.NOT_CONFIGURED:
+    case ERROR_TYPE.IS_EMPTY:
+        return "mastodonHandleIsEmpty";
+    case ERROR_TYPE.SYNTAX_IS_INVALID:
+        return "mastodonHandleIsInvalid";
+    case ERROR_TYPE.ACCOUNT_NON_EXISTANT:
+        return "mastodonHandleDoesNotExist";
+    case ERROR_TYPE.NETWORK_ERROR:
+        return "mastodonHandleServerCouldNotBeContacted";
+    case ERROR_TYPE.NO_MASTODON_SERVER:
+        return "isNoMastodonServer";
+    case ERROR_TYPE.HANDLE_CHECK_FAILED:
+        return "mastodonHandleCheckFailed";
+    default:
+        throw new TypeError(`Invalid error type "${type.toString()}" has been passed.`);
     }
 }
 
@@ -128,28 +158,16 @@ export function showMastodonHandleError(type) {
     // hide "old" error, if needed
     hideMastodonError({animate: false});
 
+    const message = getMastodonErrorString(type);
+
     switch (type) {
     case ERROR_TYPE.NOT_CONFIGURED:
     case ERROR_TYPE.IS_EMPTY:
         CommonMessages.showWarning("mastodonHandleIsEmpty");
         break;
-    case ERROR_TYPE.SYNTAX_IS_INVALID:
-        CommonMessages.showError("mastodonHandleIsInvalid");
-        break;
-    case ERROR_TYPE.ACCOUNT_NON_EXISTANT:
-        CommonMessages.showError("mastodonHandleDoesNotExist");
-        break;
-    case ERROR_TYPE.NETWORK_ERROR:
-        CommonMessages.showError("mastodonHandleServerCouldNotBeContacted");
-        break;
-    case ERROR_TYPE.NO_MASTODON_SERVER:
-        CommonMessages.showError("isNoMastodonServer");
-        break;
-    case ERROR_TYPE.HANDLE_CHECK_FAILED:
-        CommonMessages.showError("mastodonHandleCheckFailed");
-        break;
     default:
-        throw new TypeError(`Invalid error type "${type.toString()}" has been passed.`);
+        CommonMessages.showError(message);
+        break;
     }
 
     mastodonHandleErrorTypeShown = type;

@@ -1,3 +1,5 @@
+"use strict";
+
 /**
  * Return the URL, you want to follow.
  *
