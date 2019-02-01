@@ -4,7 +4,8 @@
  * @module AutoRenameFollow
  */
 
-import {INTERACTION_TYPE} from "./data/INTERACTION_TYPE.js";
+import { INTERACTION_TYPE } from "./data/INTERACTION_TYPE.js";
+import { ADDON_NAME } from "/common/modules/GlobalConstants.js";
 
 import * as MastodonDetect from "./Detect/Mastodon.js";
 import * as GnuSocialDetect from "./Detect/GnuSocial.js";
@@ -97,13 +98,18 @@ function handleWebRequest(requestDetails) {
         };
         browser.notifications.onClicked.addListener(openOptions);
 
+        const title = browser.i18n.getMessage("errorNotificationTitle", ADDON_NAME);
+        let errorIdentifier;
         // verify that Mastodon handle is correctly saved
         const mastodonHandle = await AddonSettings.get("ownMastodon");
         MastodonHandleCheck.verifyComplete(mastodonHandle).then(() => {
-            Notifications.showNotification("couldNotRedirect");
+            errorIdentifier = "couldNotRedirect";
         }).catch((error) => {
-            Notifications.showNotification(MastodonHandleError.getMastodonErrorString(error));
+            errorIdentifier = MastodonHandleError.getMastodonErrorString(error);
         });
+        const errorMessage = browser.i18n.getMessage(errorIdentifier) || errorIdentifier;
+        const message = browser.i18n.getMessage("errorInNotificationRedirecting", errorMessage);
+        Notifications.showNotification(message, title);
 
         // still throw out for debugging
         throw e;

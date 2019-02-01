@@ -5,9 +5,8 @@
  * @see {@link https://developer.mozilla.org/docs/Mozilla/Add-ons/WebExtensions/user_interface/Notifications}
  */
 
-import { ADDON_NAME, ADDON_NAME_INTERNAL } from "./GlobalConstants.js";
+import { ADDON_NAME } from "./GlobalConstants.js";
 
-const NOTIFICATION_ID = `${ADDON_NAME_INTERNAL}_notification`;
 const ICON = (browser.runtime.getManifest()).icons[32];
 
 /**
@@ -27,12 +26,10 @@ export function showNotification(content, title = ADDON_NAME) {
     title = browser.i18n.getMessage(title) || title;
     content = browser.i18n.getMessage(content) || content;
 
-    browser.notifications.create(
-        NOTIFICATION_ID, {
-            "type": "basic",
-            "iconUrl": browser.extension.getURL(ICON),
-            "title": title,
-            "message": content
-        }
-    );
+    browser.notifications.create({
+        "type": "basic",
+        "iconUrl": browser.extension.getURL(ICON),
+        "title": title,
+        "message": content
+    });
 }

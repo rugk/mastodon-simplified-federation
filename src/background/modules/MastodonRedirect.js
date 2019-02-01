@@ -58,7 +58,7 @@ async function triggerRemoteAction(uri) {
         // (the API endpoint could have been changed)
         const mastodonApiUrl = await Mastodon.getSubscribeApiUrl(ownMastodon, uri, true);
 
-        // only if this rettry fails, throw error
+        // only if this retry fails, throw error
         NetworkTools.waitForWebRequest(mastodonApiUrl, (requestDetails) => {
             // if everything is okay, we are fine with that
             const firstDigit = requestDetails.statusCode.toString()[0];

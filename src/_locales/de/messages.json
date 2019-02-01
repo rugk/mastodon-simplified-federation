@@ -45,7 +45,7 @@
 
   // errors or other messages for specific settings
   "mastodonHandleIsEmpty": {
-    "message": "Bitte gib ein mastodon-Handle ein. Ohne es wird es nicht funktionieren.",
+    "message": "Bitte gib ein Mastodon-Handle ein. Ohne es wird es nicht funktionieren.",
     "description": "This is an error shown, when the user did not (yet) enter a Mastodon handle."
   },
   "mastodonHandleIsInvalid": {
@@ -67,6 +67,31 @@
   "mastodonHandleCheckFailed": {
     "message": "Verifikation des eingegebenen Mastodon-Handles ist fehlgeschlagen.",
     "description": "This is an error shown, when the server that has been contacted to verify the handle returned an unexpected response."
+  },
+  "couldNotRedirect": {
+    "message": "Could not redirect due to an unexpected error.",
+    "description": "Generic error shown when redirecting fails."
+  },
+
+  "errorNotificationTitle": {
+    "message": "$ADDON$ – Fehler",
+    "description": "Title of a notification if an error is shown.",
+    "placeholders": {
+      "addon": {
+        "content": "$1",
+        "example": "Mastodon – Simplified Federation!"
+      }
+    }
+  },
+  "errorInNotificationRedirecting": {
+    "message": "Fehler beim Umleiten: $ERROR$ Hier klicken, um die Einstellungen anzupassen.",
+    "description": "Wrapper shown if an error is shown in a notification when redirecting fails. It is used in the description of the notification.",
+    "placeholders": {
+      "error": {
+        "content": "$1",
+        "example": "Please do enter a Mastodon handle. Without it, the add-on will not work."
+      }
+    }
   },
 
   // options
