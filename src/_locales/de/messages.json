@@ -100,9 +100,29 @@
     "description": "An explanatory text shown to the user in the settings to explain what format they have to enter the Mastodon handle. It should not hint to any example (that's what the placeholder is for), but explain the general format."
   },
 
-  // ARIA labels/descriptions
+  // ARIA labels/descriptions for messages
   "dismissIconDescription": {
     "message": "Diese Nachricht schließen",
     "description": "the label for the close button of the message box"
+  },
+  "ariaMessageLoading": {
+    "message": "Ladenachricht",
+    "description": "the aria label to label the message box as an info message box"
+  },
+  "ariaMessageInfo": {
+    "message": "Info",
+    "description": "the aria label to label the message box as an info message box"
+  },
+  "ariaMessageSuccess": {
+    "message": "Erfolg",
+    "description": "the aria label to label the message box as an success message box"
+  },
+  "ariaMessageError": {
+    "message": "Fehlermeldung",
+    "description": "the aria label to label the message box as an error message box"
+  },
+  "ariaMessageWarning": {
+    "message": "Warnung",
+    "description": "the aria label to label the message box as an warning message box"
   }
 }
