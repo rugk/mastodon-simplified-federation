@@ -34,7 +34,7 @@ async function checkMastodonHandle(optionValue, option, event) {
 
     let splitHandle, accountLink;
     try {
-        const splitHandle = MastodonHandleCheck.verifyStatically(optionValue);
+        splitHandle = MastodonHandleCheck.verifyStatically(optionValue);
 
         // if it does not throw, it has been verified
         validSyntaxHandleOnceEntered = true;
