@@ -68,6 +68,31 @@
     "message": "Verification of the entered Mastodon handle failed.",
     "description": "This is an error shown, when the server that has been contacted to verify the handle returned an unexpected response."
   },
+  "couldNotRedirect": {
+    "message": "Could not redirect due to an unexpected error.",
+    "description": "Generic error shown when redirecting fails."
+  },
+
+  "errorNotificationTitle": {
+    "message": "$ADDON$ – error",
+    "description": "Title of a notification if an error is shown when trying to redirect.",
+    "placeholders": {
+      "addon": {
+        "content": "$1",
+        "example": "Mastodon – Simplified Federation!"
+      }
+    }
+  },
+  "errorInNotificationRedirecting": {
+    "message": "Error while redirecting: $ERROR$ Click here, to adjust the settings.",
+    "description": "Wrapper shown if an error is shown in a notification when redirecting fails. It is used in the description of the notification.",
+    "placeholders": {
+      "error": {
+        "content": "$1",
+        "example": "Please do enter a Mastodon handle. Without it, the add-on will not work."
+      }
+    }
+  },
 
   // options
   "someSettingsAreManaged": {

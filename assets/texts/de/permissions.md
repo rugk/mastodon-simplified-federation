@@ -1,12 +1,13 @@
 # Erfragte Berechtigungen
 
-Für eine allgemeine Erklärung von Add-on-Berechtigungen siehe [diesen Support-Artikel]https://support.mozilla.org/de/kb/berechtigungsdialoge-der-firefox-erweiterungen).
+Für eine allgemeine Erklärung von Add-on-Berechtigungen siehe [diesen Support-Artikel](https://support.mozilla.org/de/kb/berechtigungsdialoge-der-firefox-erweiterungen).
 
 ## Berechtigungen bei Installation
 
 | Interne ID                  | Berechtigung                               | Erklärung                                                                                                                                                                                                                                                                                                                                                                                       |
 |:----------------------------|:-------------------------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `http://*/*`, `https://*/*` | Auf Ihre Daten für alle Websites zugreifen | Benötigt um Zugriff auf jede Webseite eines Servers zu bekommen, die eine Mastodon-Instanz ist. Da jeder Server eine Mastodon-Instanz sein kann, benötigt dies Zugriff auf jede [HTTP](https://de.wikipedia.org/wiki/Hypertext_Transfer_Protocol)- und [HTTPS](https://de.wikipedia.org/wiki/Hypertext_Transfer_Protocol_Secure)-[URL](https://de.wikipedia.org/wiki/Uniform_Resource_Locator). |
+| `notifications` | Benachrichtigungen anzeigen | Benötigt um eine Benachrichtigung beim Fehlschlagen der Umleitung oder anderen Fehlern zu zeigen. |
 
 ## Versteckte Berechtigungen
 

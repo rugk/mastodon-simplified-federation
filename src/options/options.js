@@ -12,4 +12,4 @@ import * as CustomOptionTriggers from "./modules/CustomOptionTriggers.js";
 // init modules
 CustomOptionTriggers.registerTrigger();
 AutomaticSettings.setDefaultOptionProvider(AddonSettings.getDefaultValue);
-AutomaticSettings.init();
+AutomaticSettings.init({debounceTime: 500});

@@ -46,11 +46,10 @@ async function triggerRemoteAction(uri) {
 
     const mastodonApiUrl = await Mastodon.getSubscribeApiUrl(ownMastodon, uri);
 
-    const url = (new URL(mastodonApiUrl)).toString();
-
     // observe triggered request, so we can make sure it worked
-    NetworkTools.waitForWebRequest(url, async (requestDetails) => {
+    NetworkTools.waitForWebRequest(mastodonApiUrl, async (requestDetails) => {
         // if everything is okay, we are fine with that
+        // Note even when a redirect is issued, we may want to clean cache and potentially redirect again
         if (requestDetails.statusCode === 200) {
             return;
         }
@@ -59,13 +58,23 @@ async function triggerRemoteAction(uri) {
         // (the API endpoint could have been changed)
         const mastodonApiUrl = await Mastodon.getSubscribeApiUrl(ownMastodon, uri, true);
 
+        // only if this retry fails, throw error
+        NetworkTools.waitForWebRequest(mastodonApiUrl, (requestDetails) => {
+            // if everything is okay, we are fine with that
+            const firstDigit = requestDetails.statusCode.toString()[0];
+            if (firstDigit !== "2" && firstDigit !== "3") {
+                console.error(`Could not successful redirect to ${mastodonApiUrl}`, requestDetails);
+                throw new Error(`Redirecting to "${mastodonApiUrl}" failed with error code ${requestDetails.statusCode}.`);
+            }
+        });
+
         // redirect and always replace site, as before an invalid site has been loaded
         // (we never need to preserve an invalid site)
         NetworkTools.redirectToWebsite(mastodonApiUrl, true);
     });
 
     // finally redirect
-    return NetworkTools.redirectToWebsite(url, loadReplace);
+    return NetworkTools.redirectToWebsite(mastodonApiUrl, loadReplace);
 }
 
 /**
