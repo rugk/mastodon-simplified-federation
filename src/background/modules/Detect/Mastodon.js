@@ -53,7 +53,6 @@ function scrapeTootUrlFromPage(url) {
                 throw new Error("Could not get toot URL from Mastodon page.");
             }
 
-            // I have no idea, why it is an array, here.
             followUrl = followUrl[0];
 
             // verify it is a real URL
