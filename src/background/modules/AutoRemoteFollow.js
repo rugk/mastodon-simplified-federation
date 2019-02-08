@@ -9,6 +9,7 @@ import { ADDON_NAME } from "/common/modules/GlobalConstants.js";
 
 import * as MastodonDetect from "./Detect/Mastodon.js";
 import * as GnuSocialDetect from "./Detect/GnuSocial.js";
+import * as PleromaDetect from "./Detect/Pleroma.js";
 
 import * as NetworkTools from "/common/modules/NetworkTools.js";
 import * as MastodonRedirect from "./MastodonRedirect.js";
@@ -20,11 +21,13 @@ import * as Notifications from "/common/modules/Notifications.js";
 
 const FEDIVERSE_TYPE = Object.freeze({
     MASTODON: Symbol("Mastodon"),
-    GNU_SOCIAL: Symbol("GNU Social")
+    GNU_SOCIAL: Symbol("GNU Social"),
+    PLEROMA: Symbol("Pleroma")
 });
 const FEDIVERSE_MODULE = Object.freeze({
     [FEDIVERSE_TYPE.MASTODON]: MastodonDetect,
-    [FEDIVERSE_TYPE.GNU_SOCIAL]: GnuSocialDetect
+    [FEDIVERSE_TYPE.GNU_SOCIAL]: GnuSocialDetect,
+    [FEDIVERSE_TYPE.PLEROMA]: PleromaDetect
 });
 
 /**
@@ -57,6 +60,9 @@ async function analyzeRequest(requestDetails) {
     case FEDIVERSE_TYPE.GNU_SOCIAL:
         detectModule = GnuSocialDetect;
         break;
+    case FEDIVERSE_TYPE.PLEROMA:
+        detectModule = PleromaDetect;
+        break;
     default:
         throw new Error(`unknown fediverse type: ${software.toString()}`);
     }
@@ -66,13 +72,13 @@ async function analyzeRequest(requestDetails) {
     // and get data and pass to redirect
     switch (interaction) {
     case INTERACTION_TYPE.FOLLOW: {
-        const remoteUser = await detectModule.getUsername(url);
-        const remoteServer = await detectModule.getServer(url);
+        const remoteUser = await detectModule.getUsername(url, requestDetails);
+        const remoteServer = await detectModule.getServer(url, requestDetails);
 
         return MastodonRedirect.redirectFollow(remoteUser, remoteServer);
     }
     case INTERACTION_TYPE.TOOT_INTERACT: {
-        const tootUrl = await detectModule.getTootUrl(url);
+        const tootUrl = await detectModule.getTootUrl(url, requestDetails);
 
         return MastodonRedirect.redirectToot(tootUrl);
     }
