@@ -90,6 +90,8 @@ async function analyzeRequest(requestDetails) {
 /**
  * Listens for Mastodon requests at web request change.
  *
+ * Also handles potentially errors.
+ *
  * @function
  * @private
  * @param {Object} requestDetails
@@ -104,7 +106,7 @@ function handleWebRequest(requestDetails) {
         };
         browser.notifications.onClicked.addListener(openOptions);
 
-        const title = browser.i18n.getMessage("errorNotificationTitle", ADDON_NAME);
+        let title = browser.i18n.getMessage("errorNotificationRedirectingTitle", ADDON_NAME);
         let errorIdentifier = "couldNotRedirect";
         // verify that Mastodon handle is correctly saved
         const mastodonHandle = await AddonSettings.get("ownMastodon");
@@ -112,17 +114,23 @@ function handleWebRequest(requestDetails) {
         await MastodonHandleCheck.verifyComplete(mastodonHandle).then(() => {
             errorIdentifier = "couldNotRedirect";
         }).catch((error) => {
-            errorIdentifier = MastodonHandleError.getMastodonErrorString(error);
+            if (error.errorType === MastodonHandleError.ERROR_TYPE.NOT_CONFIGURED) {
+                errorIdentifier = "addonIsNotYetSetup";
+                // also adjust title
+                title = browser.i18n.getMessage("errorNotificationNotSetupTitle", ADDON_NAME);
+            } else {
+                errorIdentifier = MastodonHandleError.getMastodonErrorString(error);
+            }
         }).finally(() => {
             // show actual error
             const errorMessage = browser.i18n.getMessage(errorIdentifier) || errorIdentifier;
-            const message = browser.i18n.getMessage("errorInNotificationRedirecting", errorMessage);
+            const message = browser.i18n.getMessage("errorNotificationRedirectingText", errorMessage);
             Notifications.showNotification(message, title);
         });
 
         // still throw out for debugging
         throw e;
-    });
+    }).catch(console.error);
 }
 
 /**

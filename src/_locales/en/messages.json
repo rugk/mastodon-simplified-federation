@@ -45,7 +45,7 @@
 
   // errors or other messages for specific settings
   "mastodonHandleIsEmpty": {
-    "message": "Please do enter a Mastodon handle. Without it, the add-on will not work.",
+    "message": "Please enter a Mastodon handle. Without it, the add-on will not work.",
     "description": "This is an error shown, when the user did not (yet) enter a Mastodon handle."
   },
   "mastodonHandleIsInvalid": {
@@ -68,13 +68,19 @@
     "message": "Verification of the entered Mastodon handle failed.",
     "description": "This is an error shown, when the server that has been contacted to verify the handle returned an unexpected response."
   },
+
+  "addonIsNotYetSetup": {
+    "message": "This add-on is not yet set up. You need to enter your Mastodon account in the settings.",
+    "description": "This is an error shown, when the user did not (yet) setup the whole add-on. Semantically it is the same as mastodonHandleIsEmpty, but this one is used in the notification."
+  },
   "couldNotRedirect": {
     "message": "Could not redirect due to an unexpected error.",
     "description": "Generic error shown when redirecting fails."
   },
 
-  "errorNotificationTitle": {
-    "message": "$ADDON$ – error",
+  // notification errors
+  "errorNotificationRedirectingTitle": {
+    "message": "“$ADDON$” failed to redirect",
     "description": "Title of a notification if an error is shown when trying to redirect.",
     "placeholders": {
       "addon": {
@@ -83,13 +89,24 @@
       }
     }
   },
-  "errorInNotificationRedirecting": {
-    "message": "Error while redirecting: $ERROR$ Click here, to adjust the settings.",
+  "errorNotificationNotSetupTitle": {
+    "message": "“$ADDON$” is not yet configured",
+    "description": "Title of a notification if an error is shown when the add-on is not set up yet. In contrast to errorNotificationRedirectingTitle this is only shown for this one error. See also addonIsNotYetSetup.",
+    "placeholders": {
+      "addon": {
+        "content": "$1",
+        "example": "Mastodon – Simplified Federation!"
+      }
+    }
+  },
+
+  "errorNotificationRedirectingText": {
+    "message": "$ERROR$ Click to adjust the settings.",
     "description": "Wrapper shown if an error is shown in a notification when redirecting fails. It is used in the description of the notification.",
     "placeholders": {
       "error": {
         "content": "$1",
-        "example": "Please do enter a Mastodon handle. Without it, the add-on will not work."
+        "example": "Please enter a Mastodon handle. Without it, the add-on will not work."
       }
     }
   },

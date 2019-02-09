@@ -96,7 +96,7 @@ export function getUsername(url, requestDetails) {
     }
 
     // fallback to HTML scraping
-    console.warn("Falling back to HTMl scraping from ", url, "– details:", requestDetails);
+    console.warn("Falling back to HTML scraping from ", url, "– details:", requestDetails);
 
     return scrapeUserFromPage(url);
 }

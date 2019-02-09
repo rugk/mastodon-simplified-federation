@@ -68,13 +68,19 @@
     "message": "Verifikation des eingegebenen Mastodon-Handles ist fehlgeschlagen.",
     "description": "This is an error shown, when the server that has been contacted to verify the handle returned an unexpected response."
   },
+
+  "addonIsNotYetSetup": {
+    "message": "Dieses Add-on wurde bisher nicht eingerichtet. Du musst dein Mastodon-Account in den Einstellungen angeben.",
+    "description": "This is an error shown, when the user did not (yet) setup the whole add-on. Semantically it is the same as mastodonHandleIsEmpty, but this one is used in the notification."
+  },
   "couldNotRedirect": {
-    "message": "Could not redirect due to an unexpected error.",
+    "message": "Konnte aufgrund eines unvorhergesehen Fehlers nicht umleiten.",
     "description": "Generic error shown when redirecting fails."
   },
 
-  "errorNotificationTitle": {
-    "message": "$ADDON$ – Fehler",
+  // notification errors
+  "errorNotificationRedirectingTitle": {
+    "message": "„$ADDON$” konnte Seite nicht umleiten",
     "description": "Title of a notification if an error is shown.",
     "placeholders": {
       "addon": {
@@ -83,13 +89,24 @@
       }
     }
   },
-  "errorInNotificationRedirecting": {
-    "message": "Fehler beim Umleiten: $ERROR$ Hier klicken, um die Einstellungen anzupassen.",
+  "errorNotificationNotSetupTitle": {
+    "message": "„$ADDON$” ist nicht eingerichtet",
+    "description": "Title of a notification if an error is shown when the add-on is not set up yet. In contrast to errorNotificationRedirectingTitle this is only shown for this one error. See also addonIsNotYetSetup.",
+    "placeholders": {
+      "addon": {
+        "content": "$1",
+        "example": "Mastodon – Simplified Federation!"
+      }
+    }
+  },
+
+  "errorNotificationRedirectingText": {
+    "message": "$ERROR$ Hier klicken, um die Einstellungen anzupassen.",
     "description": "Wrapper shown if an error is shown in a notification when redirecting fails. It is used in the description of the notification.",
     "placeholders": {
       "error": {
         "content": "$1",
-        "example": "Please do enter a Mastodon handle. Without it, the add-on will not work."
+        "example": "Please enter a Mastodon handle. Without it, the add-on will not work."
       }
     }
   },
