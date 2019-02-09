@@ -31,14 +31,15 @@ const FEDIVERSE_MODULE = Object.freeze({
 });
 
 /**
- * Analyses the web request.
+ * Listens for Mastodon requests at web request change.
  *
- * @function
+ * Analyses the web request and redirects it, if appropiate.
+ *
  * @private
  * @param {Object} requestDetails
  * @returns {Promise}
  */
-async function analyzeRequest(requestDetails) {
+async function handleWebRequest(requestDetails) {
     // ignore when URL is not changed
     if (!requestDetails.url) {
         return Promise.reject(new Error("URL info not available"));
@@ -88,49 +89,44 @@ async function analyzeRequest(requestDetails) {
 }
 
 /**
- * Listens for Mastodon requests at web request change.
+ * Handles errors if web request cannot be redirected.
  *
- * Also handles potentially errors.
- *
- * @function
  * @private
- * @param {Object} requestDetails
+ * @param {Error} error
  * @returns {Promise}
  */
-function handleWebRequest(requestDetails) {
-    return analyzeRequest(requestDetails).catch(async (e) => {
-        // open options on click
-        const openOptions = () => {
-            browser.notifications.onClicked.removeListener(openOptions);
-            browser.runtime.openOptionsPage();
-        };
-        browser.notifications.onClicked.addListener(openOptions);
+async function handleError(error) {
+    // open options on click
+    const openOptions = () => {
+        browser.notifications.onClicked.removeListener(openOptions);
+        browser.runtime.openOptionsPage();
+    };
+    browser.notifications.onClicked.addListener(openOptions);
 
-        let title = browser.i18n.getMessage("errorNotificationRedirectingTitle", ADDON_NAME);
-        let errorIdentifier = "couldNotRedirect";
-        // verify that Mastodon handle is correctly saved
-        const mastodonHandle = await AddonSettings.get("ownMastodon");
+    let title = browser.i18n.getMessage("errorNotificationRedirectingTitle", ADDON_NAME);
+    let errorIdentifier = "couldNotRedirect";
+    // verify that Mastodon handle is correctly saved
+    const mastodonHandle = await AddonSettings.get("ownMastodon");
 
-        await MastodonHandleCheck.verifyComplete(mastodonHandle).then(() => {
-            errorIdentifier = "couldNotRedirect";
-        }).catch((error) => {
-            if (error.errorType === MastodonHandleError.ERROR_TYPE.NOT_CONFIGURED) {
-                errorIdentifier = "addonIsNotYetSetup";
-                // also adjust title
-                title = browser.i18n.getMessage("errorNotificationNotSetupTitle", ADDON_NAME);
-            } else {
-                errorIdentifier = MastodonHandleError.getMastodonErrorString(error);
-            }
-        }).finally(() => {
-            // show actual error
-            const errorMessage = browser.i18n.getMessage(errorIdentifier) || errorIdentifier;
-            const message = browser.i18n.getMessage("errorNotificationRedirectingText", errorMessage);
-            Notifications.showNotification(message, title);
-        });
+    await MastodonHandleCheck.verifyComplete(mastodonHandle).then(() => {
+        errorIdentifier = "couldNotRedirect";
+    }).catch((error) => {
+        if (error.errorType === MastodonHandleError.ERROR_TYPE.NOT_CONFIGURED) {
+            errorIdentifier = "addonIsNotYetSetup";
+            // also adjust title
+            title = browser.i18n.getMessage("errorNotificationNotSetupTitle", ADDON_NAME);
+        } else {
+            errorIdentifier = MastodonHandleError.getMastodonErrorString(error);
+        }
+    }).finally(() => {
+        // show actual error
+        const errorMessage = browser.i18n.getMessage(errorIdentifier) || errorIdentifier;
+        const message = browser.i18n.getMessage("errorNotificationRedirectingText", errorMessage);
+        Notifications.showNotification(message, title);
+    });
 
-        // still throw out for debugging
-        throw e;
-    }).catch(console.error);
+    // still throw out for debugging
+    throw error;
 }
 
 /**
@@ -160,7 +156,9 @@ function getInteractionType(url) {
  * @returns {Promise}
  */
 function init() {
-    NetworkTools.webRequestListen(["http://*/*", "https://*/*"], "onBeforeRequest", handleWebRequest);
+    NetworkTools.webRequestListen(["http://*/*", "https://*/*"], "onBeforeRequest", (requestDetails) => {
+        return handleWebRequest(requestDetails).catch(handleError).catch(console.error);
+    });
 }
 
 init();
