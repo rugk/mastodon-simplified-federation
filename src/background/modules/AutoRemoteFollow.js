@@ -105,17 +105,20 @@ function handleWebRequest(requestDetails) {
         browser.notifications.onClicked.addListener(openOptions);
 
         const title = browser.i18n.getMessage("errorNotificationTitle", ADDON_NAME);
-        let errorIdentifier;
+        let errorIdentifier = "couldNotRedirect";
         // verify that Mastodon handle is correctly saved
         const mastodonHandle = await AddonSettings.get("ownMastodon");
-        MastodonHandleCheck.verifyComplete(mastodonHandle).then(() => {
+
+        await MastodonHandleCheck.verifyComplete(mastodonHandle).then(() => {
             errorIdentifier = "couldNotRedirect";
         }).catch((error) => {
             errorIdentifier = MastodonHandleError.getMastodonErrorString(error);
+        }).finally(() => {
+            // show actual error
+            const errorMessage = browser.i18n.getMessage(errorIdentifier) || errorIdentifier;
+            const message = browser.i18n.getMessage("errorInNotificationRedirecting", errorMessage);
+            Notifications.showNotification(message, title);
         });
-        const errorMessage = browser.i18n.getMessage(errorIdentifier) || errorIdentifier;
-        const message = browser.i18n.getMessage("errorInNotificationRedirecting", errorMessage);
-        Notifications.showNotification(message, title);
 
         // still throw out for debugging
         throw e;
