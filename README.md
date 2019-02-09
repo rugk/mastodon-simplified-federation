@@ -46,5 +46,6 @@ There, it may use different (or similar) methods for getting information about t
 
 Note, however, it only triggers when a redirect/loading of an URL specific to a Fediverse type occurs. As such, it e.g. cannot “intercept” small text-fields, where you can enter your handle, inside of a page.
 
+Here a short description on how it is done:
 * for GNU Social: It can get the user from the URL, if the URL is `/main/ostatus/nickname/<username>`.
-* for Pleroma: TODO
+* for Pleroma: If `/main/ostatus` is accessed, it tries to get the the username from the referrer. If not possible, it tries to scrape it from the website.

@@ -7,6 +7,7 @@
 import * as NetworkTools from "/common/modules/NetworkTools.js";
 import {NotSupportedError} from "/common/modules/Errors.js";
 import {INTERACTION_TYPE} from "../data/INTERACTION_TYPE.js";
+import isString from "/common/modules/lodash/isString.js";
 
 // https://regex101.com/r/JaCimp/2
 const REMOTE_FOLLOW_REGEX = /\/main\/ostatus\/?$/;
@@ -16,6 +17,14 @@ const USER_PAGE_URL_REGEX = /\/users\/(.+)\/?$/;
 /** The URLs to intercept and pass to this module. */
 export const CATCH_URLS = new Map();
 CATCH_URLS.set(REMOTE_FOLLOW_REGEX, INTERACTION_TYPE.FOLLOW);
+
+/**
+ * Whether to enable replacing the previous site when redirecting or not.
+ *
+ * @public
+ * @type {boolean}
+ */
+export const ENABLE_LOAD_REPLACE = true;
 
 /**
  * Scrapes the user information from the HTML page, if needed.
@@ -33,32 +42,22 @@ function scrapeUserFromPage(url) {
                 file: "/content_script/pleromaGetUsername.js",
                 runAt: "document_end"
             }
-        ).then((userUrl) => {
-            if (!userUrl) {
+        ).then((username) => {
+            if (!username) {
                 throw new Error("Could not get user from Pleroma page.");
             }
 
-            userUrl = userUrl[0];
+            username = username[0];
 
             // verify it is a real URL
-            try {
-                new URL(userUrl);
-            } catch (e) {
-                throw new Error(`HTML scraping returned invalid URL: ${userUrl}`);
+            if (!isString(username)) {
+                throw new Error(`HTML scraping returned invalid username, not a string: ${username}`);
             }
 
-            return userUrl;
+            return username;
         });
     });
 }
-
-/**
- * Whether to enable replacing the previous site when redirecting or not.
- *
- * @public
- * @type {boolean}
- */
-export const ENABLE_LOAD_REPLACE = false;
 
 /**
  * Find the follow URL.
@@ -81,17 +80,25 @@ export function getTootUrl() {
  * @returns {string|undefined}
  */
 export function getUsername(url, requestDetails) {
-    const originUrl = new URL(requestDetails.originUrl);
-    const match = USER_PAGE_URL_REGEX.exec(originUrl.pathname);
+    try {
+        const originUrl = new URL(requestDetails.originUrl);
+        const match = USER_PAGE_URL_REGEX.exec(originUrl.pathname);
 
-    const username = match[1];
+        const username = match[1];
 
-    // fallback to HTMl scarping
-    if (!username) {
-        return scrapeUserFromPage(url);
+        if (username) {
+            return username;
+        } else {
+            console.error("Could not get valid username from request details. Got", originUrl, "from", requestDetails);
+        }
+    } catch (e) {
+        console.error("Could not get username from request details. Error: ", e);
     }
 
-    return username;
+    // fallback to HTML scraping
+    console.warn("Falling back to HTMl scraping from ", url, "– details:", requestDetails);
+
+    return scrapeUserFromPage(url);
 }
 
 /**
