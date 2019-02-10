@@ -100,7 +100,7 @@
     }
   },
 
-  "errorNotificationRedirectingText": {
+  "errorNotificationAdjustSettings": {
     "message": "$ERROR$ Hier klicken, um die Einstellungen anzupassen.",
     "description": "Wrapper shown if an error is shown in a notification when redirecting fails. It is used in the description of the notification.",
     "placeholders": {

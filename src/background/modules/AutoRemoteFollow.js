@@ -121,7 +121,7 @@ async function handleError(error) {
     }).finally(() => {
         // show actual error
         const errorMessage = browser.i18n.getMessage(errorIdentifier) || errorIdentifier;
-        const message = browser.i18n.getMessage("errorNotificationRedirectingText", errorMessage);
+        const message = (errorIdentifier === "couldNotRedirect") ? errorIdentifier : browser.i18n.getMessage("errorNotificationAdjustSettings", errorMessage);
         Notifications.showNotification(message, title);
     });
 
