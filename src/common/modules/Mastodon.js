@@ -80,6 +80,10 @@ export function concatUserHandle(username, server) {
  * @returns {Promise} resulting in String (URL)
  */
 export async function getSubscribeApiTemplate(mastodon, skipCache = false) {
+    if (skipCache !== true && skipCache !== false) {
+        throw new TypeError(`skipCache must be a boolean, but is ${skipCache} = type ${typeof skipCache}`);
+    }
+
     if (!skipCache) {
         const configValue = await AddonSettings.get("subscriptionUri");
 
@@ -120,7 +124,7 @@ export async function getSubscribeApiTemplate(mastodon, skipCache = false) {
  * @returns {Promise} resulting in String (URL)
  */
 export async function getSubscribeApiUrl(mastodon, uri, skipCache = false) {
-    const apiTemplate = await getSubscribeApiTemplate(mastodon, uri, skipCache);
+    const apiTemplate = await getSubscribeApiTemplate(mastodon, skipCache);
     return apiTemplate.replace(SUBSCRIBE_TEMPLATE_PLACEHOLDER, uri);
 }
 
