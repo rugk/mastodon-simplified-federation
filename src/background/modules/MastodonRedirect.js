@@ -9,21 +9,17 @@ import * as Mastodon from "/common/modules/Mastodon.js";
 
 import * as NetworkTools from "/common/modules/NetworkTools.js";
 
-let loadReplace = true; // default
+let loadReplace = () => true; // default
 
 /**
  * Enable or disable replacing of the current website when redirecting.
  *
  * @private
- * @param {boolean} newLoadReplace
+ * @param {function} doLoadReplace
  * @returns {void}
  */
-export function enableLoadReplace(newLoadReplace) {
-    if (newLoadReplace !== true && newLoadReplace !== false) {
-        throw new TypeError(`Expected boolean, but got ${typeof newLoadReplace}.`);
-    }
-
-    loadReplace = newLoadReplace;
+export function enableLoadReplace(doLoadReplace) {
+    loadReplace = doLoadReplace;
 }
 
 /**
@@ -41,7 +37,7 @@ async function triggerRemoteAction(uri) {
     // own server
     if (uri.startsWith(`https://${ownMastodon.server}`)) {
         // just redirect to given input URL, if it is one the same server
-        return NetworkTools.redirectToWebsite(uri, loadReplace);
+        return NetworkTools.redirectToWebsite(uri, loadReplace());
     }
 
     const mastodonApiUrl = await Mastodon.getSubscribeApiUrl(ownMastodon, uri);
@@ -74,7 +70,7 @@ async function triggerRemoteAction(uri) {
     });
 
     // finally redirect
-    return NetworkTools.redirectToWebsite(mastodonApiUrl, loadReplace);
+    return NetworkTools.redirectToWebsite(mastodonApiUrl, loadReplace());
 }
 
 /**

@@ -68,7 +68,7 @@ async function handleWebRequest(requestDetails) {
         throw new Error(`unknown fediverse type: ${software.toString()}`);
     }
 
-    MastodonRedirect.enableLoadReplace(detectModule.ENABLE_LOAD_REPLACE);
+    MastodonRedirect.enableLoadReplace(detectModule.shouldLoadReplace);
 
     // and get data and pass to redirect
     switch (interaction) {

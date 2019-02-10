@@ -17,10 +17,20 @@ CATCH_URLS.set(REMOTE_FOLLOW_REGEX, INTERACTION_TYPE.FOLLOW);
 /**
  * Whether to enable replacing the previous site when redirecting or not.
  *
- * @public
+ * @private
  * @type {boolean}
  */
-export const ENABLE_LOAD_REPLACE = false;
+const ENABLE_LOAD_REPLACE = false;
+
+/**
+ * Determinates whether the redirect should replace the site before or not.
+ *
+ * @public
+ * @returns {boolean}
+ */
+export function shouldLoadReplace() {
+    return ENABLE_LOAD_REPLACE;
+}
 
 /**
  * Find the follow URL.

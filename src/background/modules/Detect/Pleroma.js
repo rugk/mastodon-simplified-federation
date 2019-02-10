@@ -19,12 +19,12 @@ export const CATCH_URLS = new Map();
 CATCH_URLS.set(REMOTE_FOLLOW_REGEX, INTERACTION_TYPE.FOLLOW);
 
 /**
- * Whether to enable replacing the previous site when redirecting or not.
+ * Whether the OAUTH site finished loading.
  *
- * @public
+ * @private
  * @type {boolean}
  */
-export const ENABLE_LOAD_REPLACE = true;
+let redirectSiteFinishedLoading = false;
 
 /**
  * Scrapes the user information from the HTML page, if needed.
@@ -35,6 +35,8 @@ export const ENABLE_LOAD_REPLACE = true;
  */
 function scrapeUserFromPage(url) {
     return NetworkTools.waitForWebRequest(url, () => {
+        redirectSiteFinishedLoading = true;
+
         // inject content script to get toot URL
         // default = current tab
         return browser.tabs.executeScript(
@@ -60,10 +62,20 @@ function scrapeUserFromPage(url) {
 }
 
 /**
+ * Determinates whether the redirect should replace the site before or not.
+ *
+ * @public
+ * @returns {boolean}
+ */
+export function shouldLoadReplace() {
+    // if site finished loading, replace it
+    return redirectSiteFinishedLoading;
+}
+
+/**
  * Find the follow URL.
  *
- * @function
- * @private
+ * @public
  * @returns {Promise}
  */
 export function getTootUrl() {
@@ -80,6 +92,8 @@ export function getTootUrl() {
  * @returns {string|undefined}
  */
 export function getUsername(url, requestDetails) {
+    redirectSiteFinishedLoading = false;
+
     try {
         const originUrl = new URL(requestDetails.originUrl);
         const match = USER_PAGE_URL_REGEX.exec(originUrl.pathname);
