@@ -45,11 +45,11 @@
 
   // errors or other messages for specific settings
   "mastodonHandleIsEmpty": {
-    "message": "Please enter a Mastodon handle. Without it, the add-on will not work.",
-    "description": "This is an error shown, when the user did not (yet) enter a Mastodon handle."
+    "message": "Please enter a Mastodon account. Without it, the add-on will not work.",
+    "description": "This is an error shown, when the user did not (yet) enter a Mastodon account."
   },
   "mastodonHandleIsInvalid": {
-    "message": "The Mastodon handle you entered is invalid.",
+    "message": "The Mastodon account you entered is invalid.",
     "description": "This is an error shown, when the Mastodon handle the user entered is not valid."
   },
   "mastodonHandleDoesNotExist": {
@@ -65,7 +65,7 @@
     "description": "This is an error shown, when the last part of Mastodon handle (= the server) is actually no Mastodon server."
   },
   "mastodonHandleCheckFailed": {
-    "message": "Verification of the entered Mastodon handle failed.",
+    "message": "Verification of the entered Mastodon account failed.",
     "description": "This is an error shown, when the server that has been contacted to verify the handle returned an unexpected response."
   },
 
@@ -130,7 +130,7 @@
   },
 
   "optionMastodonHandle": {
-    "message": "Your Mastodon handle: ",
+    "message": "Your Mastodon account: ",
     "description": "This is an option shown in the add-on settings. You can enter your handle in the format mastodon@server.com there."
   },
   "optionMastodonHandlePlaceholder": {
