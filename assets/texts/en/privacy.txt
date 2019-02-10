@@ -18,3 +18,9 @@ The ADD-ON will not send information about your OWN ACCOUNT or OWN SERVER to any
 It may happen, however, that the REMOTE SERVER is the same as the OWN SERVER. In such a case, the ADD-ON works the same and may thus send all the information to it's own server.
 
 An explanation of all permissions, this ADD-ON requests, can be found at https://github.com/rugk/mastodon-simplified-federation/blob/master/assets/texts/en/permissions.md.
+
+== THIRD-PARTY SERVICES ==
+
+This ADD-ON uses the “sync storage” of your browser to store the settings. If the USER enables “Sync” in the browser, the settings are uploaded and synchronized across your devices connected to your account. If you do not do, the data is only stored locally on your device.
+In Mozilla Firefox the data is end-to-end encrypted before getting uploaded and stored on servers by Mozilla.
+See https://accounts.firefox.com/legal/privacy and https://www.mozilla.org/privacy/firefox/#c-privacy-topic-8 for Mozilla's privacy policies on that topic.
