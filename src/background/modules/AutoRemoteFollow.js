@@ -53,23 +53,11 @@ async function handleWebRequest(requestDetails) {
     const [software, interaction] = getInteractionType(url);
 
     // detect, which network/software it uses
-    let detectModule;
-    switch (software) {
-    case null:
+    if (software === null) {
         // ignore unrelated sites, resolves so error handling is not triggered
         return Promise.resolve();
-    case FEDIVERSE_TYPE.MASTODON:
-        detectModule = MastodonDetect;
-        break;
-    case FEDIVERSE_TYPE.GNU_SOCIAL:
-        detectModule = GnuSocialDetect;
-        break;
-    case FEDIVERSE_TYPE.PLEROMA:
-        detectModule = PleromaDetect;
-        break;
-    default:
-        throw new Error(`unknown fediverse type: ${software.toString()}`);
     }
+    const detectModule = FEDIVERSE_MODULE[software];
 
     MastodonRedirect.enableLoadReplace(detectModule.shouldLoadReplace);
 
