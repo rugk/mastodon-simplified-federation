@@ -49,3 +49,4 @@ Note, however, it only triggers when a redirect/loading of an URL specific to a 
 Here a short description on how it is done:
 * for GNU Social: It can get the user from the URL, if the URL is `/main/ostatus/nickname/<username>`.
 * for Pleroma: If `/main/ostatus` is accessed, it tries to get the the username from the referrer. If not possible, it tries to scrape it from the website.
+* for Friendica: It can get the user from the URL, if the URL is `/main/dfrn_request/<username>`.

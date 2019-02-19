@@ -10,6 +10,7 @@ import { ADDON_NAME } from "/common/modules/GlobalConstants.js";
 import * as MastodonDetect from "./Detect/Mastodon.js";
 import * as GnuSocialDetect from "./Detect/GnuSocial.js";
 import * as PleromaDetect from "./Detect/Pleroma.js";
+import * as FriendicaDetect from "./Detect/Friendica.js";
 
 import * as NetworkTools from "/common/modules/NetworkTools.js";
 import * as MastodonRedirect from "./MastodonRedirect.js";
@@ -22,12 +23,14 @@ import * as Notifications from "/common/modules/Notifications.js";
 const FEDIVERSE_TYPE = Object.freeze({
     MASTODON: Symbol("Mastodon"),
     GNU_SOCIAL: Symbol("GNU Social"),
-    PLEROMA: Symbol("Pleroma")
+    PLEROMA: Symbol("Pleroma"),
+    FRIENDICA: Symbol("Friendica")
 });
 const FEDIVERSE_MODULE = Object.freeze({
     [FEDIVERSE_TYPE.MASTODON]: MastodonDetect,
     [FEDIVERSE_TYPE.GNU_SOCIAL]: GnuSocialDetect,
-    [FEDIVERSE_TYPE.PLEROMA]: PleromaDetect
+    [FEDIVERSE_TYPE.PLEROMA]: PleromaDetect,
+    [FEDIVERSE_TYPE.FRIENDICA]: FriendicaDetect
 });
 
 /**
