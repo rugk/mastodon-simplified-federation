@@ -17,10 +17,10 @@ Zusätzlich kann es Informationen über den EIGENEN ACCOUNT und EIGENEN SERVER a
 Das ADD-ON wird keinerlei Informationen über den EIGENEN ACCOUNT oder EIGENEN SERVER an einen ENTFERNTEN SERVER senden. Falls dieser Fall unbeabsichtigt auftreten sollte, so wird dies als Sicherheitslücke im ADD-ON behandelt.
 Es kann allerdings passieren, dass der ENTFERNTE SERVER der selbe ist wie der EIGENE SERVER. In diesem Fall arbeitet dass ADD-ON genauso und kann demzufolge alle Informationen an einen Server senden.
 
-Eine Erklärung aller Berechtigungen, die dieses ADD-ON erfragt kann auf https://github.com/rugk/mastodon-simplified-federation/blob/master/assets/texts/de/permissions.md gefunden werden.
+Eine Erklärung aller Berechtigungen, die dieses Add-on erfragt, kann auf https://github.com/rugk/mastodon-simplified-federation/blob/master/assets/texts/de/permissions.md gefunden werden.
 
 == DIENSTE VON DRITTEN ==
 
-Dieses ADD-ON nutzt den „Sync storage” des Browser's um die Einstellungen zu speicheren. Wenn der NUTZER “Sync” im Browser aktiviert, werden die Einstellungen des Add-ons hoch geladen und zwischen den Geräten, die mit dem (Mozilla) Account des Browsers verbunden sind, synchronisiert. Wenn dies nicht gemacht wird, werden die Daten lokal auf dem Gerät gespeichert.
+Dieses ADD-ON nutzt den „Sync storage” des Browser's um die Einstellungen zu speicheren. Wenn der NUTZER „Sync” im Browser aktiviert, werden die Einstellungen des Add-ons hoch geladen und zwischen den Geräten, die mit dem (Mozilla) Account des Browsers verbunden sind, synchronisiert. Wenn dies nicht gemacht wird, werden die Daten lokal auf dem Gerät gespeichert.
 In Mozilla Firefox werden die Daten Ende-zu-Ende-verschlüsselt bevor sie hoch geladen und auf den Servern von Mozilla gespeichert werden.
 Siehe https://accounts.firefox.com/legal/privacy und https://www.mozilla.org/privacy/firefox/#c-privacy-topic-8 für Mozilla's Datenschutzerklärung über dieses Thema.
