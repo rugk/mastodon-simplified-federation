@@ -4,6 +4,14 @@ As I do not want to duplicate the instructions all over, please **find the commo
 
 Some links and potential special rules for this repo only are listed below.
 
+## QA testing
+
+The [wiki lists proper instructions](https://github.com/rugk/mastodon-simplified-federation/wiki/Testing) on how to test:
+* entering a Mastodon handle into the options
+* redirecting from various Fediverse networks
+
+In case you have problems you can follow these instructions to test whether things still work as expected.
+
 ## Translations
 
 * Direct link to online translator: [Web-Ext-Translator for this add-on](https://lusito.github.io/web-ext-translator/?gh=https://github.com/rugk/mastodon-simplified-federation).
