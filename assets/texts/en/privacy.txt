@@ -19,6 +19,12 @@ It may happen, however, that the REMOTE SERVER is the same as the OWN SERVER. In
 
 An explanation of all permissions, this ADD-ON requests, can be found at https://github.com/rugk/mastodon-simplified-federation/blob/master/assets/texts/en/permissions.md.
 
+== IMPLICATIONS ==
+
+There are two implications this add-on causes:
+1. As the USER does not need to enter your Mastodon handle anymore on any website, this can result in a privacy advantage.
+2. However, please mind that websites may still detect that the USER uses this add-on by triggering a redirect as if the USER clicked on a button. The USER will likely see this.
+
 == THIRD-PARTY SERVICES ==
 
 This ADD-ON uses the “sync storage” of your browser to store the settings. If the USER enables “Sync” in the browser, the settings are uploaded and synchronized across your devices connected to your account. If you do not do, the data is only stored locally on your device.
