@@ -172,7 +172,7 @@
     }
   },
   "contributorsThanksLink": {
-    "message": "https://github.com/rugk/offline-qr-code/blob/master/CONTRIBUTORS.md",
+    "message": "https://github.com/rugk/mastodon-simplified-federation/blob/master/CONTRIBUTORS",
     "description": "The link to the CONTRIBUTORS file."
   },
   "contributorsThanksLinkText": {
