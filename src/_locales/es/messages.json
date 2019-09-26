@@ -1,205 +1,205 @@
 {
-    // manifest.json
-    "extensionName": {
-      "message": "Mastodon – Simplified Federation!",
-      "description": "Name of the extension."
-    },
-    "extensionNameShort": {
-      "message": "Mastodon – Simplified Federation!",
-      "description": "Name of the extension."
-    },
-    "extensionDescription": {
-      "message": "Simplifica el seguimiento o interaccion con otros usuarios en instancias remotas de Mastodon.",
-      "description": "Description of the extension."
-    },
+  // manifest.json
+  "extensionName": {
+    "message": "Mastodon – Simplified Federation!",
+    "description": "Name of the extension."
+  },
+  "extensionNameShort": {
+    "message": "Mastodon – Simplified Federation!",
+    "description": "Name of the extension."
+  },
+  "extensionDescription": {
+    "message": "Simplifica el seguimiento o interaccion con otros usuarios en instancias remotas de Mastodon.",
+    "description": "Description of the extension."
+  },
   
-    // errors or other messages (mostly for settings)
-    "errorShowingMessage": {
-      "message": "No se puede mostrar el mensaje.",
-      "description": "When there is an error when showing the error/info/…."
-    },
-    "couldNotLoadOptions": {
-      "message": "Configuracion no puede ser cargada.",
-      "description": "When one or all settings could not be loaded."
-    },
-    "couldNotSaveOption": {
-      "message": "Configuracion no puede ser guardada.",
-      "description": "When a setting could not be saved."
-    },
-    "messageUndoButton": {
-      "message": "Deshacer",
-      "description": "The text of a button that undoes the last action."
-    },
-    "couldNotUndoAction": {
-      "message": "No se puede deshacer esta accion.",
-      "description": "Shown when an action cannot be undone."
-    },
-    "resettingOptionsWorked": {
-      "message": "Configuracion reestablecida!",
-      "description": "The message shown, when the options of the settings were reset."
-    },
-    "resettingOptionsFailed": {
-      "message": "No se puede reestablecer la configuracion!",
-      "description": "The message shown, when the options of the settings could not have been reset."
-    },
+  // errors or other messages (mostly for settings)
+  "errorShowingMessage": {
+    "message": "No se puede mostrar el mensaje.",
+    "description": "When there is an error when showing the error/info/…."
+  },
+  "couldNotLoadOptions": {
+    "message": "Configuracion no puede ser cargada.",
+    "description": "When one or all settings could not be loaded."
+  },
+  "couldNotSaveOption": {
+    "message": "Configuracion no puede ser guardada.",
+    "description": "When a setting could not be saved."
+  },
+  "messageUndoButton": {
+    "message": "Deshacer",
+    "description": "The text of a button that undoes the last action."
+  },
+  "couldNotUndoAction": {
+    "message": "No se puede deshacer esta accion.",
+    "description": "Shown when an action cannot be undone."
+  },
+  "resettingOptionsWorked": {
+    "message": "Configuracion reestablecida!",
+    "description": "The message shown, when the options of the settings were reset."
+  },
+  "resettingOptionsFailed": {
+    "message": "No se puede reestablecer la configuracion!",
+    "description": "The message shown, when the options of the settings could not have been reset."
+  },
   
-    // errors or other messages for specific settings
-    "mastodonHandleIsEmpty": {
-      "message": "Ingresar cuenta Mastodon. Sin una cuenta la extension no funcionara.",
-      "description": "This is an error shown, when the user did not (yet) enter a Mastodon account."
-    },
-    "mastodonHandleIsInvalid": {
-      "message": "Cuenta de Mastodon invalida.",
-      "description": "This is an error shown, when the Mastodon handle the user entered is not valid."
-    },
-    "mastodonHandleDoesNotExist": {
-      "message": "Usuario de Mastodon ingresado no existe en el servidor.",
-      "description": "This is an error shown, when the Mastodon handle the user entered does not exist on the server, i.e. the server returns a 404 error."
-    },
-    "mastodonHandleServerCouldNotBeContacted": {
-      "message": "El servidor (Mastodon) no puede ser contactado.",
-      "description": "This is an error shown, when the last part of Mastodon handle (= the server) could not be contacted, due to a network (likely DNS) error and thus likely due to a typo or another problem."
-    },
-    "isNoMastodonServer": {
-      "message": "El srvidor no es una instancia de Mastodon.",
-      "description": "This is an error shown, when the last part of Mastodon handle (= the server) is actually no Mastodon server."
-    },
-    "mastodonHandleCheckFailed": {
-      "message": "Verificacion de la cuenta Mastodon fallida.",
-      "description": "This is an error shown, when the server that has been contacted to verify the handle returned an unexpected response."
-    },
+  // errors or other messages for specific settings
+  "mastodonHandleIsEmpty": {
+    "message": "Ingresar cuenta Mastodon. Sin una cuenta la extension no funcionara.",
+    "description": "This is an error shown, when the user did not (yet) enter a Mastodon account."
+  },
+  "mastodonHandleIsInvalid": {
+    "message": "Cuenta de Mastodon invalida.",
+    "description": "This is an error shown, when the Mastodon handle the user entered is not valid."
+  },
+  "mastodonHandleDoesNotExist": {
+    "message": "Usuario de Mastodon no existe en el servidor.",
+    "description": "This is an error shown, when the Mastodon handle the user entered does not exist on the server, i.e. the server returns a 404 error."
+  },
+  "mastodonHandleServerCouldNotBeContacted": {
+    "message": "El servidor (Mastodon) no puede ser contactado.",
+    "description": "This is an error shown, when the last part of Mastodon handle (= the server) could not be contacted, due to a network (likely DNS) error and thus likely due to a typo or another problem."
+  },
+  "isNoMastodonServer": {
+    "message": "El srvidor no es una instancia de Mastodon.",
+    "description": "This is an error shown, when the last part of Mastodon handle (= the server) is actually no Mastodon server."
+  },
+  "mastodonHandleCheckFailed": {
+    "message": "Verificacion de la cuenta Mastodon fallida.",
+    "description": "This is an error shown, when the server that has been contacted to verify the handle returned an unexpected response."
+  },
   
-    "addonIsNotYetSetup": {
-      "message": "La extension no ha sido configurda. Debe ingresar una cuenta Mastodon en la configuracion.",
-      "description": "This is an error shown, when the user did not (yet) setup the whole add-on. Semantically it is the same as mastodonHandleIsEmpty, but this one is used in the notification."
-    },
-    "couldNotRedirect": {
-      "message": "No se puede redirigir debido a un error inesperado.",
-      "description": "Generic error shown when redirecting fails."
-    },
+  "addonIsNotYetSetup": {
+    "message": "La extension no ha sido configurda. Debe ingresar una cuenta Mastodon en la configuracion.",
+    "description": "This is an error shown, when the user did not (yet) setup the whole add-on. Semantically it is the same as mastodonHandleIsEmpty, but this one is used in the notification."
+  },
+  "couldNotRedirect": {
+    "message": "No se puede redirigir debido a un error inesperado.",
+    "description": "Generic error shown when redirecting fails."
+  },
   
-    // notification errors
-    "errorNotificationRedirectingTitle": {
-      "message": "“$ADDON$” redireccion fallida.",
-      "description": "Title of a notification if an error is shown when trying to redirect.",
-      "placeholders": {
-        "addon": {
-          "content": "$1",
-          "example": "Mastodon – Simplified Federation!"
-        }
+  // notification errors
+  "errorNotificationRedirectingTitle": {
+    "message": "“$ADDON$” redireccion fallida.",
+    "description": "Title of a notification if an error is shown when trying to redirect.",
+    "placeholders": {
+      "addon": {
+        "content": "$1",
+        "example": "Mastodon – Simplified Federation!"
       }
-    },
-    "errorNotificationNotSetupTitle": {
-      "message": "“$ADDON$” no esta configurado.",
-      "description": "Title of a notification if an error is shown when the add-on is not set up yet. In contrast to errorNotificationRedirectingTitle this is only shown for this one error. See also addonIsNotYetSetup.",
-      "placeholders": {
-        "addon": {
-          "content": "$1",
-          "example": "Mastodon – Simplified Federation!"
-        }
-      }
-    },
-  
-    "errorNotificationAdjustSettings": {
-      "message": "$ERROR$ Click para ajustar configuracion.",
-      "description": "Wrapper shown if an error happened to point the user to the settings. It is used in the description of the notification.",
-      "placeholders": {
-        "error": {
-          "content": "$1",
-          "example": "Please enter a Mastodon handle. Without it, the add-on will not work."
-        }
-      }
-    },
-  
-    // options
-    "someSettingsAreManaged": {
-      "message": "Ciertas configuraciones son manejadas por el administrador y no pueden ser cambiadas.",
-      "description": "The message, which appears, when settings are pre-defined (as managed options) by administrators."
-    },
-    "optionIsDisabledBecauseManaged": {
-      "message": "Opcion deshabilitada, ha sido configurada por su administrador.",
-      "description": "The title (tooltip) shown, when hovering over a disabled, managed option."
-    },
-    "optionLearnMore": {
-      "message": "Mas informacion",
-      "description": "When a link to an explainer needs to be added, this is the link text."
-    },
-    "optionsResetButton": {
-      "message": "Reestablecer todo",
-      "description": "The button to delete all current settings and load the defaults, shown in the add-on settings."
-    },
-  
-    "optionMastodonHandle": {
-      "message": "Su cuenta Mastodon: ",
-      "description": "This is an option shown in the add-on settings. You can enter your handle in the format mastodon@server.com there."
-    },
-    "optionMastodonHandlePlaceholder": {
-      "message": "usuario@mastodon.ejemplo",
-      "description": "This is placeholder shown for the Mastodon handle input. Try to give an example on format the user has to use to enter the ID as  mastodon@server.com here. Do not use a real server name and do not promote any really existing user."
-    },
-    "optionMastodonHandleHelper": {
-      "message": "Ingrese su usuario Mastodon de la siguiente manera “usuario@dominio”.",
-      "description": "An explanatory text shown to the user in the settings to explain what format they have to enter the Mastodon handle. It should not hint to any example (that's what the placeholder is for), but explain the general format."
-    },
-  
-    "translatorCredit": {
-      "message": "Extension traducida al español por $TRANSLATORS$.",
-      "description": "The credit text for the translator. See https://github.com/TinyWebEx/common/blob/master/CONTRIBUTING.md#translator-credit-inside-of-add-on for how to translate this.",
-      "placeholders": {
-        "translators": {
-          "content": "$1",
-          "example": "<a href=\"https://github.com/dbarrerap/\">@dbarrerap</a>"
-        }
-      }
-    },
-    "translatorLink": {
-      "message": "https://github.com/dbarrerap",
-      "description": "The link to the translator's GitHub profile."
-    },
-    "translatorUsername": {
-      "message": "dbarrerap",
-      "description": "The username that the translator wants to be referred to."
-    },
-  
-    "contributorsThanks": {
-      "message": "Tambien se agradece a $CONTRIBUTORS$.",
-      "description": "Text thanking all contributors and linking to the contributors file.",
-      "placeholders": {
-        "contributors": {
-          "content": "$1",
-          "example": "<a href=\"https://github.com/dbarrerap/…/CONTRIBUTORS.md\">all other contributors</a>"
-        }
-      }
-    },
-    "contributorsThanksLink": {
-      "message": "https://github.com/dbarrerap/mastodon-simplified-federation/blob/master/CONTRIBUTORS",
-      "description": "The link to the CONTRIBUTORS file."
-    },
-    "contributorsThanksLinkText": {
-      "message": "todos los demás contribuyentes",
-      "description": "The link text linking to the contributors file. See contributorsThanks."
-    },
-  
-    // ARIA labels/descriptions for messages
-    "dismissIconDescription": {
-      "message": "Cerrar este mensaje",
-      "description": "the aria label for the close button of the message box"
-    },
-    "ariaMessageInfo": {
-      "message": "Mensaje informativo",
-      "description": "the aria label to label the message box as an info message box"
-    },
-    "ariaMessageSuccess": {
-      "message": "Mensaje de exito",
-      "description": "the aria label to label the message box as an success message box"
-    },
-    "ariaMessageError": {
-      "message": "Mensaje de error",
-      "description": "the aria label to label the message box as an error message box"
-    },
-    "ariaMessageWarning": {
-      "message": "Mensaje de advertencia",
-      "description": "the aria label to label the message box as an warning message box"
     }
+  },
+  "errorNotificationNotSetupTitle": {
+    "message": "“$ADDON$” no esta configurado.",
+    "description": "Title of a notification if an error is shown when the add-on is not set up yet. In contrast to errorNotificationRedirectingTitle this is only shown for this one error. See also addonIsNotYetSetup.",
+    "placeholders": {
+      "addon": {
+        "content": "$1",
+        "example": "Mastodon – Simplified Federation!"
+      }
+    }
+  },
+  
+  "errorNotificationAdjustSettings": {
+    "message": "$ERROR$ Click para ajustar configuracion.",
+    "description": "Wrapper shown if an error happened to point the user to the settings. It is used in the description of the notification.",
+    "placeholders": {
+      "error": {
+        "content": "$1",
+        "example": "Please enter a Mastodon handle. Without it, the add-on will not work."
+      }
+    }
+  },
+  
+  // options
+  "someSettingsAreManaged": {
+    "message": "Ciertas configuraciones son manejadas por el administrador y no pueden ser cambiadas.",
+    "description": "The message, which appears, when settings are pre-defined (as managed options) by administrators."
+  },
+  "optionIsDisabledBecauseManaged": {
+    "message": "Opcion deshabilitada, ha sido configurada por su administrador.",
+    "description": "The title (tooltip) shown, when hovering over a disabled, managed option."
+  },
+  "optionLearnMore": {
+    "message": "Mas informacion",
+    "description": "When a link to an explainer needs to be added, this is the link text."
+  },
+  "optionsResetButton": {
+    "message": "Reestablecer todo",
+    "description": "The button to delete all current settings and load the defaults, shown in the add-on settings."
+  },
+  
+  "optionMastodonHandle": {
+    "message": "Su cuenta Mastodon: ",
+    "description": "This is an option shown in the add-on settings. You can enter your handle in the format mastodon@server.com there."
+  },
+  "optionMastodonHandlePlaceholder": {
+    "message": "usuario@mastodon.ejemplo",
+    "description": "This is placeholder shown for the Mastodon handle input. Try to give an example on format the user has to use to enter the ID as  mastodon@server.com here. Do not use a real server name and do not promote any really existing user."
+  },
+  "optionMastodonHandleHelper": {
+    "message": "Ingrese su usuario Mastodon de la siguiente manera “usuario@dominio”.",
+    "description": "An explanatory text shown to the user in the settings to explain what format they have to enter the Mastodon handle. It should not hint to any example (that's what the placeholder is for), but explain the general format."
+  },
+  
+  "translatorCredit": {
+    "message": "Extension traducida al español por $TRANSLATORS$.",
+    "description": "The credit text for the translator. See https://github.com/TinyWebEx/common/blob/master/CONTRIBUTING.md#translator-credit-inside-of-add-on for how to translate this.",
+    "placeholders": {
+      "translators": {
+        "content": "$1",
+        "example": "<a href=\"https://github.com/dbarrerap/\">@dbarrerap</a>"
+      }
+    }
+  },
+  "translatorLink": {
+    "message": "https://github.com/dbarrerap",
+    "description": "The link to the translator's GitHub profile."
+  },
+  "translatorUsername": {
+    "message": "dbarrerap",
+    "description": "The username that the translator wants to be referred to."
+  },
+  
+  "contributorsThanks": {
+    "message": "Tambien se agradece a $CONTRIBUTORS$.",
+    "description": "Text thanking all contributors and linking to the contributors file.",
+    "placeholders": {
+      "contributors": {
+        "content": "$1",
+        "example": "<a href=\"https://github.com/dbarrerap/…/CONTRIBUTORS.md\">all other contributors</a>"
+      }
+    }
+  },
+  "contributorsThanksLink": {
+    "message": "https://github.com/dbarrerap/mastodon-simplified-federation/blob/master/CONTRIBUTORS",
+    "description": "The link to the CONTRIBUTORS file."
+  },
+  "contributorsThanksLinkText": {
+    "message": "todos los demás contribuyentes",
+    "description": "The link text linking to the contributors file. See contributorsThanks."
+  },
+  
+  // ARIA labels/descriptions for messages
+  "dismissIconDescription": {
+    "message": "Cerrar este mensaje",
+    "description": "the aria label for the close button of the message box"
+  },
+  "ariaMessageInfo": {
+    "message": "Mensaje informativo",
+    "description": "the aria label to label the message box as an info message box"
+  },
+  "ariaMessageSuccess": {
+    "message": "Mensaje de exito",
+    "description": "the aria label to label the message box as an success message box"
+  },
+  "ariaMessageError": {
+    "message": "Mensaje de error",
+    "description": "the aria label to label the message box as an error message box"
+  },
+  "ariaMessageWarning": {
+    "message": "Mensaje de advertencia",
+    "description": "the aria label to label the message box as an warning message box"
   }
+}
   
