@@ -14,4 +14,4 @@
 
 ### Turkish
 
-- Ömür Turan ([@omurturan](https://github.com/omurturan))
+- Ömür Turan [@omurturan](https://github.com/omurturan)
