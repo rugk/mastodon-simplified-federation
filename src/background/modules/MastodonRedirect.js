@@ -10,11 +10,25 @@ import * as Mastodon from "/common/modules/Mastodon.js";
 import * as NetworkTools from "/common/modules/NetworkTools.js";
 
 let loadReplace = () => true; // default
+let tabToModify = () => null; // default
+
+/**
+ * Add function to return which tab should be redirected.
+ *
+ * By default, it's the currently loaded tab (null).
+ *
+ * @public
+ * @param {function} doModifyWhichTab
+ * @returns {void}
+ */
+export function setTabToModify(doModifyWhichTab) {
+    tabToModify = doModifyWhichTab;
+}
 
 /**
  * Enable or disable replacing of the current website when redirecting.
  *
- * @private
+ * @public
  * @param {function} doLoadReplace
  * @returns {void}
  */
@@ -33,11 +47,15 @@ async function triggerRemoteAction(uri) {
     // get and assemble Mastodon object
     const ownMastodon = await AddonSettings.get("ownMastodon");
 
+    // wait for promises of dependencies to finish
+    const tabIdToModify = await tabToModify();
+    const loadReplaceTab = await loadReplace();
+
     // skip the subscribe/interact API if it is not needed, because it is your
     // own server
     if (uri.startsWith(`https://${ownMastodon.server}`)) {
         // just redirect to given input URL, if it is one the same server
-        return NetworkTools.redirectToWebsite(uri, loadReplace());
+        return NetworkTools.redirectToWebsite(uri, tabIdToModify, loadReplaceTab);
     }
 
     const mastodonApiUrl = await Mastodon.getSubscribeApiUrl(ownMastodon, uri);
@@ -58,7 +76,7 @@ async function triggerRemoteAction(uri) {
         NetworkTools.waitForWebRequest(mastodonApiUrl).then((requestDetails) => {
             // if everything is okay, we are fine with that
             const firstDigit = requestDetails.statusCode.toString()[0];
-            if (firstDigit !== "2" && firstDigit !== "3") {
+            if (firstDigit !== "2" && firstDigit !== "3") { // 200/300 return code
                 console.error(`Could not successful redirect to ${mastodonApiUrl}`, requestDetails);
                 throw new Error(`Redirecting to "${mastodonApiUrl}" failed with error code ${requestDetails.statusCode}.`);
             }
@@ -66,11 +84,11 @@ async function triggerRemoteAction(uri) {
 
         // redirect and always replace site, as before an invalid site has been loaded
         // (we never need to preserve an invalid site)
-        NetworkTools.redirectToWebsite(mastodonApiUrl, true);
+        NetworkTools.redirectToWebsite(mastodonApiUrl, tabIdToModify, true);
     });
 
     // finally redirect
-    return NetworkTools.redirectToWebsite(mastodonApiUrl, loadReplace());
+    return NetworkTools.redirectToWebsite(mastodonApiUrl, tabIdToModify, loadReplaceTab);
 }
 
 /**

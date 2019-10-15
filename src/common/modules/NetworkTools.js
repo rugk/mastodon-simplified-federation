@@ -106,22 +106,23 @@ export function webRequestListenStop(onAction, handleWebRequest) {
  *
  * @public
  * @param {string|URL} url
+ * @param {int|null} tabToModify
  * @param {boolean} loadReplace whether to replace the existing site
  * @returns {Promise}
  * @see {@link https://developer.mozilla.org/docs/Mozilla/Add-ons/WebExtensions/API/tabs/update}
  */
-export function redirectToWebsite(url, loadReplace = true) {
+export function redirectToWebsite(url, tabToModify = null, loadReplace = true) {
     // convert URL object, if needed
     url = convertUrlToString(url);
 
     // Firefox for Android e.g. does not support "loadReplace"
     try {
-        return browser.tabs.update({
+        return browser.tabs.update(tabToModify, {
             loadReplace,
             url
         });
     } catch (e) {
-        return browser.tabs.update({ url });
+        return browser.tabs.update(tabToModify, { url });
     }
 }
 
@@ -156,6 +157,7 @@ export function waitForWebRequest(url, onAction = "onCompleted", timeout = 5000)
             }, timeout);
         }
 
+        const promiseResolve = resolve, promiseReject = reject;
         const listenForPageLoad = (requestDetails) => {
             // cleanup timeout & listener
             if (timerId) {
@@ -164,7 +166,7 @@ export function waitForWebRequest(url, onAction = "onCompleted", timeout = 5000)
             webRequestListenStop(onAction, listenForPageLoad);
 
             // now call callback
-            resolve(requestDetails).catch(reject);
+            promiseResolve(requestDetails).catch(promiseReject);
         };
 
         // convert URL object, if needed

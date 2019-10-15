@@ -32,7 +32,8 @@
     "webRequest",
     "notifications",
     "http://*/*",
-    "https://*/*"
+    "https://*/*",
+    "tabs"
   ],
 
   "applications": {

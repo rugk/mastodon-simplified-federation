@@ -8,6 +8,7 @@ import * as NetworkTools from "/common/modules/NetworkTools.js";
 
 import * as AddonSettings from "/common/modules/AddonSettings/AddonSettings.js";
 import * as MastodonApi from "/common/modules/MastodonApi.js";
+import * as TabHandler from "../TabHandler.js";
 
 import {INTERACTION_TYPE} from "../data/INTERACTION_TYPE.js";
 
@@ -40,6 +41,24 @@ const ENABLE_LOAD_REPLACE = true;
  */
 export function shouldLoadReplace() {
     return ENABLE_LOAD_REPLACE;
+}
+
+/**
+ * Determinates which tab should be redirected.
+ *
+ * @public
+ * @param {Object} requestDetails
+ * @returns {boolean}
+ */
+export async function getTabToModify(requestDetails) {
+    const redirectInMainWindow = await AddonSettings.get("redirectInMainWindow");
+    const ownTabId = requestDetails.tabId;
+
+    if (redirectInMainWindow) {
+        return TabHandler.getPopupOwnerTab(ownTabId, requestDetails) || ownTabId;
+    }
+
+    return ownTabId;
 }
 
 /**

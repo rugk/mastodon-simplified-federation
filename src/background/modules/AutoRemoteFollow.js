@@ -50,15 +50,16 @@ async function handleWebRequest(requestDetails) {
 
     const url = new URL(requestDetails.url);
 
+    // detect, which network/software it uses
     const [software, interaction] = getInteractionType(url);
 
-    // detect, which network/software it uses
     if (software === null) {
         // ignore unrelated sites, resolves so error handling is not triggered
         return Promise.resolve();
     }
     const detectModule = FEDIVERSE_MODULE[software];
 
+    MastodonRedirect.setTabToModify(detectModule.getTabToModify.bind(null, requestDetails));
     MastodonRedirect.enableLoadReplace(detectModule.shouldLoadReplace);
 
     // and get data and pass to redirect
