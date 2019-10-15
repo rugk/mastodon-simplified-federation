@@ -43,7 +43,7 @@ async function triggerRemoteAction(uri) {
     const mastodonApiUrl = await Mastodon.getSubscribeApiUrl(ownMastodon, uri);
 
     // observe triggered request, so we can make sure it worked
-    NetworkTools.waitForWebRequest(mastodonApiUrl, async (requestDetails) => {
+    NetworkTools.waitForWebRequest(mastodonApiUrl).then(async (requestDetails) => {
         // if everything is okay, we are fine with that
         // Note even when a redirect is issued, we may want to clean cache and potentially redirect again
         if (requestDetails.statusCode === 200) {
@@ -55,7 +55,7 @@ async function triggerRemoteAction(uri) {
         const mastodonApiUrl = await Mastodon.getSubscribeApiUrl(ownMastodon, uri, true);
 
         // only if this retry fails, throw error
-        NetworkTools.waitForWebRequest(mastodonApiUrl, (requestDetails) => {
+        NetworkTools.waitForWebRequest(mastodonApiUrl).then((requestDetails) => {
             // if everything is okay, we are fine with that
             const firstDigit = requestDetails.statusCode.toString()[0];
             if (firstDigit !== "2" && firstDigit !== "3") {

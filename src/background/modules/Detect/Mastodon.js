@@ -50,7 +50,7 @@ export function shouldLoadReplace() {
  * @returns {Promise}
  */
 function scrapeTootUrlFromPage(url) {
-    return NetworkTools.waitForWebRequest(url, () => {
+    return NetworkTools.waitForWebRequest(url).then(() => {
         // inject content script to get toot URL
         // default = current tab
         return browser.tabs.executeScript(

@@ -137,7 +137,6 @@ export function redirectToWebsite(url, loadReplace = true) {
  *
  * @public
  * @param {string|URL|string[]} url
- * @param {function} callback
  * @param {string} [onAction="onCompleted"]
  * @param {int|null} [timeout=5000] time after which the Promise is rejected if
  *                                  the required event for the URL does not trigger,
@@ -145,7 +144,7 @@ export function redirectToWebsite(url, loadReplace = true) {
  * @returns {Promise}
  * @see {@link https://developer.mozilla.org/docs/Mozilla/Add-ons/WebExtensions/API/webRequest/onCompleted}
  */
-export function waitForWebRequest(url, callback, onAction = "onCompleted", timeout = 5000) {
+export function waitForWebRequest(url, onAction = "onCompleted", timeout = 5000) {
     return new Promise((resolve, reject) => {
         let timerId = null;
         if (timeout) {
@@ -165,7 +164,7 @@ export function waitForWebRequest(url, callback, onAction = "onCompleted", timeo
             webRequestListenStop(onAction, listenForPageLoad);
 
             // now call callback
-            callback(requestDetails).then(resolve).catch(reject);
+            resolve(requestDetails).catch(reject);
         };
 
         // convert URL object, if needed
