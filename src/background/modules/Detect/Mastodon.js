@@ -69,7 +69,7 @@ export async function getTabToModify(requestDetails) {
  * @returns {Promise}
  */
 function scrapeTootUrlFromPage(url) {
-    return NetworkTools.waitForWebRequest(url).then(() => {
+    return NetworkTools.waitForWebRequest(url, () => {
         // inject content script to get toot URL
         // default = current tab
         return browser.tabs.executeScript(
