@@ -49,7 +49,7 @@ async function triggerRemoteAction(uri) {
 
     // wait for promises of dependencies to finish
     const tabIdToModify = await tabToModify();
-    const loadReplaceTab = await loadReplace();
+    const loadReplaceTab = await loadReplace(tabIdToModify);
 
     // skip the subscribe/interact API if it is not needed, because it is your
     // own server

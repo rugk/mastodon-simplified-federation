@@ -63,7 +63,7 @@ async function handleWebRequest(requestDetails) {
     await AddonSettings.loadOptions();
 
     MastodonRedirect.setTabToModify(detectModule.getTabToModify.bind(null, requestDetails));
-    MastodonRedirect.enableLoadReplace(detectModule.shouldLoadReplace);
+    MastodonRedirect.enableLoadReplace(detectModule.shouldLoadReplace.bind(null, requestDetails));
 
     // and get data and pass to redirect
     switch (interaction) {

@@ -26,21 +26,18 @@ CATCH_URLS.set(REMOTE_FOLLOW_REGEX, INTERACTION_TYPE.FOLLOW);
 CATCH_URLS.set(REMOTE_INTERACT_REGEX, INTERACTION_TYPE.TOOT_INTERACT);
 
 /**
- * Whether to enable replacing the previous site when redirecting or not.
- *
- * @private
- * @type {boolean}
- */
-const ENABLE_LOAD_REPLACE = true;
-
-/**
  * Determinates whether the redirect should replace the site before or not.
  *
  * @public
+ * @param {Object} requestDetails
+ * @param {int} tabIdToModify
  * @returns {boolean}
  */
-export function shouldLoadReplace() {
-    return ENABLE_LOAD_REPLACE;
+export function shouldLoadReplace(requestDetails, tabIdToModify) {
+    const isRedirectingPopup = !tabIdToModify || requestDetails.tabId === tabIdToModify;
+
+    // only replace tab, if it is the popup one
+    return isRedirectingPopup;
 }
 
 /**
