@@ -78,6 +78,19 @@
     "description": "Generic error shown when redirecting fails."
   },
 
+  "permissionRequiredTabs": {
+    "message": "The permission to access your browser tabs is required for this feature.",
+    "description": "The message shown, when the emojiCopyOnlyFallback option in the settings needs to request permissions to work."
+  },
+  "buttonRequestPermission": {
+    "message": "Grant permission",
+    "description": "The button label, used for requesting a permission that is missing."
+  },
+  "couldNotRequestPermission": {
+    "message": "Requesting permission failed.",
+    "description": "When the permission request fails."
+  },
+
   // notification errors
   "errorNotificationRedirectingTitle": {
     "message": "“$ADDON$” failed to redirect",

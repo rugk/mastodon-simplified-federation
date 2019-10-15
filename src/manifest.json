@@ -32,7 +32,10 @@
     "webRequest",
     "notifications",
     "http://*/*",
-    "https://*/*",
+    "https://*/*"
+  ],
+
+  "optional_permissions": [
     "tabs"
   ],
 

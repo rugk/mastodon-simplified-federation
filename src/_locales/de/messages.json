@@ -78,6 +78,19 @@
     "description": "Generic error shown when redirecting fails."
   },
 
+  "permissionRequiredTabs": {
+    "message": "Für dieses Feature wird die Berechtigung, auf deine Browsertabs zuzugreifen, benötigt.",
+    "description": "The message shown, when the emojiCopyOnlyFallback option in the settings needs to request permissions to work."
+  },
+  "buttonRequestPermission": {
+    "message": "Berechtigung erteilen",
+    "description": "The button label, used for requesting a permission that is missing."
+  },
+  "couldNotRequestPermission": {
+    "message": "Konnte Berechtigung nicht erfragen.",
+    "description": "When the permission request fails."
+  },
+
   // notification errors
   "errorNotificationRedirectingTitle": {
     "message": "„$ADDON$” konnte Seite nicht umleiten",

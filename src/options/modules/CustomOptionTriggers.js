@@ -12,9 +12,48 @@ import * as AutomaticSettings from "/common/modules/AutomaticSettings/AutomaticS
 import * as MastodonHandleError from "/common/modules/MastodonHandle/ConfigError.js";
 import * as MastodonHandleCheck from "/common/modules/MastodonHandle/ConfigCheck.js";
 
+import * as PermissionRequest from "/common/modules/PermissionRequest/PermissionRequest.js";
+
+const TABS_PERMISSION = {
+    permissions: ["tabs"]
+};
+const REDIRECT_IN_MAIN_WINDOW_PERMISSION_INFO = "redirectInMainWindowPermissionInfo";
+
+
 // whether the handle was once entered in a valid way
 let validSyntaxHandleOnceEntered = false;
 let lastInvalidHandleWithError = null;
+
+/**
+* Request the tab permission for
+ *
+ * @function
+ * @private
+ * @param  {boolean} redirectIsEnabled
+ * @param  {string} option
+ * @param  {Object} event
+ * @returns {Promise}
+ */
+function applyRedirectInMainWindowPermission(redirectIsEnabled, option, event) {
+    // ignore options directly loaded from the settings, these are always valid
+    if (redirectIsEnabled &&
+        !PermissionRequest.isPermissionGranted(TABS_PERMISSION)
+    ) {
+        return PermissionRequest.requestPermission(
+            TABS_PERMISSION,
+            REDIRECT_IN_MAIN_WINDOW_PERMISSION_INFO,
+            event
+        ).catch(() => {
+            // if permission is rejected (user declined), force disabling the setting
+            redirectIsEnabled = false;
+            document.getElementById("redirectInMainWindow").checked = false;
+        });
+    } else {
+        PermissionRequest.cancelPermissionPrompt(TABS_PERMISSION, REDIRECT_IN_MAIN_WINDOW_PERMISSION_INFO);
+    }
+
+    return Promise.resolve();
+}
 
 /**
  * Checks if the Mastodon handle is valid and shows an error, if needed.
@@ -136,14 +175,23 @@ function prepareMastodonHandleForInput(param) {
  * @function
  * @returns {void}
  */
-export function registerTrigger() {
+export async function registerTrigger() {
     // override load/safe behaviour for custom fields
     AutomaticSettings.Trigger.addCustomLoadOverride("ownMastodon", prepareMastodonHandleForInput);
     AutomaticSettings.Trigger.addCustomSaveOverride("ownMastodon", saveMastodonHandle);
 
     // register triggers
     AutomaticSettings.Trigger.registerSave("ownMastodon", checkMastodonHandle);
+    AutomaticSettings.Trigger.registerSave("redirectInMainWindow", applyRedirectInMainWindowPermission);
 
     // handle loading of options correctly
     AutomaticSettings.Trigger.registerAfterLoad(AutomaticSettings.Trigger.RUN_ALL_SAVE_TRIGGER);
+
+    // permission request init
+    await PermissionRequest.registerPermissionMessageBox(
+        TABS_PERMISSION,
+        REDIRECT_IN_MAIN_WINDOW_PERMISSION_INFO,
+        document.getElementById("redirectInMainWindowPermissionInfo"),
+        "permissionRequiredTabs"
+    );
 }

@@ -10,3 +10,6 @@
 [submodule "src/common/modules/AddonSettings"]
 	path = src/common/modules/AddonSettings
 	url = https://github.com/TinyWebEx/AddonSettings
+[submodule "src/common/modules/PermissionRequest"]
+	path = src/common/modules/PermissionRequest
+	url = https://github.com/TinyWebEx/PermissionRequest

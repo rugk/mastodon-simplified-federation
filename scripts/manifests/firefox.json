@@ -34,6 +34,10 @@
     "https://*/*"
   ],
 
+  "optional_permissions": [
+    "tabs"
+  ],
+
   "applications": {
     "gecko": {
       "id": "mastodon-auto-remote-follow@rugk.github.io",
