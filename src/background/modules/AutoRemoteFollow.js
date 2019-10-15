@@ -59,6 +59,9 @@ async function handleWebRequest(requestDetails) {
     }
     const detectModule = FEDIVERSE_MODULE[software];
 
+    // clear cache of settings
+    await AddonSettings.loadOptions();
+
     MastodonRedirect.setTabToModify(detectModule.getTabToModify.bind(null, requestDetails));
     MastodonRedirect.enableLoadReplace(detectModule.shouldLoadReplace);
 

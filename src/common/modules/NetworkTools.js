@@ -106,7 +106,7 @@ export function webRequestListenStop(onAction, handleWebRequest) {
  *
  * @public
  * @param {string|URL} url
- * @param {int|null} tabToModify
+ * @param {int|null} tabToModify by default will modify currently opened tab
  * @param {boolean} loadReplace whether to replace the existing site
  * @returns {Promise}
  * @see {@link https://developer.mozilla.org/docs/Mozilla/Add-ons/WebExtensions/API/tabs/update}
