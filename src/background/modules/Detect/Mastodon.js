@@ -48,7 +48,7 @@ export function shouldLoadReplace() {
  *
  * @public
  * @param {Object} requestDetails
- * @returns {boolean}
+ * @returns {Promise} int
  */
 export async function getTabToModify(requestDetails) {
     const redirectInMainWindow = await AddonSettings.get("redirectInMainWindow");

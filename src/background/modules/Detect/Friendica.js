@@ -33,6 +33,17 @@ export function shouldLoadReplace() {
 }
 
 /**
+ * Determinates which tab should be redirected.
+ *
+ * @public
+ * @param {Object} requestDetails
+ * @returns {int}
+ */
+export function getTabToModify(requestDetails) {
+    return requestDetails.tabId;
+}
+
+/**
  * Find the follow URL.
  *
  * @public
