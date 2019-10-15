@@ -52,10 +52,17 @@ export function shouldLoadReplace() {
  */
 export async function getTabToModify(requestDetails) {
     const redirectInMainWindow = await AddonSettings.get("redirectInMainWindow");
-    const ownTabId = requestDetails.tabId;
+    let ownTabId = requestDetails.tabId;
 
-    if (redirectInMainWindow) {
-        return TabHandler.getPopupOwnerTab(ownTabId, requestDetails) || ownTabId;
+    if (!redirectInMainWindow) {
+        return ownTabId;
+    }
+
+    ownTabId = TabHandler.getPopupOwnerTab(ownTabId, requestDetails) || ownTabId;
+
+    // actually directly close old tab, if it is not needed anymore
+    if (ownTabId && ownTabId !== requestDetails.tabId) {
+        TabHandler.closeTab(requestDetails.tabId);
     }
 
     return ownTabId;

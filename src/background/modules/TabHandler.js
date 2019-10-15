@@ -57,3 +57,15 @@ async function findBrowserTab({
 
     return tabFilter[0];
 }
+
+/**
+ * Close a tab that is not needed anymore.
+ *
+ * @public
+ * @param {int} tabId
+ * @returns {Promise}
+ * @see {@link https://developer.mozilla.org/docs/Mozilla/Add-ons/WebExtensions/API/tabs/remove}
+ */
+export function closeTab(tabId) {
+    return browser.tabs.remove(tabId);
+}
