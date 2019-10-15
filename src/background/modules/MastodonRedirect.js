@@ -76,7 +76,6 @@ async function triggerRemoteAction(uri) {
         NetworkTools.waitForWebRequest(mastodonApiUrl, (requestDetails) => {
             // if everything is okay, we are fine with that
             const firstDigit = requestDetails.statusCode.toString()[0];
-            debugger;
             if (firstDigit !== "2" && firstDigit !== "3") { // 200/300 return code
                 console.error(`Could not successful redirect to ${mastodonApiUrl}`, requestDetails);
                 throw new Error(`Redirecting to "${mastodonApiUrl}" failed with error code ${requestDetails.statusCode}.`);

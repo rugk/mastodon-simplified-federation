@@ -16,6 +16,9 @@ export async function getPopupOwnerTab(tabId, requestDetails) {
     const ownTab = await browser.tabs.get(tabId);
     let openerTabId = ownTab.openerTabId;
 
+    // fallback to manually finding opener tab
+    // because the openerTabId is not always set, see
+    // https://discourse.mozilla.org/t/openertabid-not-present-in-tab-opened-as-a-popup-getting-opener-tab-of-popup/46844?u=rugkx
     if (!openerTabId) {
         openerTabId = (await findBrowserTab({
             url: requestDetails.originUrl,

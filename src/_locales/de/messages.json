@@ -142,6 +142,15 @@
     "description": "An explanatory text shown to the user in the settings to explain what format they have to enter the Mastodon handle. It should not hint to any example (that's what the placeholder is for), but explain the general format."
   },
 
+  "optionRedirectInMainWindow": {
+    "message": "Verhindere die Nutzung eines Popups.",
+    "description": "This is an option shown in the add-on settings."
+  },
+  "optionRedirectInMainWindowDescr": {
+    "message": "Verhindert die Benutzung eines extra Fensters und leitet stattdessen die Hauptseite um.",
+    "description": "This is an option shown in the add-on settings."
+  },
+
   "translatorCredit": {
     "message": "Dieses Add-on wurde von $TRANSLATORS$ ins Deutsche übersetzt.",
     "description": "The credit text for the translator. See https://github.com/TinyWebEx/common/blob/master/CONTRIBUTING.md#translator-credit-inside-of-add-on for how to translate this.",
