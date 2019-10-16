@@ -194,7 +194,7 @@
     }
   },
   "contributorsThanksLink": {
-    "message": "https://github.com/rugk/mastodon-simplified-federation/blob/master/CONTRIBUTORS",
+    "message": "https://github.com/rugk/mastodon-simplified-federation/blob/master/CONTRIBUTORS.md",
     "description": "The link to the CONTRIBUTORS file."
   },
   "contributorsThanksLinkText": {
