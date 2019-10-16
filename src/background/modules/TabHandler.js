@@ -20,11 +20,15 @@ export async function getPopupOwnerTab(tabId, requestDetails) {
     // because the openerTabId is not always set, see
     // https://discourse.mozilla.org/t/openertabid-not-present-in-tab-opened-as-a-popup-getting-opener-tab-of-popup/46844?u=rugkx
     if (!openerTabId) {
-        openerTabId = (await findBrowserTab({
-            url: requestDetails.originUrl,
-            excludeTabId: tabId,
-            active: true
-        })).id; // get ID
+        try {
+            openerTabId = (await findBrowserTab({
+                url: requestDetails.originUrl,
+                excludeTabId: tabId,
+                active: true
+            })).id; // get ID
+        } catch (e) {
+            // ignore issues and just use openerTabId from before or null
+        }
     }
     return openerTabId || null;
 }
