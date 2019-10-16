@@ -34,7 +34,7 @@ let redirectSiteFinishedLoading = false;
  * @returns {Promise}
  */
 function scrapeUserFromPage(url) {
-    return NetworkTools.waitForWebRequest(url, () => {
+    return NetworkTools.waitForWebRequest(url).then(() => {
         redirectSiteFinishedLoading = true;
 
         // inject content script to get toot URL
