@@ -10,8 +10,8 @@
 
 ### Spanish
 
-- David E. Barrera [@dbarrerap](https://github.com/dbarrerap)
+- David E. Barrera ([@dbarrerap](https://github.com/dbarrerap))
 
 ### Turkish
 
-- Ömür Turan [@omurturan](https://github.com/omurturan)
+- Ömür Turan ([@omurturan](https://github.com/omurturan))
