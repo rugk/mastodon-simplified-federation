@@ -1,7 +1,7 @@
 # Contributors
 
 - [@ENT8R](https://github.com/ENT8R)
-- [Chao Zhang] ([@zhang1pr](https://github.com/zhang1pr))
+- Chao Zhang ([@zhang1pr](https://github.com/zhang1pr))
 
 ## Translators
 
