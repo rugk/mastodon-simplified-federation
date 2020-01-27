@@ -10,7 +10,7 @@ For a general explanation of add-on permission see [this support article](https:
 | `notifications` | Display notifications to you | Required to show you a notification in case redirecting or something else fails. |
 
 ## Hidden permissions
-Additionally it requests these permission, which are not requested in Firefox when the add-on is installed, as they are not a profound permission.
+Additionally, it requests these permissions, which are not requested in Firefox when the add-on is installed, as they are not a profound permission.
 
 | Internal Id  | Permission           | Explanation                                                                                                                                |
 |:-------------|:---------------------|:-------------------------------------------------------------------------------------------------------------------------------------------|
