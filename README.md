@@ -5,7 +5,7 @@
 [![Mozilla Add-on users](https://img.shields.io/amo/users/mastodon-simplified-federation.svg)](https://addons.mozilla.org/firefox/addon/mastodon-simplified-federation/statistics/)
 [![Mozilla Add-on stars](https://img.shields.io/amo/stars/mastodon-simplified-federation.svg)](https://addons.mozilla.org/firefox/addon/mastodon-simplified-federation/reviews/)
 
-Simplifies following or interacting with other users on remote Mastodon instances in the Fediverse. Basically, it skips the "Enter your Mastodon handle" popup and takes you directly to your own "home" instance, saving you from cumbrously entering your Mastodon handle again and again in that input box when you click on a “Follow”, “Retoot”/“Fav” or other remote interaction button on another instance. :smile:
+Simplifies following or interacting with other users on remote Mastodon instances in the Fediverse. Basically, it skips the "Enter your Mastodon handle" popup and takes you directly to your own "home" instance, saving you from cumbersomely entering your Mastodon handle again and again in that input box when you click on a “Follow”, “Retoot”/“Fav” or other remote interaction button on another instance. :smile:
 
 [Idea by](https://social.wxcafe.net/@akkes/100550833588126733) [@akkes](https://social.wxcafe.net/@akkes).
 
