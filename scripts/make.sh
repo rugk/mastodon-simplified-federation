@@ -2,7 +2,7 @@
 #
 # Makes a release ZIP of the add-on.
 #
-# IMPORTANT: This is only useful for building release versions of the add-on. 
+# IMPORTANT: This is only useful for building release versions of the add-on.
 # For development, please rather follow the guidance in the contributing doc.
 #
 
@@ -24,7 +24,8 @@ zip -r -FS "../build/$EXTENSION_NAME.xpi" ./* -x "tests/*" -x "**/tests/*" \
     -x "examples/*" -x "**/examples/*" -x "**/*.example" \
     -x "**/README.md" -x "**/CONTRIBUTING.md" -x "**/manifest.json" \
     -x "**/.git" -x "**/.gitignore" -x "**/.gitmodules" -x "**/.eslintrc" \
-    -x "**/.editorconfig"
+    -x "**/.editorconfig" \
+    -x "**/.github/*"
 
 # revert changes
 mv LICENSE.md ../LICENSE.md
