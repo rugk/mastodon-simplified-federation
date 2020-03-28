@@ -13,6 +13,8 @@ Simplifies following or interacting with other users on remote Mastodon instance
 
 **[![Get it for Firefox!](https://addons.cdn.mozilla.net/static/img/addons-buttons/AMO-button_1.png)](https://addons.mozilla.org/firefox/addon/mastodon-simplified-federation?src=external-github-download)**
 
+> **BTW:** If you want to generate QR codes privately, do check out our **[Offline QR Code Generator](https://github.com/rugk/offline-qr-code)** too!
+
 ## In action…
 
 [![GIF demo showing how I click on a reply button and directly get to the toot site and how I click on follow and directly get to the page, where I can click "Follow"](assets/screencasts/mastodonSimplifiedFederationDemo.gif)](assets/screencasts/mastodonSimplifiedFederationDemo.gif)
