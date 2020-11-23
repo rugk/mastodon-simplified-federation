@@ -1,9 +1,9 @@
 # Mastodon – Simplified Federation! <img align="right" height="100" width="100" src="assets/logo/logo_optimized.svg">
 
-[![Mozilla Add-on version](https://img.shields.io/amo/v/mastodon-simplified-federation.svg)](https://addons.mozilla.org/firefox/addon/mastodon-simplified-federation/?src=external-github-shield-downloads)  
-[![Mozilla Add-on downloads](https://img.shields.io/amo/d/mastodon-simplified-federation.svg)](https://addons.mozilla.org/firefox/addon/mastodon-simplified-federation/?src=external-github-shield-downloads)
-[![Mozilla Add-on users](https://img.shields.io/amo/users/mastodon-simplified-federation.svg)](https://addons.mozilla.org/firefox/addon/mastodon-simplified-federation/)
-[![Mozilla Add-on stars](https://img.shields.io/amo/stars/mastodon-simplified-federation.svg)](https://addons.mozilla.org/firefox/addon/mastodon-simplified-federation/reviews/)
+[![Mozilla Add-on version](https://img.shields.io/amo/v/mastodon-simplified-federation.svg)](https://addons.mozilla.org/firefox/addon/mastodon-simplified-federation/?utm_source=github.com&utm_medium=git&utm_content=badge-version&campaign=github)  
+[![Mozilla Add-on downloads](https://img.shields.io/amo/d/mastodon-simplified-federation.svg)](https://addons.mozilla.org/firefox/addon/mastodon-simplified-federation/?utm_source=github.com&utm_medium=git&utm_content=badge-downloads&campaign=github)
+[![Mozilla Add-on users](https://img.shields.io/amo/users/mastodon-simplified-federation.svg)](https://addons.mozilla.org/firefox/addon/mastodon-simplified-federation/?utm_source=github.com&utm_medium=git&utm_content=badge-users&campaign=github)
+[![Mozilla Add-on stars](https://img.shields.io/amo/stars/mastodon-simplified-federation.svg)](https://addons.mozilla.org/firefox/addon/mastodon-simplified-federation/reviews/?utm_source=github.com&utm_medium=git&utm_content=badge-stars&campaign=github)
 
 Simplifies following or interacting with other users on remote Mastodon instances in the Fediverse. Basically, it skips the "Enter your Mastodon handle" popup and takes you directly to your own "home" instance, saving you from cumbrously entering your Mastodon handle again and again in that input box when you click on a “Follow”, “Retoot”/“Fav” or other remote interaction button on another instance. :smile:
 
@@ -11,7 +11,7 @@ Simplifies following or interacting with other users on remote Mastodon instance
 
 ## Download
 
-**[![Get it for Firefox!](https://addons.cdn.mozilla.net/static/img/addons-buttons/AMO-button_1.png)](https://addons.mozilla.org/firefox/addon/mastodon-simplified-federation?src=external-github-download)**
+**[![Get it for Firefox!](https://addons.cdn.mozilla.net/static/img/addons-buttons/AMO-button_1.png)](https://addons.mozilla.org/firefox/addon/mastodon-simplified-federation?utm_source=github.com&utm_medium=git&utm_content=download-button&campaign=github)**
 
 > **BTW:** If you want to generate QR codes privately, do check out our **[Offline QR Code Generator](https://github.com/rugk/offline-qr-code)** too!
 
