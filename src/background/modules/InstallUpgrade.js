@@ -13,7 +13,7 @@
  * @see {@link https://developer.mozilla.org/docs/Mozilla/Add-ons/WebExtensions/API/runtime/onInstalled}
  * @private
  * @param {Object} details
- * @returns {void}
+ * @returns {Promise}
  */
 async function handleInstalled(details) {
     // only trigger for usual addon updates
