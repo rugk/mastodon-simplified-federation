@@ -1,57 +1,249 @@
 {
   // manifest.json
+  "extensionName": {
+    "message": "Mastodon – Simplified Federation!",
+    "description": "Name of the extension.",
+    "hash": "8c716f7803f220414804500b514a1dc0"
+  },
+  "extensionNameShort": {
+    "message": "Mastodon - Basitleştirilmiş Federasyon!",
+    "description": "Name of the extension.",
+    "hash": "8c716f7803f220414804500b514a1dc0"
+  },
+  "extensionDescription": {
+    "message": "Sanal (Mastodon) Sunucularında diğer kullanıcıları takip etmeyi veya onlarla etkileşimi Kolaylaştırır.",
+    "description": "Description of the extension.",
+    "hash": "61083256339a41f90d4db1bfa89532b6"
+  },
 
   // errors or other messages (mostly for settings)
   "errorShowingMessage": {
     "message": "Mesaj görüntülenemedi.",
-    "description": "When there is an error when showing the error/info/…."
+    "description": "When there is an error when showing the error/info/….",
+    "hash": "a9440e4f824a372841d4de2b7e2643ee"
   },
   "couldNotLoadOptions": {
     "message": "Ayarlar yüklenemedi.",
-    "description": "When one or all settings could not be loaded."
+    "description": "When one or all settings could not be loaded.",
+    "hash": "9497a5d2c9473aeb2ed9601f46c456be"
   },
   "couldNotSaveOption": {
     "message": "Ayarlar kaydedilemedi.",
-    "description": "When a setting could not be saved."
+    "description": "When a setting could not be saved.",
+    "hash": "6bcb9e36d2c33172b948515a9c50aa8e"
   },
   "messageUndoButton": {
     "message": "Geri al",
-    "description": "The text of a button that undoes the last action."
+    "description": "The text of a button that undoes the last action.",
+    "hash": "a85e775d7404b86c8060a20efd31241c"
   },
   "couldNotUndoAction": {
     "message": "Geri alma işlemi başarısız.",
-    "description": "Shown when an action cannot be undone."
+    "description": "Shown when an action cannot be undone.",
+    "hash": "d2883c6ca0164afc4f360f3e02e3166a"
   },
   "resettingOptionsWorked": {
     "message": "Bütün ayarlar varsayılan değerlere döndürüldü!",
-    "description": "The message shown, when the options of the settings were reset."
+    "description": "The message shown, when the options of the settings were reset.",
+    "hash": "257b99ed2a074fccbfc658d770b50107"
   },
   "resettingOptionsFailed": {
     "message": "Seçenekleri sıfırlama başarısız oldu!",
-    "description": "The message shown, when the options of the settings could not have been reset."
+    "description": "The message shown, when the options of the settings could not have been reset.",
+    "hash": "76e950d2db72a824482411ca6564fb1f"
+  },
+
+  // errors or other messages for specific settings
+  "mastodonHandleIsEmpty": {
+    "message": "Lütfen bir Mastodon hesabı girin. yoksa, eklenti çalışmaz.",
+    "hash": "ee5babc05bd20be8fc70189b26c31fc8"
+  },
+  "mastodonHandleIsInvalid": {
+    "message": "Girdiğiniz Mastodon hesabı geçersiz.",
+    "description": "This is an error shown, when the Mastodon handle the user entered is not valid.",
+    "hash": "6cf4f0cecc601398c99f9a1afab1dc09"
+  },
+  "mastodonHandleDoesNotExist": {
+    "message": "Sağladığınız Mastodon kullanıcısı bu sunucuda mevcut değil.",
+    "description": "This is an error shown, when the Mastodon handle the user entered does not exist on the server, i.e. the server returns a 404 error.",
+    "hash": "510bf6395054f816063b1dbb6b226b8c"
+  },
+  "mastodonHandleServerCouldNotBeContacted": {
+    "message": "Belirtilen (Mastodon) sunucu ile bağlantı kurulamadı.",
+    "description": "This is an error shown, when the last part of Mastodon handle (= the server) could not be contacted, due to a network (likely DNS) error and thus likely due to a typo or another problem.",
+    "hash": "77c3f0fc23bc9a39d82d6ba80def8fdb"
+  },
+  "isNoMastodonServer": {
+    "message": "Sağlanan sunucu Mastodon sunucusu değildir.",
+    "description": "This is an error shown, when the last part of Mastodon handle (= the server) is actually no Mastodon server.",
+    "hash": "a32698c492feb27656ece403e4bb5d3f"
+  },
+  "mastodonHandleCheckFailed": {
+    "message": "Girilen Mastodon hesabının doğrulanması başarısız oldu.",
+    "description": "This is an error shown, when the server that has been contacted to verify the handle returned an unexpected response.",
+    "hash": "63eda9bccc85c46e7694fb4ec9a7527d"
+  },
+  "addonIsNotYetSetup": {
+    "message": "Bu eklenti henüz ayarlanmadı. Mastodon hesabınızı ayarlardan eklemeniz gerekir.",
+    "description": "This is an error shown, when the user did not (yet) setup the whole add-on. Semantically it is the same as mastodonHandleIsEmpty, but this one is used in the notification.",
+    "hash": "bbc3ea93d61ef757d572c5e8a67462d8"
+  },
+  "couldNotRedirect": {
+    "message": "Beklenmedik bir hata nedeniyle yönlendirilemedi.",
+    "description": "Generic error shown when redirecting fails.",
+    "hash": "e46a9b3ba7502d7b5d399f0b9461fc82"
+  },
+  "permissionRequiredTabs": {
+    "message": "Bu özellik için tarayıcı sekmelerinize erişim izni gereklidir.",
+    "description": "The message shown, when the emojiCopyOnlyFallback option in the settings needs to request permissions to work.",
+    "hash": "dce672ef8e244e85b5972c4c4b885a56"
+  },
+  "buttonRequestPermission": {
+    "message": "İzin verin",
+    "description": "The button label, used for requesting a permission that is missing.",
+    "hash": "4689dc838288903e92432d87c1b8fea2"
+  },
+  "couldNotRequestPermission": {
+    "message": "İzin isteği başarısız.",
+    "description": "When the permission request fails.",
+    "hash": "53e3617a82c33e20fb22eed64dced8de"
+  },
+
+  // notification errors
+  "errorNotificationRedirectingTitle": {
+    "message": "“$ADDON$” yeniden yönlendirme başarısız.",
+    "description": "Title of a notification if an error is shown when trying to redirect.",
+    "placeholders": {
+      "addon": { "content": "$1", "example": "Mastodon – Simplified Federation!" }
+    },
+    "hash": "22b6584d75bbe237f649b1acb1368f3e"
+  },
+  "errorNotificationNotSetupTitle": {
+    "message": "“$ADDON$” henüz ayarlanmadı",
+    "description": "Title of a notification if an error is shown when the add-on is not set up yet. In contrast to errorNotificationRedirectingTitle this is only shown for this one error. See also addonIsNotYetSetup.",
+    "placeholders": {
+      "addon": { "content": "$1", "example": "Mastodon – Simplified Federation!" }
+    },
+    "hash": "293c7d2237453337466f497c7f96a483"
+  },
+  "errorNotificationAdjustSettings": {
+    "message": "$ERROR$ Ayarları düzenlemek için tıklayın.",
+    "description": "Wrapper shown if an error happened to point the user to the settings. It is used in the description of the notification.",
+    "placeholders": {
+      "error": { "content": "$1", "example": "Please enter a Mastodon handle. Without it, the add-on will not work." }
+    },
+    "hash": "bb59597ed9b522c05b451cb4dce628e3"
   },
 
   // options
   "someSettingsAreManaged": {
     "message": "Bazı ayarlar sistem yöneticin tarafından düzenlendiği için değiştirilemez.",
-    "description": "The message, which appears, when settings are pre-defined (as managed options) by administrators."
+    "description": "The message, which appears, when settings are pre-defined (as managed options) by administrators.",
+    "hash": "148604ebbeb7df28974d8233f1418d1f"
   },
   "optionIsDisabledBecauseManaged": {
     "message": "Bu özellik sistem yöneticin tarafından ayarlandığı için devredışı.",
-    "description": "The title (tooltip) shown, when hovering over a disabled, managed option."
+    "description": "The title (tooltip) shown, when hovering over a disabled, managed option.",
+    "hash": "50fb70682c64e1a1fb4d8884b33cca64"
   },
   "optionLearnMore": {
     "message": "Daha fazla bilgi",
-    "description": "When a link to an explainer needs to be added, this is the link text."
+    "description": "When a link to an explainer needs to be added, this is the link text.",
+    "hash": "9085b09f4748be12ab0c241d2e643b31"
   },
   "optionsResetButton": {
     "message": "Bütün ayarları varsayılanlara sıfırla",
-    "description": "The button to delete all current settings and load the defaults, shown in the add-on settings."
+    "description": "The button to delete all current settings and load the defaults, shown in the add-on settings.",
+    "hash": "4bb60c6c7e7b9e2ff987c244e76ee044"
+  },
+  "optionMastodonHandle": {
+    "message": "Mastodon hesabınız:",
+    "description": "This is an option shown in the add-on settings. You can enter your handle in the format mastodon@server.com there.",
+    "hash": "c3056895503de22349f1b77062b3bbd3"
+  },
+  "optionMastodonHandlePlaceholder": {
+    "message": "ornek@mastodon.example",
+    "description": "This is placeholder shown for the Mastodon handle input. Try to give an example on format the user has to use to enter the ID as  mastodon@server.com here. Do not use a real server name and do not promote any really existing user.",
+    "hash": "9a20059d2d16dfb7e731226187c04836"
+  },
+  "optionMastodonHandleHelper": {
+    "message": "Lütfen Mastodon hesabınızı “kullanici@serverdomain” biçiminde girin.",
+    "description": "An explanatory text shown to the user in the settings to explain what format they have to enter the Mastodon handle. It should not hint to any example (that's what the placeholder is for), but explain the general format.",
+    "hash": "5e2a6e34c5fed46740dc238f1cc7768a"
+  },
+  "optionRedirectInMainWindow": {
+    "message": "Açılır pencere kullanımını önle.",
+    "description": "This is an option shown in the add-on settings.",
+    "hash": "dc056fc373c7161104ad81b28884a017"
+  },
+  "optionRedirectInMainWindowDescr": {
+    "message": "Ekstra bir pencere kullanılmasını önler ve bunun yerine ana sayfaya yönlendirir.",
+    "description": "This is an option shown in the add-on settings.",
+    "hash": "ba0f60f1ae0c6d6785d5eb410247eb11"
+  },
+  "translatorCredit": {
+    "message": "Bu eklenti $TRANSLATORS$ tarafından Türkçeye çevrildi.",
+    "description": "The credit text for the translator. See https://github.com/TinyWebEx/common/blob/master/CONTRIBUTING.md#translator-credit-inside-of-add-on for how to translate this.",
+    "placeholders": {
+      "translators": { "content": "$1", "example": "<a href=\"https://github.com/rugk/\">@rugk</a>" }
+    },
+    "hash": "18078bbbb2e9485a3ed6f98595cf0423"
+  },
+  "translatorLink": {
+    "message": "https://github.com/hozansahin",
+    "description": "The link to the translator's GitHub profile.",
+    "hash": "4775fb2f88fd33d02b871e5021dec3e9"
+  },
+  "translatorUsername": {
+    "message": "hozansahin",
+    "description": "The username that the translator wants to be referred to.",
+    "hash": "ce96c18a8a1b4b528b294e981ee4d651"
+  },
+  "contributorsThanks": {
+    "message": "$CONTRIBUTORS$ sayesinde, sonsuz teşekkürler.",
+    "description": "Text thanking all contributors and linking to the contributors file.",
+    "placeholders": {
+      "contributors": { "content": "$1", "example": "<a href=\"https://github.com/rugk/…/CONTRIBUTORS.md\">all other contributors</a>" }
+    },
+    "hash": "f3589ab41bb2efd51ab62fcedafd0427"
+  },
+  "contributorsThanksLink": {
+    "message": "https://github.com/rugk/mastodon-simplified-federation/blob/master/CONTRIBUTORS.md",
+    "description": "The link to the CONTRIBUTORS file.",
+    "hash": "1fbeb3813910bf47c53cf596035c27db"
+  },
+  "contributorsThanksLinkText": {
+    "message": "diğer katkı sağlayanlar",
+    "description": "The link text linking to the contributors file. See contributorsThanks.",
+    "hash": "d84e8682446e240bfd75d7751055abee"
   },
 
-  // ARIA labels/descriptions
+  // ARIA labels/descriptions for messages
   "dismissIconDescription": {
     "message": "Bu mesajı kapat",
-    "description": "the label for the close button of the message box"
-  }
+    "description": "the aria label for the close button of the message box",
+    "hash": "632720ab193dcacba4286cb364124856"
+  },
+  "ariaMessageInfo": {
+    "message": "Bilgi Mesajı",
+    "description": "the aria label to label the message box as an info message box",
+    "hash": "5f54e42067e19895a2641b17a5233418"
+  },
+  "ariaMessageSuccess": {
+    "message": "Başarı Mesajı",
+    "description": "the aria label to label the message box as an success message box",
+    "hash": "334387b4ae53483d17f11519a70dd3af"
+  },
+  "ariaMessageError": {
+    "message": "Hata Mesajı",
+    "description": "the aria label to label the message box as an error message box",
+    "hash": "fcda6eedc61727fe8aae7392a0a541a5"
+  },
+  "ariaMessageWarning": {
+    "message": "Uyarı Mesajı",
+    "description": "the aria label to label the message box as an warning message box",
+    "hash": "8a5dd7528bead1ccd27cb7430d797bd2"
+  },
+
+  "__WET_LOCALE__": { "message": "tr" }
 }
