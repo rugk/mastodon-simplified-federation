@@ -9,6 +9,10 @@
 
 - [@rugk](https://github.com/rugk)
 
+### Russian
+
+- [@katabasiz](https://github.com/katabasiz)
+
 ### Spanish
 
 - David E. Barrera ([@dbarrerap](https://github.com/dbarrerap))
