@@ -5,6 +5,10 @@
 
 ## Translators
 
+### French
+
+- [@PoorPocketsMcNeuHold](https://github.com/PoorPocketsMcNeuHold)
+
 ### German
 
 - [@rugk](https://github.com/rugk)
