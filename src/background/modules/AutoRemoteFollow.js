@@ -1,7 +1,7 @@
 /**
  * Controller intercepting tab loads and redirecting them to correct modules.
  *
- * @module AutoRenameFollow
+ * @module AutoRemoteFollow
  */
 
 import { INTERACTION_TYPE } from "./data/INTERACTION_TYPE.js";
