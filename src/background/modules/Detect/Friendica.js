@@ -7,8 +7,8 @@
 import {NotSupportedError} from "/common/modules/Errors.js";
 import {INTERACTION_TYPE} from "../data/INTERACTION_TYPE.js";
 
-// https://regex101.com/r/Khzf4S/1
-const REMOTE_FOLLOW_REGEX = /\/dfrn_request\/(.+)\/?$/;
+// https://regex101.com/r/Khzf4S/4
+const REMOTE_FOLLOW_REGEX = /\/(?:dfrn_request|remote_follow)\/(.+)\/?$/;
 
 /** The URLs to intercept and pass to this module. */
 export const CATCH_URLS = new Map();
