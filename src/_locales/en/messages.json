@@ -163,9 +163,8 @@
     "message": "Prevents the use of an extra window and instead redirects the action on the main page.",
     "description": "This is an option shown in the add-on settings."
   },
-
   "translatorCredit": {
-    "message": "Dieses Add-on wurde von $TRANSLATORS$ ins Deutsche übersetzt.",
+    "message": "This add-on has been translated into English by $TRANSLATORS$.",
     "description": "The credit text for the translator. See https://github.com/TinyWebEx/common/blob/master/CONTRIBUTING.md#translator-credit-inside-of-add-on for how to translate this.",
     "placeholders": {
       "translators": {
@@ -184,7 +183,7 @@
   },
 
   "contributorsThanks": {
-    "message": "Ebenfalls vielen Dank an $CONTRIBUTORS$.",
+    "message": "Also thanks to $CONTRIBUTORS$.",
     "description": "Text thanking all contributors and linking to the contributors file.",
     "placeholders": {
       "contributors": {
@@ -198,7 +197,7 @@
     "description": "The link to the CONTRIBUTORS file."
   },
   "contributorsThanksLinkText": {
-    "message": "alle anderen Beitragenden",
+    "message": "all other contributors",
     "description": "The link text linking to the contributors file. See contributorsThanks."
   },
 
