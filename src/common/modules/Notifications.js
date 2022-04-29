@@ -28,7 +28,7 @@ export function showNotification(content, title = ADDON_NAME) {
 
     browser.notifications.create({
         "type": "basic",
-        "iconUrl": browser.extension.getURL(ICON),
+        "iconUrl": browser.runtime.getURL(ICON),
         "title": title,
         "message": content
     });
