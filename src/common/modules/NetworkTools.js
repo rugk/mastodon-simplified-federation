@@ -141,7 +141,7 @@ export function redirectToWebsite(url, tabToModify = null, loadReplace = true) {
  * @param {string} [onAction="onCompleted"]
  * @param {int|null} [timeout=5000] time after which the Promise is rejected if
  *                                  the required event for the URL does not trigger,
-*                                   set to "null" to disable
+ *                                  set to "null" to disable
  * @returns {Promise}
  * @see {@link https://developer.mozilla.org/docs/Mozilla/Add-ons/WebExtensions/API/webRequest/onCompleted}
  */
