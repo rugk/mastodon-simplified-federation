@@ -1,0 +1,1 @@
+* **Corrigido:** Foi corrigido um bug que fazia com que o redirecionamento não fosse capturado no caso de versões mais recentes do Friendica. ([#62](https://github.com/rugk/mastodon-simplified-federation/issues/62))
