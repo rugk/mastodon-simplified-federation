@@ -183,7 +183,7 @@
     "hash": "ba0f60f1ae0c6d6785d5eb410247eb11"
   },
   "translatorCredit": {
-    "message": "Cette extension a été traduite en français par <a href=\"https://github.com/rugk/mastodon-simplified-federation/blob/master/CONTRIBUTORS.md#french\">@PoorPocketsMcNewHold et @le-jun</a>",
+    "message": "Cette extension a été traduite en français par $TRANSLATORS$",
     "description": "The credit text for the translator. See https://github.com/TinyWebEx/common/blob/master/CONTRIBUTING.md#translator-credit-inside-of-add-on for how to translate this.",
     "placeholders": {
       "translators": { "content": "$1", "example": "<a href=\"https://github.com/rugk/\">@rugk</a>" }
@@ -191,12 +191,12 @@
     "hash": "a6f5deecd624d5f8cd58350c72dd8fdf"
   },
   "translatorLink": {
-    "message": "https://github.com/rugk",
+    "message": "https://github.com/rugk/mastodon-simplified-federation/blob/master/CONTRIBUTORS.md#french\",
     "description": "The link to the translator's GitHub profile.",
     "hash": "4775fb2f88fd33d02b871e5021dec3e9"
   },
   "translatorUsername": {
-    "message": "rugk",
+    "message": "rugk, PoorPocketsMcNewHold et le-jun",
     "description": "The username that the translator wants to be referred to.",
     "hash": "ce96c18a8a1b4b528b294e981ee4d651"
   },
