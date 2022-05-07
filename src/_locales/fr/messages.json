@@ -183,7 +183,7 @@
     "hash": "ba0f60f1ae0c6d6785d5eb410247eb11"
   },
   "translatorCredit": {
-    "message": "Cette extension a été traduite en français par $TRANSLATORS$",
+    "message": "Cette extension a été traduite en français par <a href=\"https://github.com/rugk/mastodon-simplified-federation/blob/master/CONTRIBUTORS.md#french\">@PoorPocketsMcNewHold et @le-jun</a>",
     "description": "The credit text for the translator. See https://github.com/TinyWebEx/common/blob/master/CONTRIBUTING.md#translator-credit-inside-of-add-on for how to translate this.",
     "placeholders": {
       "translators": { "content": "$1", "example": "<a href=\"https://github.com/rugk/\">@rugk</a>" }
