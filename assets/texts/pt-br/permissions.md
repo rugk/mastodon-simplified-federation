@@ -1,6 +1,6 @@
 # Permissões solicitadas
 
-Para uma explicação geral da permissão de complemento, consulte [this support article](https://support.mozilla.org/kb/permission-request-messages-firefox-extensions).
+Para uma explicação geral da permissão de complemento, consulte [este artigo de suporte](https://support.mozilla.org/kb/permission-request-messages-firefox-extensions).
 
 ## Permissões de instalação
 
