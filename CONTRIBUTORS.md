@@ -8,6 +8,7 @@
 ### French
 
 - [@PoorPocketsMcNeuHold](https://github.com/PoorPocketsMcNeuHold)
+- [@le-jun](https://github.com/le-jun)
 
 ### German
 
