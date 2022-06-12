@@ -35,7 +35,7 @@ Additionally, this add-on makes sure to keep your Mastodon handle **private**. I
   2. for toot interactions:
      1. It gets the local toot ID from the URL.
      2. It sends an additional web request to the remote server to get the remote toot ID.  
-       Alternatively, it does try to get the remote toot URL from the page you are loading.
+       Alternatively, it does try to get the remote toot URL from the "Enter your Mastodon ID" popup when it is shown/rendered.
 3. Afterwards it redirects you to the "remote_follow"/"remote_interaction" endpoint of your own Mastodon instance directly, thus skipping entering the Mastodon handle in that "foreign" page.
 
 Due to the fact that it does not block loading of the "Enter your Mastodon ID" popup, it may – especially in the case of "toot interactions" – happen, that the "Enter your Mastodon ID" popup is shown anyway for some seconds. After some time, it should be redirected though.
