@@ -42,7 +42,7 @@
   "applications": {
     "gecko": {
       "id": "mastodon-auto-remote-follow@rugk.github.io",
-      "strict_min_version": "61.0"
+      "strict_min_version": "79.0"
     }
   }
 }
