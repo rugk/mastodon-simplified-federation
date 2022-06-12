@@ -64,6 +64,7 @@ export function fetch(input, init = {}, ...args) {
     let abortTimeoutId;
 
     if (!init.signal) {
+        // replace with AbortSignal.timeout(5000) if that is browser cross-compatible
         abortTimeoutId = setTimeout(() => abortController.abort(), 5000);
         init.signal = abortController.signal;
     }
