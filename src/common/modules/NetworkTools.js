@@ -28,6 +28,7 @@ function convertUrlToString(url) {
  * A small fetch wrapper.
  *
  * Just adjusts fetch request, so they are common enough.
+ * Also adds a timeout of five seconds to avoid stuck fetch requests in case of a server not responding.
  *
  * @public
  * @param {USVString|Request} input
@@ -57,8 +58,24 @@ export function fetch(input, init = {}, ...args) {
         }
     }
 
+    // add timeout value if needed
+    // from https://stackoverflow.com/a/50101022/5008962
+    const abortController = new AbortController();
+    let abortTimeoutId;
+
+    if (!init.signal) {
+        abortTimeoutId = setTimeout(() => abortController.abort(), 5000);
+        init.signal = abortController.signal;
+    }
+
     // continue with global fetch
-    return window.fetch(input, init, ...args);
+    return window.fetch(input, init, ...args).then((x) => {
+        if (abortTimeoutId) {
+            // do not timeout the response, only the request
+            clearTimeout(abortTimeoutId);
+        }
+        return x;
+    });
 }
 
 /**
