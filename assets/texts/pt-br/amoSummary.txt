@@ -1,0 +1,1 @@
+Simplifica seguir ou interagir com outros usuários em instâncias remotas do Mastodon no Fediverse. Ele pula o pop-up “Enter your Mastodon handle” e leva você para sua própria instância “home”, sem inserir seu handle Mastodon em instâncias remotas.

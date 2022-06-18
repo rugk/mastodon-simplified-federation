@@ -1,0 +1,32 @@
+Definições:
+COMPLEMENTO – o software ao qual esta política se aplica
+USUÁRIO – o USUÁRIO do COMPLEMENTO
+SERVIDOR REMOTO – um servidor na internet, identificado por um endereço de servidor (nome de domínio)
+USUÁRIO REMOTO – uma conta de USUÁRIO salva em um servidor na internet, consiste no nome de um USUÁRIO e no endereço do servidor no qual um USUÁRIO está registrado, o SERVIDOR REMOTO
+MENSAGEM REMOTA – qualquer forma de mensagem, incluindo, mas não se limitando a texto, multimídia, áudio e vídeo; publicado por um USUÁRIO REMOTO e salvo em um SERVIDOR REMOTO
+
+Este COMPLEMENTO não envia nenhuma informação de identificação pessoal ao autor do COMPLEMENTO.
+
+CONTA PRÓPRIA – uma conta de USUÁRIO salva em um servidor na internet, consiste no nome de um USUÁRIO e no endereço do servidor, o USUÁRIO do COMPLEMENTO declarou nas configurações deste COMPLEMENTO que esta conta é de sua propriedade
+SERVIDOR PRÓPRIO – o servidor na internet, identificado por um endereço de servidor (nome de domínio); o USUÁRIO do COMPLEMENTO declarou nas configurações deste COMPLEMENTO ter salvo sua PRÓPRIA CONTA neste servidor
+
+Se um Uniform Resource Locator (URL) de uma forma especificada for acessado, isso indica que você está tentando seguir o USUÁRIO REMOTO ou de outra forma interagir com o USUÁRIO REMOTO ou uma MENSAGEM REMOTA publicada por um USUÁRIO REMOTO em um SERVIDOR REMOTO, ele pode redirecionar o USUÁRIO para um servidor que você especificou nas configurações do COMPLEMENTO como um SERVIDOR PRÓPRIO.
+Para tanto, o COMPLEMENTO poderá entrar em contato com o SERVIDOR REMOTO e LOCAL SERVER e enviar informações sobre o USUÁRIO REMOTO e MENSAGEM REMOTA.
+Além disso, pode enviar informações da PRÓPRIA CONTA e PRÓPRIO SERVIDOR para PRÓPRIO SERVIDOR.
+
+O COMPLEMENTO não enviará informações sobre sua CONTA PRÓPRIA ou SERVIDOR PRÓPRIO para nenhum SERVIDOR REMOTO. Se esse caso ocorrer inadvertidamente, é considerado uma vulnerabilidade no COMPLEMENTO.
+Pode acontecer, porém, que o SERVIDOR REMOTO seja o mesmo que o SERVIDOR PRÓPRIO. Nesse caso, o COMPLEMENTO funciona da mesma forma, podendo assim enviar toda a informação para o seu próprio servidor.
+
+Uma explicação de todas as permissões, solicitações deste COMPLEMENTO, pode ser encontrada em https://github.com/rugk/mastodon-simplified-federation/blob/master/assets/texts/en/permissions.md.
+
+== IMPLICAÇÕES ==
+
+Há duas implicações que esse complemento causa:
+1. Como o USUÁRIO não precisa mais inserir seu identificador Mastodon em nenhum site, isso pode resultar em uma vantagem de privacidade.
+2. No entanto, lembre-se de que os sites ainda podem detectar que o USUÁRIO usa esse complemento acionando um redirecionamento como se o USUÁRIO tivesse clicado em um botão. O USUÁRIO provavelmente verá isso.
+
+== SERVIÇOS DE TERCEIROS ==
+
+Este COMPLEMENTO usa o “armazenamento de sincronização” do seu navegador para armazenar as configurações. Se o USUÁRIO habilitar “Sincronizar” no navegador, as configurações serão carregadas e sincronizadas em seus dispositivos conectados à sua conta. Se você não fizer isso, os dados serão armazenados apenas localmente em seu dispositivo.
+No Mozilla Firefox, os dados são criptografados de ponta a ponta antes de serem carregados e armazenados em servidores pela Mozilla.
+Consulte https://accounts.firefox.com/legal/privacy e https://www.mozilla.org/privacy/firefox/#c-privacy-topic-8 para obter as políticas de privacidade da Mozilla sobre esse tópico.
