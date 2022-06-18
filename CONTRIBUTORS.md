@@ -5,6 +5,10 @@
 
 ## Translators
 
+### Brazilian Portuguese
+
+* [@paulo-roger](https://github.com/paulo-roger)
+
 ### French
 
 - [@PoorPocketsMcNeuHold](https://github.com/PoorPocketsMcNeuHold)
