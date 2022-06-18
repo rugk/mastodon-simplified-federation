@@ -87,6 +87,7 @@ export function isMastodonServer(mastodonServer) {
  * @param {string} mastodonServer Mastodon server domain to query
  * @param {string} localTootId local ID of the toot
  * @returns {Promise} an (JSON) object
+ * @throws {MastodonApiError} in case the data cannot be fetched
  */
 export function getTootStatus(mastodonServer, localTootId) {
     // protcol specified HTTPS must be used

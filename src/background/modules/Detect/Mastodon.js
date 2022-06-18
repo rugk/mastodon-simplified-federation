@@ -161,7 +161,7 @@ export function getTootUrl(url) {
     // methods.
     return fromStaticOwnServer.catch(() => {
         // prefer fastest result
-        return Promise.race([getFromApiQuery, scrapFromHtml]);
+        return Promise.any([getFromApiQuery, scrapFromHtml]);
     }).then((url) => {
         // log result for debugging purposes
         console.log(`Got toot URL "${url}".`, {fromStaticOwnServer, getFromApiQuery, scrapFromHtml});
