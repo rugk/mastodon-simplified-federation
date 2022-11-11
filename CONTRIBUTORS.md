@@ -26,10 +26,6 @@
 
 - David E. Barrera ([@dbarrerap](https://github.com/dbarrerap))
 
-### Traditional Chinese (Taiwan)
-
-- Ryan He ([@ryanho](https://github.com/ryanho))
-
 ### Turkish
 
 - Ömür Turan ([@omurturan](https://github.com/omurturan))
