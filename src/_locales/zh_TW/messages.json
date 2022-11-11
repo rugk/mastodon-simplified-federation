@@ -183,20 +183,20 @@
     "hash": "ba0f60f1ae0c6d6785d5eb410247eb11"
   },
   "translatorCredit": {
-    "message": "此插件已由 $TRANSLATORS$ 翻譯成英文。",
+    "message": "此插件已由 $TRANSLATORS$ 翻譯成繁體中文（台灣）。",
     "description": "The credit text for the translator. See https://github.com/TinyWebEx/common/blob/master/CONTRIBUTING.md#translator-credit-inside-of-add-on for how to translate this.",
     "placeholders": {
-      "translators": { "content": "$1", "example": "<a href=\"https://github.com/rugk/\">@rugk</a>" }
+      "translators": { "content": "$1", "example": "<a href=\"https://github.com/ryanho/\">@ryanho</a>" }
     },
     "hash": "a6f5deecd624d5f8cd58350c72dd8fdf"
   },
   "translatorLink": {
-    "message": "https://github.com/rugk",
+    "message": "https://github.com/ryanho/",
     "description": "The link to the translator's GitHub profile.",
     "hash": "4775fb2f88fd33d02b871e5021dec3e9"
   },
   "translatorUsername": {
-    "message": "rugk",
+    "message": "ryanho",
     "description": "The username that the translator wants to be referred to.",
     "hash": "ce96c18a8a1b4b528b294e981ee4d651"
   },
