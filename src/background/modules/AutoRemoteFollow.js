@@ -145,6 +145,15 @@ function getInteractionType(url) {
 }
 
 /**
+ * Handles changes to the URL of a tab
+ */
+function onTabUpdate() {
+    browser.tabs.executeScript(null, {
+        file: `/content_script/mastodonInject.js`
+    })
+}
+
+/**
  * Init AutoRemoteFollower module.
  *
  * @function
@@ -153,6 +162,10 @@ function getInteractionType(url) {
 function init() {
     NetworkTools.webRequestListen(["http://*/*", "https://*/*"], "onBeforeRequest", (requestDetails) => {
         return handleWebRequest(requestDetails).catch(handleError).catch(console.error);
+    });
+
+    browser.tabs.onUpdated.addListener(onTabUpdate, {
+        properties: ["url"]
     });
 }
 
