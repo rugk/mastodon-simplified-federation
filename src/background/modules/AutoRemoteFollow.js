@@ -145,12 +145,13 @@ function getInteractionType(url) {
 }
 
 /**
- * Handles changes to the URL of a tab
+ * Handles changes to the URL of a tab.
+ * @returns {void}
  */
 function onTabUpdate() {
     browser.tabs.executeScript(null, {
-        file: `/content_script/mastodonInject.js`
-    })
+        file: "/content_script/mastodonInject.js"
+    });
 }
 
 /**
