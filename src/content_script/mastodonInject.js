@@ -1,20 +1,4 @@
-/**
- * @typedef {Object} VersionNumber
- * @property {string} major
- * @property {string} minor
- * @property {string} patch
- */
-
-/**
- * parses a versionNumber string
- * @returns {VersionNumber}
- */
-function parseVersionNumber() {
-  const versionElement = document.querySelector(`.link-footer`).textContent;
-  const versionNumber = versionElement.match(/v?(?<major>\d+)\.(?<minor>\d+)\.(?<patch>\d+)$/);
-  return versionNumber.groups;
-}
-
+"use strict";
 
 /**
  * Replacement onClick handler for Follow button
@@ -77,25 +61,7 @@ async function injectFollowButton() {
 }
 
 async function init() {
-  let versionNumber;
-
-  try {
-    const initialStateObject = JSON.parse(document.getElementById(`initial-state`).innerHTML);
-    const version = initialStateObject?.meta?.version;
-    if(!initialStateObject || !version){
-      // not a Mastodon server
-      return;
-    }
-
-    versionNumber = parseVersionNumber(version);
-  } catch {
-    return
-  }
-
-  
-  if(Number.parseInt(versionNumber.major) >= 4){
-    await injectFollowButton();
-  }
+  await injectFollowButton();
 }
 
 init();
