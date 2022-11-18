@@ -149,7 +149,7 @@ function getInteractionType(url) {
  * @returns {void}
  */
 function onTabUpdate() {
-    browser.tabs.executeScript(null, {
+    browser.tabs.executeScript({
         file: "/content_script/mastodonInject.js"
     });
 }
