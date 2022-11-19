@@ -2,6 +2,7 @@
 
 /**
  * Replacement onClick handler for Follow button.
+ * 
  * @param {Event} event 
  * @returns {void}
  */
@@ -15,6 +16,7 @@ function onClickFollow(event) {
 
 /**
  * Wait for element to appear.
+ * 
  * @param {string} selector
  * @param {number} timeoutDuration
  * @see {@link https://github.com/storybookjs/test-runner/blob/6d41927154e8dd1e4c9e7493122e24e2739a7a0f/src/setup-page.ts#L134}
@@ -55,6 +57,7 @@ function waitForElement(selector, timeoutDuration) {
 
 /**
  * Inject replacement onClick handler for Follow button.
+ * 
  * @returns {void}
  */
 async function injectFollowButton() {
@@ -68,6 +71,7 @@ async function injectFollowButton() {
 
 /**
  * Initialise injection for Mastodon Follow button.
+ * 
  * @returns {void}
  */
 async function init() {
