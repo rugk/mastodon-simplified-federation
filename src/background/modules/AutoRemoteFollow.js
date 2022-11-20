@@ -146,6 +146,7 @@ function getInteractionType(url) {
 
 /**
  * Handles changes to the URL of a tab.
+ * 
  * @returns {void}
  */
 function onTabUpdate() {
