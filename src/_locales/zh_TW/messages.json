@@ -1,0 +1,250 @@
+{
+  // manifest.json
+  "extensionName": {
+    "message": "Mastodon – Simplified Federation!",
+    "description": "Name of the extension.",
+    "hash": "8c716f7803f220414804500b514a1dc0"
+  },
+  "extensionNameShort": {
+    "message": "Mastodon – Simplified Federation!",
+    "description": "Name of the extension.",
+    "hash": "8c716f7803f220414804500b514a1dc0"
+  },
+  "extensionDescription": {
+    "message": "簡化與遠端（Mastodon）實例使用者的追隨或互動。",
+    "description": "Description of the extension.",
+    "hash": "61083256339a41f90d4db1bfa89532b6"
+  },
+
+  // errors or other messages (mostly for settings)
+  "errorShowingMessage": {
+    "message": "無法顯示此訊息。",
+    "description": "When there is an error when showing the error/info/….",
+    "hash": "a9440e4f824a372841d4de2b7e2643ee"
+  },
+  "couldNotLoadOptions": {
+    "message": "無法載入設置。",
+    "description": "When one or all settings could not be loaded.",
+    "hash": "9497a5d2c9473aeb2ed9601f46c456be"
+  },
+  "couldNotSaveOption": {
+    "message": "無法儲存設定。",
+    "description": "When a setting could not be saved.",
+    "hash": "6bcb9e36d2c33172b948515a9c50aa8e"
+  },
+  "messageUndoButton": {
+    "message": "復原",
+    "description": "The text of a button that undoes the last action.",
+    "hash": "a85e775d7404b86c8060a20efd31241c"
+  },
+  "couldNotUndoAction": {
+    "message": "無法復原操作。",
+    "description": "Shown when an action cannot be undone.",
+    "hash": "d2883c6ca0164afc4f360f3e02e3166a"
+  },
+  "resettingOptionsWorked": {
+    "message": "所有設置都恢復為預設值了！",
+    "description": "The message shown, when the options of the settings were reset.",
+    "hash": "257b99ed2a074fccbfc658d770b50107"
+  },
+  "resettingOptionsFailed": {
+    "message": "無法重設選項！",
+    "description": "The message shown, when the options of the settings could not have been reset.",
+    "hash": "76e950d2db72a824482411ca6564fb1f"
+  },
+
+  // errors or other messages for specific settings
+  "mastodonHandleIsEmpty": {
+    "message": "請輸入 Mastodon 帳號。沒有輸入的話，擴充套件將無法運作。",
+    "description": "This is an error shown, when the user did not (yet) enter a Mastodon account.",
+    "hash": "ee5babc05bd20be8fc70189b26c31fc8"
+  },
+  "mastodonHandleIsInvalid": {
+    "message": "您輸入的 Mastodon 帳號無效。",
+    "description": "This is an error shown, when the Mastodon handle the user entered is not valid.",
+    "hash": "6cf4f0cecc601398c99f9a1afab1dc09"
+  },
+  "mastodonHandleDoesNotExist": {
+    "message": "您提供的 Mastodon 帳號不存在於伺服器上。",
+    "description": "This is an error shown, when the Mastodon handle the user entered does not exist on the server, i.e. the server returns a 404 error.",
+    "hash": "510bf6395054f816063b1dbb6b226b8c"
+  },
+  "mastodonHandleServerCouldNotBeContacted": {
+    "message": "無法聯繫到指定的 Mastodon 服務器。",
+    "description": "This is an error shown, when the last part of Mastodon handle (= the server) could not be contacted, due to a network (likely DNS) error and thus likely due to a typo or another problem.",
+    "hash": "77c3f0fc23bc9a39d82d6ba80def8fdb"
+  },
+  "isNoMastodonServer": {
+    "message": "提供的伺服器不是 Mastodon 的實例。",
+    "description": "This is an error shown, when the last part of Mastodon handle (= the server) is actually no Mastodon server.",
+    "hash": "a32698c492feb27656ece403e4bb5d3f"
+  },
+  "mastodonHandleCheckFailed": {
+    "message": "驗證輸入的 Mastodon 帳號失敗。",
+    "description": "This is an error shown, when the server that has been contacted to verify the handle returned an unexpected response.",
+    "hash": "63eda9bccc85c46e7694fb4ec9a7527d"
+  },
+  "addonIsNotYetSetup": {
+    "message": "此擴充套件尚未設定。您需要在設定中輸入您的 Mastodon 帳戶。",
+    "description": "This is an error shown, when the user did not (yet) setup the whole add-on. Semantically it is the same as mastodonHandleIsEmpty, but this one is used in the notification.",
+    "hash": "bbc3ea93d61ef757d572c5e8a67462d8"
+  },
+  "couldNotRedirect": {
+    "message": "由於意外錯誤，無法重導向。",
+    "description": "Generic error shown when redirecting fails.",
+    "hash": "e46a9b3ba7502d7b5d399f0b9461fc82"
+  },
+  "permissionRequiredTabs": {
+    "message": "此功能需要存取瀏覽器標籤的權限。",
+    "description": "The message shown, when the emojiCopyOnlyFallback option in the settings needs to request permissions to work.",
+    "hash": "dce672ef8e244e85b5972c4c4b885a56"
+  },
+  "buttonRequestPermission": {
+    "message": "授予權限",
+    "description": "The button label, used for requesting a permission that is missing.",
+    "hash": "4689dc838288903e92432d87c1b8fea2"
+  },
+  "couldNotRequestPermission": {
+    "message": "請求權限失敗。",
+    "description": "When the permission request fails.",
+    "hash": "53e3617a82c33e20fb22eed64dced8de"
+  },
+
+  // notification errors
+  "errorNotificationRedirectingTitle": {
+    "message": "“$ADDON$” 重導向失敗",
+    "description": "Title of a notification if an error is shown when trying to redirect.",
+    "placeholders": {
+      "addon": { "content": "$1", "example": "Mastodon – Simplified Federation!" }
+    },
+    "hash": "22b6584d75bbe237f649b1acb1368f3e"
+  },
+  "errorNotificationNotSetupTitle": {
+    "message": "“$ADDON$” 尚未設置",
+    "description": "Title of a notification if an error is shown when the add-on is not set up yet. In contrast to errorNotificationRedirectingTitle this is only shown for this one error. See also addonIsNotYetSetup.",
+    "placeholders": {
+      "addon": { "content": "$1", "example": "Mastodon – Simplified Federation!" }
+    },
+    "hash": "293c7d2237453337466f497c7f96a483"
+  },
+  "errorNotificationAdjustSettings": {
+    "message": "$ERROR$ 單擊來調整設定。",
+    "description": "Wrapper shown if an error happened to point the user to the settings. It is used in the description of the notification.",
+    "placeholders": {
+      "error": { "content": "$1", "example": "Please enter a Mastodon handle. Without it, the add-on will not work." }
+    },
+    "hash": "bb59597ed9b522c05b451cb4dce628e3"
+  },
+
+  // options
+  "someSettingsAreManaged": {
+    "message": "某些設置由系統管理員管理，無法更改。",
+    "description": "The message, which appears, when settings are pre-defined (as managed options) by administrators.",
+    "hash": "148604ebbeb7df28974d8233f1418d1f"
+  },
+  "optionIsDisabledBecauseManaged": {
+    "message": "此選項已禁用，因為它已由系統管理員配置。",
+    "description": "The title (tooltip) shown, when hovering over a disabled, managed option.",
+    "hash": "50fb70682c64e1a1fb4d8884b33cca64"
+  },
+  "optionLearnMore": {
+    "message": "了解更多",
+    "description": "When a link to an explainer needs to be added, this is the link text.",
+    "hash": "9085b09f4748be12ab0c241d2e643b31"
+  },
+  "optionsResetButton": {
+    "message": "將所有設定重置為預設值",
+    "description": "The button to delete all current settings and load the defaults, shown in the add-on settings.",
+    "hash": "4bb60c6c7e7b9e2ff987c244e76ee044"
+  },
+  "optionMastodonHandle": {
+    "message": "您的 Mastodon 帳號：",
+    "description": "This is an option shown in the add-on settings. You can enter your handle in the format mastodon@server.com there.",
+    "hash": "c3056895503de22349f1b77062b3bbd3"
+  },
+  "optionMastodonHandlePlaceholder": {
+    "message": "you@mastodon.example",
+    "description": "This is placeholder shown for the Mastodon handle input. Try to give an example on format the user has to use to enter the ID as  mastodon@server.com here. Do not use a real server name and do not promote any really existing user.",
+    "hash": "9a20059d2d16dfb7e731226187c04836"
+  },
+  "optionMastodonHandleHelper": {
+    "message": "請以 “username@serverdomain” 格式輸入您的 Mastodon 帳號。",
+    "description": "An explanatory text shown to the user in the settings to explain what format they have to enter the Mastodon handle. It should not hint to any example (that's what the placeholder is for), but explain the general format.",
+    "hash": "5e2a6e34c5fed46740dc238f1cc7768a"
+  },
+  "optionRedirectInMainWindow": {
+    "message": "防止彈出視窗。",
+    "description": "This is an option shown in the add-on settings.",
+    "hash": "dc056fc373c7161104ad81b28884a017"
+  },
+  "optionRedirectInMainWindowDescr": {
+    "message": "以重導向主頁上的操作取代彈出視窗。",
+    "description": "This is an option shown in the add-on settings.",
+    "hash": "ba0f60f1ae0c6d6785d5eb410247eb11"
+  },
+  "translatorCredit": {
+    "message": "此插件已由 $TRANSLATORS$ 翻譯成繁體中文（台灣）。",
+    "description": "The credit text for the translator. See https://github.com/TinyWebEx/common/blob/master/CONTRIBUTING.md#translator-credit-inside-of-add-on for how to translate this.",
+    "placeholders": {
+      "translators": { "content": "$1", "example": "<a href=\"https://github.com/ryanho/\">@ryanho</a>" }
+    },
+    "hash": "a6f5deecd624d5f8cd58350c72dd8fdf"
+  },
+  "translatorLink": {
+    "message": "https://github.com/ryanho/",
+    "description": "The link to the translator's GitHub profile.",
+    "hash": "4775fb2f88fd33d02b871e5021dec3e9"
+  },
+  "translatorUsername": {
+    "message": "ryanho",
+    "description": "The username that the translator wants to be referred to.",
+    "hash": "ce96c18a8a1b4b528b294e981ee4d651"
+  },
+  "contributorsThanks": {
+    "message": "並且感謝 $CONTRIBUTORS$。",
+    "description": "Text thanking all contributors and linking to the contributors file.",
+    "placeholders": {
+      "contributors": { "content": "$1", "example": "<a href=\"https://github.com/rugk/…/CONTRIBUTORS.md\">all other contributors</a>" }
+    },
+    "hash": "b1434b8b42b1707f37d0531a8efdc7f8"
+  },
+  "contributorsThanksLink": {
+    "message": "https://github.com/rugk/mastodon-simplified-federation/blob/master/CONTRIBUTORS.md",
+    "description": "The link to the CONTRIBUTORS file.",
+    "hash": "1fbeb3813910bf47c53cf596035c27db"
+  },
+  "contributorsThanksLinkText": {
+    "message": "所有其他貢獻者",
+    "description": "The link text linking to the contributors file. See contributorsThanks.",
+    "hash": "ce03e1f3b15df3bba66048b30c4f8de4"
+  },
+
+  // ARIA labels/descriptions for messages
+  "dismissIconDescription": {
+    "message": "關閉此訊息",
+    "description": "the aria label for the close button of the message box",
+    "hash": "632720ab193dcacba4286cb364124856"
+  },
+  "ariaMessageInfo": {
+    "message": "提示訊息",
+    "description": "the aria label to label the message box as an info message box",
+    "hash": "5f54e42067e19895a2641b17a5233418"
+  },
+  "ariaMessageSuccess": {
+    "message": "成功訊息",
+    "description": "the aria label to label the message box as an success message box",
+    "hash": "334387b4ae53483d17f11519a70dd3af"
+  },
+  "ariaMessageError": {
+    "message": "錯誤訊息",
+    "description": "the aria label to label the message box as an error message box",
+    "hash": "fcda6eedc61727fe8aae7392a0a541a5"
+  },
+  "ariaMessageWarning": {
+    "message": "警告訊息",
+    "description": "the aria label to label the message box as an warning message box",
+    "hash": "8a5dd7528bead1ccd27cb7430d797bd2"
+  },
+
+  "__WET_LOCALE__": { "message": "zh-TW" }
+}
