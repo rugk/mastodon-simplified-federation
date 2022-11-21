@@ -147,12 +147,18 @@ function getInteractionType(url) {
 /**
  * Handles changes to the URL of a tab.
  * 
+ * @param {string} tabId
+ * @param {Object} changeInfo
  * @returns {void}
  */
-function onTabUpdate() {
-    browser.tabs.executeScript({
-        file: "/content_script/mastodonInject.js"
-    });
+async function onTabUpdate(tabId, changeInfo) {
+    const ownMastodon = await AddonSettings.get("ownMastodon");
+    const currentURL = new URL(changeInfo.url);
+    if(ownMastodon.server !== currentURL.hostname){
+        browser.tabs.executeScript({
+            file: "/content_script/mastodonInject.js"
+        });
+    }
 }
 
 /**

@@ -1,5 +1,7 @@
 "use strict";
 
+const TIMEOUT_DURATION = 20000;
+
 /**
  * Replacement onClick handler for Follow button.
  * 
@@ -15,31 +17,56 @@ function onClickFollow(event) {
 }
 
 /**
+ * Replacement onClick handler for interaction buttons.
+ * 
+ * @param {Event} event
+ * @returns {void}
+ */
+function onClickInteract(event) {
+    event.stopPropagation();
+    event.preventDefault();
+    const articleElement = event.target.closest("article[data-id]");
+    const tootId = (
+        articleElement === null
+            ? window.location.pathname.split("/").slice(-1)[0]
+            : articleElement.getAttribute("data-id")
+    );
+    // activate AutoRemoteFollow
+    window.open(`/interact/${tootId}`, "_blank");
+}
+
+/**
  * Wait for element to appear.
  * 
  * @param {string} selector
+ * @param {boolean} multiple
  * @param {number} timeoutDuration
  * @see {@link https://github.com/storybookjs/test-runner/blob/6d41927154e8dd1e4c9e7493122e24e2739a7a0f/src/setup-page.ts#L134}
  *  from which this was adapted
  * @returns {Promise}
  */
-function waitForElement(selector, timeoutDuration) {
+function waitForElement(selector, multiple = false, timeoutDuration) {
     return new Promise((resolve, reject) => {
-        const getElement = () => document.querySelector(selector);
+        const getElement = () => (
+            multiple
+                ? document.querySelectorAll(selector)
+                : document.querySelector(selector)
+        );
+        const isElementFound = (el) => (!multiple && el) || (multiple && el.length > 0);
 
         const timeout = window.setTimeout(() => {
             reject(new Error("waitForElement timed out"));
         }, timeoutDuration);
 
         const element = getElement();
-        if(element){
+        if(isElementFound(element)){
             window.clearTimeout(timeout);
             return resolve(element);
         }
 
         const observer = new MutationObserver(() => {
             const element = getElement();
-            if(element){
+            if(isElementFound(element)){
                 window.clearTimeout(timeout);
                 resolve(element);
                 observer.disconnect();
@@ -62,10 +89,36 @@ function waitForElement(selector, timeoutDuration) {
  */
 async function injectFollowButton() {
     try {
-        const followButton = await waitForElement(".account__header__tabs__buttons button:first-of-type", 20000);
+        const followButton = await waitForElement(".account__header__tabs__buttons button:first-of-type", false, TIMEOUT_DURATION);
         followButton.addEventListener("click", onClickFollow);
     } catch (error) {
         // Follow button failed to appear
+    }
+}
+
+/**
+ * Inject replacement onClick handler for Interaction buttons.
+ * 
+ * @returns {void}
+ */
+async function injectInteractionButtons() {
+    const INJECTED_REPLY_CLASS = "mastodon-simplified-federation-injected-interaction";
+    try {
+        const replyButtons = await waitForElement(
+            ".item-list[role='feed'] article[data-id] .status__action-bar button," +
+            ".detailed-status__wrapper .detailed-status__action-bar button",
+            true,
+            TIMEOUT_DURATION,
+        );
+        replyButtons.forEach((button) => {
+            if(!button.classList.contains(INJECTED_REPLY_CLASS)){
+                button.addEventListener("click", onClickInteract);
+                button.classList.add(INJECTED_REPLY_CLASS);
+            }
+        });
+    } catch (error) {
+        // Interaction buttons failed to appear
+        console.log(error);
     }
 }
 
@@ -74,8 +127,17 @@ async function injectFollowButton() {
  * 
  * @returns {void}
  */
-async function init() {
-    await injectFollowButton();
+function init() {
+    const observer = new MutationObserver(() => {
+        Promise.allSettled([
+            injectFollowButton(),
+            injectInteractionButtons(),
+        ]);
+    });
+
+    observer.observe(document.body, {
+        childList: true, subtree: true,
+    });
 }
 
 init();
