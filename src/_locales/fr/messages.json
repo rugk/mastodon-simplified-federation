@@ -95,17 +95,17 @@
     "hash": "e46a9b3ba7502d7b5d399f0b9461fc82"
   },
   "permissionRequiredTabs": {
-    "message": "La permission d’accès aux onglets du navigateur est requise pour cette fonction.",
+    "message": "L'autorisation d’accès aux onglets du navigateur est requise pour cette fonction.",
     "description": "The message shown, when the emojiCopyOnlyFallback option in the settings needs to request permissions to work.",
     "hash": "dce672ef8e244e85b5972c4c4b885a56"
   },
   "buttonRequestPermission": {
-    "message": "Accorder la permission",
+    "message": "Accorder l'autorisation",
     "description": "The button label, used for requesting a permission that is missing.",
     "hash": "4689dc838288903e92432d87c1b8fea2"
   },
   "couldNotRequestPermission": {
-    "message": "Requête de permission a échouée.",
+    "message": "La requête d'autorisation a échouée.",
     "description": "When the permission request fails.",
     "hash": "53e3617a82c33e20fb22eed64dced8de"
   },
