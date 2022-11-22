@@ -122,7 +122,7 @@ async function injectInteractionButtons() {
 }
 
 /**
- * Initialise injection for Mastodon Follow button.
+ * Initialise injection for all remote Mastodon buttons.
  * 
  * @returns {void}
  */
