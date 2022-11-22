@@ -154,7 +154,7 @@ function getInteractionType(url) {
 async function onTabUpdate(tabId, changeInfo) {
     const ownMastodon = await AddonSettings.get("ownMastodon");
     const currentURL = new URL(changeInfo.url);
-    if(ownMastodon.server !== currentURL.hostname){
+    if (ownMastodon.server !== currentURL.hostname){
         browser.tabs.executeScript({
             file: "/content_script/mastodonInject.js"
         });

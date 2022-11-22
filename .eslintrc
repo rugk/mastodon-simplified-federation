@@ -24,6 +24,9 @@
             "allowTemplateLiterals": false
         }],
         "brace-style": 2,
+        "keyword-spacing": ["error", {
+            "after": true
+        }],
 
         // just to make sure (are defaults)
         "indent": ["error", 4],

@@ -39,7 +39,7 @@ function onClickInteract(event) {
  * Wait for element to appear.
  * 
  * @param {string} selector
- * @param {boolean} multiple
+ * @param {boolean} [multiple=false]
  * @param {number} timeoutDuration
  * @see {@link https://github.com/storybookjs/test-runner/blob/6d41927154e8dd1e4c9e7493122e24e2739a7a0f/src/setup-page.ts#L134}
  *  from which this was adapted
@@ -59,14 +59,14 @@ function waitForElement(selector, multiple = false, timeoutDuration) {
         }, timeoutDuration);
 
         const element = getElement();
-        if(isElementFound(element)){
+        if (isElementFound(element)){
             window.clearTimeout(timeout);
             return resolve(element);
         }
 
         const observer = new MutationObserver(() => {
             const element = getElement();
-            if(isElementFound(element)){
+            if (isElementFound(element)){
                 window.clearTimeout(timeout);
                 resolve(element);
                 observer.disconnect();
@@ -103,23 +103,22 @@ async function injectFollowButton() {
  */
 async function injectInteractionButtons() {
     const INJECTED_REPLY_CLASS = "mastodon-simplified-federation-injected-interaction";
-    try {
-        const replyButtons = await waitForElement(
-            ".item-list[role='feed'] article[data-id] .status__action-bar button," +
-            ".detailed-status__wrapper .detailed-status__action-bar button",
-            true,
-            TIMEOUT_DURATION,
-        );
-        replyButtons.forEach((button) => {
-            if(!button.classList.contains(INJECTED_REPLY_CLASS)){
+    const replyButtons = await waitForElement(
+        ".item-list[role='feed'] article[data-id] .status__action-bar button," +
+        ".detailed-status__wrapper .detailed-status__action-bar button",
+        true,
+        TIMEOUT_DURATION,
+    );
+    replyButtons.forEach((button) => {
+        try {
+            if (!button.classList.contains(INJECTED_REPLY_CLASS)){
                 button.addEventListener("click", onClickInteract);
                 button.classList.add(INJECTED_REPLY_CLASS);
             }
-        });
-    } catch (error) {
-        // Interaction buttons failed to appear
-        console.log(error);
-    }
+        } catch (error) {
+            // Interaction buttons failed to appear
+        }
+    });
 }
 
 /**
