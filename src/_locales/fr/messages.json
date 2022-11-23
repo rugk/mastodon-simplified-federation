@@ -1,12 +1,12 @@
 {
   // manifest.json
   "extensionName": {
-    "message": "Mastodon - Fédération simplifiée !",
+    "message": "Mastodon — Fédération simplifiée !",
     "description": "Name of the extension.",
     "hash": "8c716f7803f220414804500b514a1dc0"
   },
   "extensionNameShort": {
-    "message": "Mastodon - Fédération simplifiée !",
+    "message": "Mastodon — Fédération simplifiée !",
     "description": "Name of the extension.",
     "hash": "8c716f7803f220414804500b514a1dc0"
   },
@@ -80,7 +80,7 @@
     "hash": "a32698c492feb27656ece403e4bb5d3f"
   },
   "mastodonHandleCheckFailed": {
-    "message": "Échec de la vérification du compte Mastodon entré.",
+    "message": "Échec de la vérification du compte Mastodon indiqué.",
     "description": "This is an error shown, when the server that has been contacted to verify the handle returned an unexpected response.",
     "hash": "63eda9bccc85c46e7694fb4ec9a7527d"
   },
@@ -90,29 +90,29 @@
     "hash": "bbc3ea93d61ef757d572c5e8a67462d8"
   },
   "couldNotRedirect": {
-    "message": "Impossible de rediriger à cause d´une erreur innattendue.",
+    "message": "Impossible de rediriger à cause d´une erreur inattendue.",
     "description": "Generic error shown when redirecting fails.",
     "hash": "e46a9b3ba7502d7b5d399f0b9461fc82"
   },
   "permissionRequiredTabs": {
-    "message": "La permission d’accès aux onglets du navigateur est requise pour cette fonction",
+    "message": "L'autorisation d’accès aux onglets du navigateur est requise pour cette fonction.",
     "description": "The message shown, when the emojiCopyOnlyFallback option in the settings needs to request permissions to work.",
     "hash": "dce672ef8e244e85b5972c4c4b885a56"
   },
   "buttonRequestPermission": {
-    "message": "Accorder la permission",
+    "message": "Accorder l'autorisation",
     "description": "The button label, used for requesting a permission that is missing.",
     "hash": "4689dc838288903e92432d87c1b8fea2"
   },
   "couldNotRequestPermission": {
-    "message": "Requête de permission annulée",
+    "message": "La requête d'autorisation a échouée.",
     "description": "When the permission request fails.",
     "hash": "53e3617a82c33e20fb22eed64dced8de"
   },
 
   // notification errors
   "errorNotificationRedirectingTitle": {
-    "message": "“$ADDON$” n’a pas réussi à rediriger",
+    "message": "« $ADDON$ » n’a pas réussi à rediriger",
     "description": "Title of a notification if an error is shown when trying to redirect.",
     "placeholders": {
       "addon": { "content": "$1", "example": "Mastodon – Simplified Federation!" }
@@ -120,7 +120,7 @@
     "hash": "22b6584d75bbe237f649b1acb1368f3e"
   },
   "errorNotificationNotSetupTitle": {
-    "message": "“$ADDON$” n´est pas encore configuré",
+    "message": "« $ADDON$ » n´est pas encore configuré",
     "description": "Title of a notification if an error is shown when the add-on is not set up yet. In contrast to errorNotificationRedirectingTitle this is only shown for this one error. See also addonIsNotYetSetup.",
     "placeholders": {
       "addon": { "content": "$1", "example": "Mastodon – Simplified Federation!" }
@@ -138,7 +138,7 @@
 
   // options
   "someSettingsAreManaged": {
-    "message": "Certaines options sont gérées par l´administrateur système et ne peut être modifiées.",
+    "message": "Certaines options sont gérées par l´administrateur système et ne peuvent être modifiées.",
     "description": "The message, which appears, when settings are pre-defined (as managed options) by administrators.",
     "hash": "148604ebbeb7df28974d8233f1418d1f"
   },
@@ -168,7 +168,7 @@
     "hash": "9a20059d2d16dfb7e731226187c04836"
   },
   "optionMastodonHandleHelper": {
-    "message": "Veuillez entrer votre lien Mastodon au format « utilisateur@domaineserveur »",
+    "message": "Veuillez entrer votre lien Mastodon au format « utilisateur@domaineserveur ».",
     "description": "An explanatory text shown to the user in the settings to explain what format they have to enter the Mastodon handle. It should not hint to any example (that's what the placeholder is for), but explain the general format.",
     "hash": "5e2a6e34c5fed46740dc238f1cc7768a"
   },
@@ -183,7 +183,7 @@
     "hash": "ba0f60f1ae0c6d6785d5eb410247eb11"
   },
   "translatorCredit": {
-    "message": "Cette extension a été traduite en français par $TRANSLATORS$",
+    "message": "Cette extension a été traduite en français par $TRANSLATORS$.",
     "description": "The credit text for the translator. See https://github.com/TinyWebEx/common/blob/master/CONTRIBUTING.md#translator-credit-inside-of-add-on for how to translate this.",
     "placeholders": {
       "translators": { "content": "$1", "example": "<a href=\"https://github.com/rugk/\">@rugk</a>" }
@@ -201,7 +201,7 @@
     "hash": "ce96c18a8a1b4b528b294e981ee4d651"
   },
   "contributorsThanks": {
-    "message": "Merci également à $CONTRIBUTORS$",
+    "message": "Merci également à $CONTRIBUTORS$.",
     "description": "Text thanking all contributors and linking to the contributors file.",
     "placeholders": {
       "contributors": { "content": "$1", "example": "<a href=\"https://github.com/rugk/…/CONTRIBUTORS.md\">all other contributors</a>" }
