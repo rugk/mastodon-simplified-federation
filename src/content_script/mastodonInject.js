@@ -89,7 +89,7 @@ function waitForElement(selector, multiple = false, timeoutDuration) {
  */
 async function injectFollowButton() {
     try {
-        const followButton = await waitForElement(".account__header__tabs__buttons button:first-of-type", false, TIMEOUT_DURATION);
+        const followButton = await waitForElement("#mastodon .account__header__tabs__buttons button:first-of-type", false, TIMEOUT_DURATION);
         followButton.addEventListener("click", onClickFollow);
     } catch (error) {
         // Follow button failed to appear
@@ -104,8 +104,8 @@ async function injectFollowButton() {
 async function injectInteractionButtons() {
     const INJECTED_REPLY_CLASS = "mastodon-simplified-federation-injected-interaction";
     const replyButtons = await waitForElement(
-        ".item-list[role='feed'] article[data-id] .status__action-bar button," +
-        ".detailed-status__wrapper .detailed-status__action-bar button",
+        "#mastodon .item-list[role='feed'] article[data-id] .status__action-bar button," +
+        "#mastodon .detailed-status__wrapper .detailed-status__action-bar button",
         true,
         TIMEOUT_DURATION,
     );
@@ -126,15 +126,21 @@ async function injectInteractionButtons() {
  * 
  * @returns {void}
  */
-function init() {
+async function init() {
+    injectFollowButton();
+
     const observer = new MutationObserver(() => {
         Promise.allSettled([
-            injectFollowButton(),
             injectInteractionButtons(),
         ]);
     });
 
-    observer.observe(document.body, {
+    const feedElement = await waitForElement(
+        "#mastodon .item-list[role='feed']",
+        false,
+        TIMEOUT_DURATION
+    );
+    observer.observe(feedElement, {
         childList: true, subtree: true,
     });
 }
