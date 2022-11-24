@@ -129,20 +129,26 @@ async function injectInteractionButtons() {
 async function init() {
     injectFollowButton();
 
-    const observer = new MutationObserver(() => {
-        Promise.allSettled([
-            injectInteractionButtons(),
-        ]);
-    });
+    const ogType = document.querySelector("meta[property='og:type']");
 
-    const feedElement = await waitForElement(
-        "#mastodon .item-list[role='feed']",
-        false,
-        TIMEOUT_DURATION
-    );
-    observer.observe(feedElement, {
-        childList: true, subtree: true,
-    });
+    if (ogType && ogType.getAttribute("content") === "article"){
+        injectInteractionButtons();
+    } else {
+        const observer = new MutationObserver(() => {
+            Promise.allSettled([
+                injectInteractionButtons(),
+            ]);
+        });
+
+        const feedElement = await waitForElement(
+            "#mastodon .item-list[role='feed']",
+            false,
+            TIMEOUT_DURATION
+        );
+        observer.observe(feedElement, {
+            childList: true, subtree: true,
+        });
+    }
 }
 
 init();
