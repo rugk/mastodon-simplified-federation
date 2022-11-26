@@ -1,7 +1,5 @@
 "use strict";
 
-const TIMEOUT_DURATION = 20000;
-
 /**
  * Replacement onClick handler for Follow button.
  * 
@@ -40,12 +38,12 @@ function onClickInteract(event) {
  * 
  * @param {string} selector
  * @param {boolean} [multiple=false]
- * @param {number} timeoutDuration
+ * @param {number} [timeoutDuration=200000]
  * @see {@link https://github.com/storybookjs/test-runner/blob/6d41927154e8dd1e4c9e7493122e24e2739a7a0f/src/setup-page.ts#L134}
  *  from which this was adapted
  * @returns {Promise}
  */
-function waitForElement(selector, multiple = false, timeoutDuration) {
+function waitForElement(selector, multiple = false, timeoutDuration = 200000) {
     return new Promise((resolve, reject) => {
         const getElement = () => (
             multiple
@@ -89,7 +87,7 @@ function waitForElement(selector, multiple = false, timeoutDuration) {
  */
 async function injectFollowButton() {
     try {
-        const followButton = await waitForElement("#mastodon .account__header__tabs__buttons button:first-of-type", false, TIMEOUT_DURATION);
+        const followButton = await waitForElement("#mastodon .account__header__tabs__buttons button:first-of-type", false);
         followButton.addEventListener("click", onClickFollow);
     } catch (error) {
         // Follow button failed to appear
@@ -107,7 +105,6 @@ async function injectInteractionButtons() {
         "#mastodon .item-list[role='feed'] article[data-id] .status__action-bar button," +
         "#mastodon .detailed-status__wrapper .detailed-status__action-bar button",
         true,
-        TIMEOUT_DURATION,
     );
     replyButtons.forEach((button) => {
         try {
@@ -122,11 +119,35 @@ async function injectInteractionButtons() {
 }
 
 /**
+ * Initialise injection for feedElement.
+ * 
+ * @returns {void}
+ */
+async function injectFeed() {
+    const observer = new MutationObserver(() => {
+        injectInteractionButtons();
+    });
+
+    try {
+        const feedElement = await waitForElement(
+            "#mastodon .item-list[role='feed']",
+            false,
+        );
+
+        observer.observe(feedElement, {
+            childList: true, subtree: true,
+        });
+    } catch (error){
+        // feedElement not found
+    }
+}
+
+/**
  * Initialise injection for all remote Mastodon buttons.
  * 
  * @returns {void}
  */
-async function init() {
+function init() {
     injectFollowButton();
 
     const ogType = document.querySelector("meta[property='og:type']");
@@ -134,26 +155,9 @@ async function init() {
     // inject only once on detail toots view pages
     if (ogType && ogType.getAttribute("content") === "article"){
         injectInteractionButtons();
-        // otherwise listen to the feed for new posts
     } else {
-        const observer = new MutationObserver(() => {
-            injectInteractionButtons();
-        });
-
-        try {
-            const feedElement = await waitForElement(
-                "#mastodon .item-list[role='feed']",
-                false,
-                TIMEOUT_DURATION
-            );
-
-            observer.observe(feedElement, {
-                childList: true, subtree: true,
-            });
-        } catch (error){
-            // feedElement not found
-        }
-        
+        // otherwise listen to the feed for new posts
+        injectFeed();
     }
 }
 
