@@ -131,6 +131,7 @@ async function init() {
 
     const ogType = document.querySelector("meta[property='og:type']");
 
+    // inject only once on detail toots view pages
     if (ogType && ogType.getAttribute("content") === "article"){
         injectInteractionButtons();
     } else {
