@@ -134,7 +134,8 @@ async function init() {
     // inject only once on detail toots view pages
     if (ogType && ogType.getAttribute("content") === "article"){
         injectInteractionButtons();
-    } else {
+        // otherwise listen to the feed for new posts
+        } else {
         const observer = new MutationObserver(() => {
             Promise.allSettled([
                 injectInteractionButtons(),
