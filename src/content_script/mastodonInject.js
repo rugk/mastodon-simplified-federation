@@ -135,21 +135,25 @@ async function init() {
     if (ogType && ogType.getAttribute("content") === "article"){
         injectInteractionButtons();
         // otherwise listen to the feed for new posts
-        } else {
+    } else {
         const observer = new MutationObserver(() => {
-            Promise.allSettled([
-                injectInteractionButtons(),
-            ]);
+            injectInteractionButtons();
         });
 
-        const feedElement = await waitForElement(
-            "#mastodon .item-list[role='feed']",
-            false,
-            TIMEOUT_DURATION
-        );
-        observer.observe(feedElement, {
-            childList: true, subtree: true,
-        });
+        try {
+            const feedElement = await waitForElement(
+                "#mastodon .item-list[role='feed']",
+                false,
+                TIMEOUT_DURATION
+            );
+
+            observer.observe(feedElement, {
+                childList: true, subtree: true,
+            });
+        } catch (error){
+            // feedElement not found
+        }
+        
     }
 }
 
