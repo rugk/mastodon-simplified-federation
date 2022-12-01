@@ -101,45 +101,28 @@ async function injectFollowButton() {
  */
 async function injectInteractionButtons() {
     const INJECTED_REPLY_CLASS = "mastodon-simplified-federation-injected-interaction";
-    const replyButtons = await waitForElement(
-        "#mastodon .item-list[role='feed'] article[data-id] .status__action-bar button," +
-        "#mastodon .detailed-status__wrapper .detailed-status__action-bar button",
-        true,
-    );
-    replyButtons.forEach((button) => {
-        try {
-            if (!button.classList.contains(INJECTED_REPLY_CLASS)){
-                button.addEventListener("click", onClickInteract);
-                button.classList.add(INJECTED_REPLY_CLASS);
-            }
-        } catch (error) {
-            // Interaction buttons failed to appear
-        }
-    });
-}
-
-/**
- * Initialise injection for feedElement.
- * 
- * @returns {void}
- */
-async function injectFeed() {
-    const observer = new MutationObserver(() => {
-        injectInteractionButtons();
-    });
-
     try {
-        const feedElement = await waitForElement(
-            "#mastodon .item-list[role='feed']",
-            false,
+        const replyButtons = await waitForElement(
+            "#mastodon .item-list[role='feed'] article[data-id] .status__action-bar button," + // timeline / user profile
+            "#mastodon .detailed-status__wrapper .detailed-status__action-bar button," + // status with no replies
+            "#mastodon .status__wrapper .status__action-bar button", // status with replies
+            true,
         );
-
-        observer.observe(feedElement, {
-            childList: true, subtree: true,
+        replyButtons.forEach((button) => {
+            try {
+                if (!button.classList.contains(INJECTED_REPLY_CLASS)){
+                    button.addEventListener("click", onClickInteract);
+                    button.classList.add(INJECTED_REPLY_CLASS);
+                }
+            } catch (error) {
+                // Failed to inject interaction buttons
+            }
         });
-    } catch (error){
-        // feedElement not found
+    } catch (error) {
+        // Interaction buttons failed to appear
     }
+    
+    
 }
 
 /**
@@ -147,18 +130,40 @@ async function injectFeed() {
  * 
  * @returns {void}
  */
-function init() {
-    injectFollowButton();
-
-    const ogType = document.querySelector("meta[property='og:type']");
-
-    // inject only once on detail toots view pages
-    if (ogType && ogType.getAttribute("content") === "article"){
-        injectInteractionButtons();
-    } else {
-        // otherwise listen to the feed for new posts
-        injectFeed();
-    }
+function initInjections() {
+    injectFollowButton().catch(console.error);
+    injectInteractionButtons().catch(console.error);
 }
 
-init();
+/**
+ * Initialise script and re-run if there are changes.
+ * 
+ * @returns {void}
+ */
+async function init() {
+    const MASTODON_INJECTED_CLASS = "mastodon-simplified-federation-injected";
+    
+    if (document.body.classList.contains(MASTODON_INJECTED_CLASS)){
+        // init has already run
+        return;
+    }
+
+    document.body.classList.add(MASTODON_INJECTED_CLASS);
+    initInjections();
+
+    const observer = new MutationObserver(() => {
+        initInjections();
+    });
+
+    // monitor only the main column in the Mastodon UI
+    const mainColumn = await waitForElement(
+        "#mastodon .ui",
+        false,
+    );
+    observer.observe(mainColumn, {
+        childList: true,
+        subtree: true,
+    });
+}
+
+init().catch(console.error);
