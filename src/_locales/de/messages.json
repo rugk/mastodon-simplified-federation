@@ -156,11 +156,11 @@
   },
 
   "optionRedirectInMainWindow": {
-    "message": "Verhindere die Nutzung eines Popups.",
+    "message": "In aktuellem Tab umleiten.",
     "description": "This is an option shown in the add-on settings."
   },
   "optionRedirectInMainWindowDescr": {
-    "message": "Verhindert die Benutzung eines extra Fensters und leitet stattdessen die Hauptseite um.",
+    "message": "Verhindert die Benutzung eines extra Tabs und leitet stattdessen die Hauptseite um.",
     "description": "This is an option shown in the add-on settings."
   },
 
