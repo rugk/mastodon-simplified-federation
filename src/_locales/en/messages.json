@@ -156,11 +156,11 @@
   },
 
   "optionRedirectInMainWindow": {
-    "message": "Prevent popup usage.",
+    "message": "Redirect in main window.",
     "description": "This is an option shown in the add-on settings."
   },
   "optionRedirectInMainWindowDescr": {
-    "message": "Prevents the use of an extra window and instead redirects the action on the main page.",
+    "message": "Prevents the use of an extra tab and instead redirects the action on the main page.",
     "description": "This is an option shown in the add-on settings."
   },
   "translatorCredit": {
