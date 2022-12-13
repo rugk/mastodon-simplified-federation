@@ -41,6 +41,8 @@ Additionally, this add-on makes sure to keep your Mastodon handle **private**. I
 Due to the fact that it does not block loading of the "Enter your Mastodon ID" popup, it may – especially in the case of "toot interactions" – happen, that the "Enter your Mastodon ID" popup is shown anyway for some seconds. After some time, it should be redirected though.
 If it really fails, this behavior ensures you still have a fallback to be able to manually enter your Mastodon handle.
 
+Note for new Mastodon v4 instances, this is not enough. It also needs to inject some code into the website and modify Mastodon instances. [See the release adding compatibility](https://github.com/rugk/mastodon-simplified-federation/releases/tag/v2.0) to see what is done in detail.
+
 ### Other Fediverse instances
 
 Note this add-on also include (partially limited) support for redirecting other Fediverse instances to your Mastodon instance.
