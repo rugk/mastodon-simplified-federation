@@ -24,10 +24,14 @@ function onClickInteract(event) {
     event.stopPropagation();
     event.preventDefault();
     const articleElement = event.target.closest("article[data-id]");
+    const getId = () => {
+        const rawId = articleElement.getAttribute("data-id");
+        return rawId.slice(0, 2) === "f-" ? rawId.slice(2) : rawId;
+    };
     const tootId = (
         articleElement === null
             ? window.location.pathname.split("/").slice(-1)[0]
-            : articleElement.getAttribute("data-id")
+            : getId()
     );
     // activate AutoRemoteFollow
     window.open(`/interact/${tootId}`, "_blank");
@@ -57,14 +61,14 @@ function waitForElement(selector, multiple = false, timeoutDuration = 200000) {
         }, timeoutDuration);
 
         const element = getElement();
-        if (isElementFound(element)){
+        if (isElementFound(element)) {
             window.clearTimeout(timeout);
             return resolve(element);
         }
 
         const observer = new MutationObserver(() => {
             const element = getElement();
-            if (isElementFound(element)){
+            if (isElementFound(element)) {
                 window.clearTimeout(timeout);
                 resolve(element);
                 observer.disconnect();
@@ -77,7 +81,7 @@ function waitForElement(selector, multiple = false, timeoutDuration = 200000) {
         });
 
         return null;
-    }); 
+    });
 }
 
 /**
@@ -101,16 +105,18 @@ async function injectFollowButton() {
  */
 async function injectInteractionButtons() {
     const INJECTED_REPLY_CLASS = "mastodon-simplified-federation-injected-interaction";
+    const TIMELINE_SELECTOR = "#mastodon .item-list[role='feed'] article[data-id] .status__action-bar button"; // timeline / user profile
+    const STATUS_NO_REPLIES_SELECTOR = "#mastodon .detailed-status__wrapper .detailed-status__action-bar button"; // status with no replies
+    const STATUS_WITH_REPLIES_SELECTOR = "#mastodon .status__wrapper .status__action-bar button"; // status with replies
     try {
-        const replyButtons = await waitForElement(
-            "#mastodon .item-list[role='feed'] article[data-id] .status__action-bar button," + // timeline / user profile
-            "#mastodon .detailed-status__wrapper .detailed-status__action-bar button," + // status with no replies
-            "#mastodon .status__wrapper .status__action-bar button", // status with replies
-            true,
-        );
+        const replyButtons = await waitForElement([
+            TIMELINE_SELECTOR,
+            STATUS_NO_REPLIES_SELECTOR,
+            STATUS_WITH_REPLIES_SELECTOR,
+        ].join(","), true,);
         replyButtons.forEach((button) => {
             try {
-                if (!button.classList.contains(INJECTED_REPLY_CLASS)){
+                if (!button.classList.contains(INJECTED_REPLY_CLASS)) {
                     button.addEventListener("click", onClickInteract);
                     button.classList.add(INJECTED_REPLY_CLASS);
                 }
@@ -121,8 +127,8 @@ async function injectInteractionButtons() {
     } catch (error) {
         // Interaction buttons failed to appear
     }
-    
-    
+
+
 }
 
 /**
@@ -142,8 +148,8 @@ function initInjections() {
  */
 async function init() {
     const MASTODON_INJECTED_CLASS = "mastodon-simplified-federation-injected";
-    
-    if (document.body.classList.contains(MASTODON_INJECTED_CLASS)){
+
+    if (document.body.classList.contains(MASTODON_INJECTED_CLASS)) {
         // init has already run
         return;
     }
