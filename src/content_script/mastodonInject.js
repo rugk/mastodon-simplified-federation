@@ -9,7 +9,7 @@
 function onClickFollow(event) {
     event.stopPropagation();
     event.preventDefault();
-    const username = window.location.pathname.split("/").slice(-1)[0];
+    const username = window.location.pathname.split("/").find(pathPart => pathPart.startsWith('@'));
     // activate AutoRemoteFollow
     window.open(`/users/${username}/remote_follow`, "_blank");
 }
