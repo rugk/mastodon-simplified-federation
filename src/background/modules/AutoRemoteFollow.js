@@ -11,6 +11,7 @@ import * as MastodonDetect from "./Detect/Mastodon.js";
 import * as GnuSocialDetect from "./Detect/GnuSocial.js";
 import * as PleromaDetect from "./Detect/Pleroma.js";
 import * as FriendicaDetect from "./Detect/Friendica.js";
+import * as GuppeDetect from "./Detect/Guppe.js";
 
 import * as NetworkTools from "/common/modules/NetworkTools.js";
 import * as MastodonRedirect from "./MastodonRedirect.js";
@@ -22,12 +23,15 @@ import * as Notifications from "/common/modules/Notifications.js";
 
 const FEDIVERSE_TYPE = Object.freeze({
     MASTODON: Symbol("Mastodon"),
+    GUPPE: Symbol("Gup.pe"),
+    FRIENDICA: Symbol("Friendica"),
     GNU_SOCIAL: Symbol("GNU Social"),
     PLEROMA: Symbol("Pleroma"),
-    FRIENDICA: Symbol("Friendica")
 });
 const FEDIVERSE_MODULE = Object.freeze({
     [FEDIVERSE_TYPE.MASTODON]: MastodonDetect,
+    [FEDIVERSE_TYPE.GUPPE]: GuppeDetect,
+    [FEDIVERSE_TYPE.FRIENDICA]: FriendicaDetect,
     [FEDIVERSE_TYPE.GNU_SOCIAL]: GnuSocialDetect,
     [FEDIVERSE_TYPE.PLEROMA]: PleromaDetect,
     [FEDIVERSE_TYPE.FRIENDICA]: FriendicaDetect
@@ -48,10 +52,8 @@ async function handleWebRequest(requestDetails) {
         return Promise.reject(new Error("URL info not available"));
     }
 
-    const url = new URL(requestDetails.url);
-
     // detect, which network/software it uses
-    const [software, interaction] = getInteractionType(url);
+    const [software, interaction] = getInteractionType(requestDetails.url);
 
     if (software === null) {
         // ignore unrelated sites, resolves so error handling is not triggered
@@ -66,6 +68,7 @@ async function handleWebRequest(requestDetails) {
     MastodonRedirect.enableLoadReplace(detectModule.shouldLoadReplace.bind(null, requestDetails));
 
     // and get data and pass to redirect
+    const url = new URL(requestDetails.url);
     switch (interaction) {
     case INTERACTION_TYPE.FOLLOW: {
         const remoteUser = await detectModule.getUsername(url, requestDetails);
@@ -129,13 +132,13 @@ async function handleError(error) {
  *
  * @function
  * @private
- * @param {URL} url
+ * @param {string} fullUrl the full URL as a string
  * @returns {[FEDIVERSE_TYPE, Symbol]|[null, null]}
  */
-function getInteractionType(url) {
+function getInteractionType(fullUrl) {
     for (const fedType of Object.values(FEDIVERSE_TYPE)) {
         for (const [checkRegEx, interactionType] of FEDIVERSE_MODULE[fedType].CATCH_URLS) {
-            if (url.pathname.match(checkRegEx)) {
+            if (fullUrl.match(checkRegEx)) {
                 return [fedType, interactionType];
             }
         }
