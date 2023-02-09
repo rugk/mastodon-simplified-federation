@@ -23,7 +23,7 @@ function onClickFollow(event) {
 function onClickInteract(event) {
     event.stopPropagation();
     event.preventDefault();
-    const articleElement = event.target.closest("article[data-id]");
+    const articleElement = event.target.closest(".status.status-public[data-id]");
     const getId = () => {
         const rawId = articleElement.getAttribute("data-id");
         return rawId.slice(0, 2) === "f-" ? rawId.slice(2) : rawId;
