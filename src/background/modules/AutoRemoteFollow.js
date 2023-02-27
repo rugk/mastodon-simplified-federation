@@ -135,7 +135,7 @@ async function handleError(error) {
 function getInteractionType(url) {
     for (const fedType of Object.values(FEDIVERSE_TYPE)) {
         for (const [checkRegEx, interactionType] of FEDIVERSE_MODULE[fedType].CATCH_URLS) {
-            if (url.pathname.match(checkRegEx)) {
+            if (url.href.match(checkRegEx)) {
                 return [fedType, interactionType];
             }
         }
