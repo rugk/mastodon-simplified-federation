@@ -170,7 +170,7 @@ async function onTabUpdate(tabId, changeInfo) {
 function init() {
     NetworkTools.webRequestListen(["http://*/*", "https://*/*"], "onBeforeRequest", (requestDetails) => {
         return handleWebRequest(requestDetails).catch(handleError).catch(console.error);
-    });
+    }, ["requestBody"]);
 
     browser.tabs.onUpdated.addListener(onTabUpdate, {
         properties: ["url"]

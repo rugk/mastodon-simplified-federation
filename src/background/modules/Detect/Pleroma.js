@@ -111,6 +111,12 @@ export function getUsername(url, requestDetails) {
     redirectSiteFinishedLoading = false;
 
     try {
+        return requestDetails.requestBody.formData.nickname[0];
+    } catch (e) {
+        console.error("Could not get username from request body. Error: ", e);
+    }
+
+    try {
         const originUrl = new URL(requestDetails.originUrl);
         const match = USER_PAGE_URL_REGEX.exec(originUrl.pathname);
 
@@ -122,7 +128,7 @@ export function getUsername(url, requestDetails) {
             console.error("Could not get valid username from request details. Got", originUrl, "from", requestDetails);
         }
     } catch (e) {
-        console.error("Could not get username from request details. Error: ", e);
+        console.error("Could not get username from request origin. Error: ", e);
     }
 
     // fallback to HTML scraping
