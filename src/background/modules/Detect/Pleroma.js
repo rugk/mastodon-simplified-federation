@@ -94,7 +94,7 @@ export function getTabToModify(requestDetails) {
  */
 export function getTootUrl(url) {
     return new Promise((resolve, reject) => {
-        resolve("https://" + url.host + "/notice/" + url.searchParams.get("status_id"));
+        resolve(`https://${url.host}/notice/{url.searchParams.get("status_id")}`);
     });
 }
 
