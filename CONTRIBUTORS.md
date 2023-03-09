@@ -1,5 +1,6 @@
 # Contributors
 
+- Austin Huang ([@austinhuang0131](https://github.com/austinhuang0131))
 - [@ENT8R](https://github.com/ENT8R)
 - Chao Zhang ([@zhang1pr](https://github.com/zhang1pr))
 
