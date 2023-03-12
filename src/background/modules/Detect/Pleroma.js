@@ -5,7 +5,6 @@
  */
 
 import * as NetworkTools from "/common/modules/NetworkTools.js";
-import {NotSupportedError} from "/common/modules/Errors.js";
 import {INTERACTION_TYPE} from "../data/INTERACTION_TYPE.js";
 import isString from "/common/modules/lodash/isString.js";
 
@@ -13,9 +12,12 @@ import isString from "/common/modules/lodash/isString.js";
 const REMOTE_FOLLOW_REGEX = /\/main\/ostatus\/?$/;
 // https://regex101.com/r/fjPdgC/1
 const USER_PAGE_URL_REGEX = /\/users\/(.+)\/?$/;
+// really just REMOTE_FOLLOW_REGEX with status_id query
+const REMOTE_INTERACT_REGEX = /\/main\/ostatus\/?\?status_id=\w+$/;
 
 /** The URLs to intercept and pass to this module. */
 export const CATCH_URLS = new Map();
+CATCH_URLS.set(REMOTE_INTERACT_REGEX, INTERACTION_TYPE.TOOT_INTERACT);
 CATCH_URLS.set(REMOTE_FOLLOW_REGEX, INTERACTION_TYPE.FOLLOW);
 
 /**
@@ -84,13 +86,16 @@ export function getTabToModify(requestDetails) {
 }
 
 /**
- * Find the follow URL.
+ * Find the status URL.
  *
  * @public
+ * @param {URL} url
  * @returns {Promise}
  */
-export function getTootUrl() {
-    throw new NotSupportedError("getTootUrl() is not supported");
+export function getTootUrl(url) {
+    return new Promise((resolve, reject) => {
+        resolve(`https://${url.host}/notice/{url.searchParams.get("status_id")}`);
+    });
 }
 
 /**
@@ -106,6 +111,12 @@ export function getUsername(url, requestDetails) {
     redirectSiteFinishedLoading = false;
 
     try {
+        return requestDetails.requestBody.formData.nickname[0];
+    } catch (e) {
+        console.error("Could not get username from request body. Error: ", e);
+    }
+
+    try {
         const originUrl = new URL(requestDetails.originUrl);
         const match = USER_PAGE_URL_REGEX.exec(originUrl.pathname);
 
@@ -117,7 +128,7 @@ export function getUsername(url, requestDetails) {
             console.error("Could not get valid username from request details. Got", originUrl, "from", requestDetails);
         }
     } catch (e) {
-        console.error("Could not get username from request details. Error: ", e);
+        console.error("Could not get username from request origin. Error: ", e);
     }
 
     // fallback to HTML scraping

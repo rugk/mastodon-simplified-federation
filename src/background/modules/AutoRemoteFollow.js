@@ -135,7 +135,7 @@ async function handleError(error) {
 function getInteractionType(url) {
     for (const fedType of Object.values(FEDIVERSE_TYPE)) {
         for (const [checkRegEx, interactionType] of FEDIVERSE_MODULE[fedType].CATCH_URLS) {
-            if (url.pathname.match(checkRegEx)) {
+            if (url.href.match(checkRegEx)) {
                 return [fedType, interactionType];
             }
         }
@@ -170,7 +170,7 @@ async function onTabUpdate(tabId, changeInfo) {
 function init() {
     NetworkTools.webRequestListen(["http://*/*", "https://*/*"], "onBeforeRequest", (requestDetails) => {
         return handleWebRequest(requestDetails).catch(handleError).catch(console.error);
-    });
+    }, ["requestBody"]);
 
     browser.tabs.onUpdated.addListener(onTabUpdate, {
         properties: ["url"]
