@@ -147,14 +147,14 @@ function initInjections() {
  * @returns {void}
  */
 async function init() {
-    const MASTODON_INJECTED_CLASS = "mastodon-simplified-federation-injected";
-
-    if (document.body.classList.contains(MASTODON_INJECTED_CLASS)) {
+    if (typeof MASTODON_INJECTED_CLASS === "undefined"){
+        // eslint-disable-next-line vars-on-top, no-var
+        var MASTODON_INJECTED_CLASS = true;
+    } else {
         // init has already run
         return;
     }
 
-    document.body.classList.add(MASTODON_INJECTED_CLASS);
     initInjections();
 
     const observer = new MutationObserver(() => {
