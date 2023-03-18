@@ -85,6 +85,21 @@ function waitForElement(selector, multiple = false, timeoutDuration = 200000) {
 }
 
 /**
+ * Checks whether the user has logged into the instance.
+ * 
+ * @returns {boolean}
+ */
+async function checkLoggedIn() {
+    try {
+        const initialState = await waitForElement("#initial-state", false);
+        return JSON.parse(initialState.textContent).meta.access_token != null;
+    } catch(error) {
+        // cannot fetch login status
+        return false;
+    }
+}
+
+/**
  * Inject replacement onClick handler for Follow button.
  * 
  * @returns {void}
@@ -137,8 +152,12 @@ async function injectInteractionButtons() {
  * @returns {void}
  */
 function initInjections() {
-    injectFollowButton().catch(console.error);
-    injectInteractionButtons().catch(console.error);
+    checkLoggedIn().then((r) => {
+        if (!r) {
+            injectFollowButton().catch(console.error);
+            injectInteractionButtons().catch(console.error);
+        }
+    });
 }
 
 /**
