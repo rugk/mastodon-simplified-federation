@@ -11,6 +11,7 @@ import * as MastodonDetect from "./Detect/Mastodon.js";
 import * as GnuSocialDetect from "./Detect/GnuSocial.js";
 import * as PleromaDetect from "./Detect/Pleroma.js";
 import * as FriendicaDetect from "./Detect/Friendica.js";
+import * as MisskeyDetect from "./Detect/Misskey.js";
 
 import * as NetworkTools from "/common/modules/NetworkTools.js";
 import * as MastodonRedirect from "./MastodonRedirect.js";
@@ -24,13 +25,15 @@ const FEDIVERSE_TYPE = Object.freeze({
     MASTODON: Symbol("Mastodon"),
     GNU_SOCIAL: Symbol("GNU Social"),
     PLEROMA: Symbol("Pleroma"),
-    FRIENDICA: Symbol("Friendica")
+    FRIENDICA: Symbol("Friendica"),
+    MISSKEY: Symbol("Misskey"),
 });
 const FEDIVERSE_MODULE = Object.freeze({
     [FEDIVERSE_TYPE.MASTODON]: MastodonDetect,
     [FEDIVERSE_TYPE.GNU_SOCIAL]: GnuSocialDetect,
     [FEDIVERSE_TYPE.PLEROMA]: PleromaDetect,
-    [FEDIVERSE_TYPE.FRIENDICA]: FriendicaDetect
+    [FEDIVERSE_TYPE.FRIENDICA]: FriendicaDetect,
+    [FEDIVERSE_TYPE.MISSKEY]: MisskeyDetect
 });
 
 /**
@@ -157,6 +160,9 @@ async function onTabUpdate(tabId, changeInfo) {
     if (ownMastodon.server !== currentURL.hostname){
         browser.tabs.executeScript(tabId, {
             file: "/content_script/mastodonInject.js",
+        });
+        browser.tabs.executeScript(tabId, {
+            file: "/content_script/misskeyInject.js",
         });
     }
 }
