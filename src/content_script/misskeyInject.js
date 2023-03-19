@@ -101,8 +101,6 @@ async function injectInteractionButtons() {
     } catch (error) {
         // Interaction buttons failed to appear
     }
-
-
 }
 
 /**
@@ -120,9 +118,9 @@ function initInjections() {
  * @returns {void}
  */
 async function init() {
-    if (typeof MISSKEY_INJECTED_CLASS === "undefined"){
+    if (typeof MISSKEY_INJECTED === "undefined"){
         // eslint-disable-next-line vars-on-top, no-var
-        var MISSKEY_INJECTED_CLASS = true;
+        var MISSKEY_INJECTED = true;
     } else {
         // init has already run
         return;
@@ -134,7 +132,7 @@ async function init() {
         initInjections();
     });
 
-    // monitor only the main column in the Mastodon UI
+    // monitor only the main column in the Misskey UI
     const mainColumn = await waitForElement(
         ".mk-app > .main",
         false,
