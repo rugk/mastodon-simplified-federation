@@ -89,7 +89,7 @@ function waitForElement(selector, multiple = false, timeoutDuration = 200000) {
  * 
  * @returns {boolean}
  */
-async function checkLoggedIn() {
+async function isLoggedIn() {
     try {
         const initialState = await waitForElement("#initial-state", false);
         return JSON.parse(initialState.textContent).meta.access_token != null;
@@ -152,11 +152,12 @@ async function injectInteractionButtons() {
  * @returns {void}
  */
 function initInjections() {
-    checkLoggedIn().then((r) => {
-        if (!r) {
-            injectFollowButton().catch(console.error);
-            injectInteractionButtons().catch(console.error);
+    isLoggedIn().then((isLoggedIn) => {
+        if (isLoggedIn) {
+            return;
         }
+        injectFollowButton().catch(console.error);
+        injectInteractionButtons().catch(console.error);
     });
 }
 
