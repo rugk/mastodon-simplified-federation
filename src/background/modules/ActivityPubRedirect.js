@@ -5,16 +5,16 @@ import { resolveActivityPubId } from "/common/modules/MastodonApi.js";
 /**
  * Scrapes the ActivityPub <link> destination from the HTML page, if needed and exists.
  *
- * @param {number} tabIdToModify
+ * @param {number} tabId
  * @param {URL} url
  * @returns {Promise}
  */
-export async function redirectByActivityPubLink(tabIdToModify, url) {
-    if (!tabIdToModify || !url) {
+export async function redirectByActivityPubLink(tabId, url) {
+    if (!tabId || !url) {
         throw new Error("Needs a tab id and a page URL");
     }
 
-    const [objectId] = await browser.tabs.executeScript({
+    const [objectId] = await browser.tabs.executeScript(tabId, {
         code: `document.querySelector("link[rel=alternate][type='application/activity+json']")?.href`,
         runAt: "document_end",
     });
@@ -42,5 +42,5 @@ export async function redirectByActivityPubLink(tabIdToModify, url) {
         return;
     }
 
-    await NetworkTools.redirectToWebsite(homeUrl, tabIdToModify);
+    await NetworkTools.redirectToWebsite(homeUrl, tabId);
 }
