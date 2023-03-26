@@ -163,6 +163,10 @@
     "message": "Prevents the use of an extra tab and instead redirects the action on the main page.",
     "description": "This is an option shown in the add-on settings."
   },
+  "optionRedirectImmediately": {
+    "message": "Redirect immediately on page load, instead of on action.",
+    "description": "This is an option shown in the add-on settings."
+  },
   "translatorCredit": {
     "message": "This add-on has been translated into English by $TRANSLATORS$.",
     "description": "The credit text for the translator. See https://github.com/TinyWebEx/common/blob/master/CONTRIBUTING.md#translator-credit-inside-of-add-on for how to translate this.",
