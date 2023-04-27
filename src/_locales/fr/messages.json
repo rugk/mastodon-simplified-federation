@@ -11,14 +11,14 @@
     "hash": "8c716f7803f220414804500b514a1dc0"
   },
   "extensionDescription": {
-    "message": "Simplifie le suivi ou l´interaction avec d´autres personnes sur des instances (Mastodon) externes.",
+    "message": "Simplifie le suivi ou l'interaction avec d'autres personnes sur des instances (Mastodon) externes.",
     "description": "Description of the extension.",
     "hash": "61083256339a41f90d4db1bfa89532b6"
   },
 
   // errors or other messages (mostly for settings)
   "errorShowingMessage": {
-    "message": "Impossible d´afficher ce message.",
+    "message": "Impossible d'afficher ce message.",
     "description": "When there is an error when showing the error/info/….",
     "hash": "a9440e4f824a372841d4de2b7e2643ee"
   },
@@ -65,17 +65,17 @@
     "hash": "6cf4f0cecc601398c99f9a1afab1dc09"
   },
   "mastodonHandleDoesNotExist": {
-    "message": "L’utilisateur Mastodon que vous avez indiqué n´existe pas sur ce serveur.",
+    "message": "L’utilisateur Mastodon que vous avez indiqué n'existe pas sur ce serveur.",
     "description": "This is an error shown, when the Mastodon handle the user entered does not exist on the server, i.e. the server returns a 404 error.",
     "hash": "510bf6395054f816063b1dbb6b226b8c"
   },
   "mastodonHandleServerCouldNotBeContacted": {
-    "message": "Le serveur (Mastodon) indiqué n´a pas pu être contacté.",
+    "message": "Le serveur (Mastodon) indiqué n'a pas pu être contacté.",
     "description": "This is an error shown, when the last part of Mastodon handle (= the server) could not be contacted, due to a network (likely DNS) error and thus likely due to a typo or another problem.",
     "hash": "77c3f0fc23bc9a39d82d6ba80def8fdb"
   },
   "isNoMastodonServer": {
-    "message": "Le serveur indiqué n´est pas une instance Mastodon",
+    "message": "Le serveur indiqué n'est pas une instance Mastodon",
     "description": "This is an error shown, when the last part of Mastodon handle (= the server) is actually no Mastodon server.",
     "hash": "a32698c492feb27656ece403e4bb5d3f"
   },
@@ -90,7 +90,7 @@
     "hash": "bbc3ea93d61ef757d572c5e8a67462d8"
   },
   "couldNotRedirect": {
-    "message": "Impossible de rediriger à cause d´une erreur inattendue.",
+    "message": "Impossible de rediriger à cause d'une erreur inattendue.",
     "description": "Generic error shown when redirecting fails.",
     "hash": "e46a9b3ba7502d7b5d399f0b9461fc82"
   },
@@ -120,7 +120,7 @@
     "hash": "22b6584d75bbe237f649b1acb1368f3e"
   },
   "errorNotificationNotSetupTitle": {
-    "message": "« $ADDON$ » n´est pas encore configuré",
+    "message": "« $ADDON$ » n'est pas encore configuré",
     "description": "Title of a notification if an error is shown when the add-on is not set up yet. In contrast to errorNotificationRedirectingTitle this is only shown for this one error. See also addonIsNotYetSetup.",
     "placeholders": {
       "addon": { "content": "$1", "example": "Mastodon – Simplified Federation!" }
@@ -138,12 +138,12 @@
 
   // options
   "someSettingsAreManaged": {
-    "message": "Certaines options sont gérées par l´administrateur système et ne peuvent être modifiées.",
+    "message": "Certaines options sont gérées par l'administrateur système et ne peuvent pas être modifiées.",
     "description": "The message, which appears, when settings are pre-defined (as managed options) by administrators.",
     "hash": "148604ebbeb7df28974d8233f1418d1f"
   },
   "optionIsDisabledBecauseManaged": {
-    "message": "Cette option est désactivée, car configurée par votre administrateur système.",
+    "message": "Cette option est désactivée par votre administrateur système.",
     "description": "The title (tooltip) shown, when hovering over a disabled, managed option.",
     "hash": "50fb70682c64e1a1fb4d8884b33cca64"
   },
@@ -196,7 +196,7 @@
     "hash": "4775fb2f88fd33d02b871e5021dec3e9"
   },
   "translatorUsername": {
-    "message": "PoorPocketsMcNewHold et le-jun",
+    "message": "PoorPocketsMcNewHold, le-jun et amcwb/stars",
     "description": "The username that the translator wants to be referred to.",
     "hash": "ce96c18a8a1b4b528b294e981ee4d651"
   },
@@ -226,7 +226,7 @@
     "hash": "632720ab193dcacba4286cb364124856"
   },
   "ariaMessageInfo": {
-    "message": "message d´information",
+    "message": "message d'information",
     "description": "the aria label to label the message box as an info message box",
     "hash": "5f54e42067e19895a2641b17a5233418"
   },
@@ -236,12 +236,12 @@
     "hash": "334387b4ae53483d17f11519a70dd3af"
   },
   "ariaMessageError": {
-    "message": "message d´erreur",
+    "message": "message d'erreur",
     "description": "the aria label to label the message box as an error message box",
     "hash": "fcda6eedc61727fe8aae7392a0a541a5"
   },
   "ariaMessageWarning": {
-    "message": "message d´avertissement",
+    "message": "message d'avertissement",
     "description": "the aria label to label the message box as an warning message box",
     "hash": "8a5dd7528bead1ccd27cb7430d797bd2"
   },
