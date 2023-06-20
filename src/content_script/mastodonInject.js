@@ -23,7 +23,7 @@ function onClickFollow(event) {
 function onClickInteract(event) {
     event.stopPropagation();
     event.preventDefault();
-    const articleElement = event.target.closest(".status.status-public[data-id]");
+    const articleElement = event.target.closest(".status.status-public[data-id], .status.status-unlisted[data-id]");
     const getId = () => {
         const rawId = articleElement.getAttribute("data-id");
         return rawId.slice(0, 2) === "f-" ? rawId.slice(2) : rawId;
@@ -85,6 +85,21 @@ function waitForElement(selector, multiple = false, timeoutDuration = 200000) {
 }
 
 /**
+ * Checks whether the user has logged into the instance.
+ * 
+ * @returns {boolean}
+ */
+async function isLoggedIn() {
+    try {
+        const initialState = await waitForElement("#initial-state", false);
+        return JSON.parse(initialState.textContent).meta.access_token != null;
+    } catch(error) {
+        // cannot fetch login status
+        return false;
+    }
+}
+
+/**
  * Inject replacement onClick handler for Follow button.
  * 
  * @returns {void}
@@ -137,8 +152,13 @@ async function injectInteractionButtons() {
  * @returns {void}
  */
 function initInjections() {
-    injectFollowButton().catch(console.error);
-    injectInteractionButtons().catch(console.error);
+    isLoggedIn().then((isLoggedIn) => {
+        if (isLoggedIn) {
+            return;
+        }
+        injectFollowButton().catch(console.error);
+        injectInteractionButtons().catch(console.error);
+    });
 }
 
 /**
