@@ -7,9 +7,9 @@
  * @returns {string}
  */
 function getUsername() {
-    const hiddenInputFied = document.querySelector('[name="user[nickname]"]') || document.getElementById("user_nickname");
+    const hiddenInputField = document.querySelector('[name="user[nickname]"]') || document.getElementById("user_nickname");
 
-    return hiddenInputFied.value;
+    return hiddenInputField.value;
 }
 
 getUsername();
