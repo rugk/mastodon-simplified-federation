@@ -15,6 +15,7 @@
 - [@PoorPocketsMcNeuHold](https://github.com/PoorPocketsMcNeuHold)
 - [@le-jun](https://github.com/le-jun)
 - Antonin Del Fabbro ([@AntoninDelFabbro](https://github.com/AntoninDelFabbro))
+- [@amcwb/stars](https://github.com/amcwb/)
 
 ### German
 
