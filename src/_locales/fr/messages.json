@@ -138,12 +138,12 @@
 
   // options
   "someSettingsAreManaged": {
-    "message": "Certaines options sont gérées par l´administrateur système et ne peuvent être modifiées.",
+    "message": "Certaines options sont gérées par l´administrateur système et ne peuvent pas être modifiées.",
     "description": "The message, which appears, when settings are pre-defined (as managed options) by administrators.",
     "hash": "148604ebbeb7df28974d8233f1418d1f"
   },
   "optionIsDisabledBecauseManaged": {
-    "message": "Cette option est désactivée, car configurée par votre administrateur système.",
+    "message": "Cette option est désactivée par votre administrateur système.",
     "description": "The title (tooltip) shown, when hovering over a disabled, managed option.",
     "hash": "50fb70682c64e1a1fb4d8884b33cca64"
   },
@@ -196,7 +196,7 @@
     "hash": "4775fb2f88fd33d02b871e5021dec3e9"
   },
   "translatorUsername": {
-    "message": "PoorPocketsMcNewHold et le-jun",
+    "message": "PoorPocketsMcNewHold, le-jun et amcwb/stars",
     "description": "The username that the translator wants to be referred to.",
     "hash": "ce96c18a8a1b4b528b294e981ee4d651"
   },
