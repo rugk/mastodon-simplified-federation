@@ -6,7 +6,7 @@
  * @param {Event} event
  * @returns {void}
  */
-function onClickInteract(event) {
+function onClickInteractMisskey(event) {
     event.stopImmediatePropagation();
     event.stopPropagation();
     event.preventDefault();
@@ -91,7 +91,7 @@ async function injectInteractionButtons() {
             try {
                 if (!button.classList.contains(INJECTED_REPLY_CLASS)) {
                     button.classList.add(INJECTED_REPLY_CLASS);
-                    button.addEventListener("click", onClickInteract);
+                    button.addEventListener("click", onClickInteractMisskey);
                     button.removeEventListener("mousedown");
                 }
             } catch (error) {
