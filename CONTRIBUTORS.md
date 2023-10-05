@@ -37,3 +37,7 @@
 
 - Ömür Turan ([@omurturan](https://github.com/omurturan))
 - Hozan Şahin ([@hozansahin](https://github.com/hozansahin))
+
+### Dutch
+
+- [@hugo-vrijswijk](https://github.com/hugo-vrijswijk)

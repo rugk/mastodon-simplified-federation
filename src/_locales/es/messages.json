@@ -12,7 +12,7 @@
     "message": "Simplifica el seguimiento o interaccion con otros usuarios en instancias remotas de Mastodon.",
     "description": "Description of the extension."
   },
-  
+
   // errors or other messages (mostly for settings)
   "errorShowingMessage": {
     "message": "No se puede mostrar el mensaje.",
@@ -42,7 +42,7 @@
     "message": "No se puede reestablecer la configuracion!",
     "description": "The message shown, when the options of the settings could not have been reset."
   },
-  
+
   // errors or other messages for specific settings
   "mastodonHandleIsEmpty": {
     "message": "Ingresar cuenta Mastodon. Sin una cuenta la extension no funcionara.",
@@ -68,7 +68,7 @@
     "message": "Verificacion de la cuenta Mastodon fallida.",
     "description": "This is an error shown, when the server that has been contacted to verify the handle returned an unexpected response."
   },
-  
+
   "addonIsNotYetSetup": {
     "message": "La extension no ha sido configurda. Debe ingresar una cuenta Mastodon en la configuracion.",
     "description": "This is an error shown, when the user did not (yet) setup the whole add-on. Semantically it is the same as mastodonHandleIsEmpty, but this one is used in the notification."
@@ -77,7 +77,7 @@
     "message": "No se puede redirigir debido a un error inesperado.",
     "description": "Generic error shown when redirecting fails."
   },
-  
+
   // notification errors
   "errorNotificationRedirectingTitle": {
     "message": "“$ADDON$” redireccion fallida.",
@@ -99,7 +99,7 @@
       }
     }
   },
-  
+
   "errorNotificationAdjustSettings": {
     "message": "$ERROR$ Click para ajustar configuracion.",
     "description": "Wrapper shown if an error happened to point the user to the settings. It is used in the description of the notification.",
@@ -110,7 +110,7 @@
       }
     }
   },
-  
+
   // options
   "someSettingsAreManaged": {
     "message": "Ciertas configuraciones son manejadas por el administrador y no pueden ser cambiadas.",
@@ -128,7 +128,7 @@
     "message": "Reestablecer todo",
     "description": "The button to delete all current settings and load the defaults, shown in the add-on settings."
   },
-  
+
   "optionMastodonHandle": {
     "message": "Su cuenta Mastodon: ",
     "description": "This is an option shown in the add-on settings. You can enter your handle in the format mastodon@server.com there."
@@ -141,7 +141,7 @@
     "message": "Ingrese su usuario Mastodon de la siguiente manera “usuario@dominio”.",
     "description": "An explanatory text shown to the user in the settings to explain what format they have to enter the Mastodon handle. It should not hint to any example (that's what the placeholder is for), but explain the general format."
   },
-  
+
   "translatorCredit": {
     "message": "Extension traducida al español por $TRANSLATORS$.",
     "description": "The credit text for the translator. See https://github.com/TinyWebEx/common/blob/master/CONTRIBUTING.md#translator-credit-inside-of-add-on for how to translate this.",
@@ -160,7 +160,7 @@
     "message": "dbarrerap",
     "description": "The username that the translator wants to be referred to."
   },
-  
+
   "contributorsThanks": {
     "message": "Tambien se agradece a $CONTRIBUTORS$.",
     "description": "Text thanking all contributors and linking to the contributors file.",
@@ -172,14 +172,14 @@
     }
   },
   "contributorsThanksLink": {
-    "message": "https://github.com/dbarrerap/mastodon-simplified-federation/blob/master/CONTRIBUTORS",
+    "message": "https://github.com/dbarrerap/mastodon-simplified-federation/blob/main/CONTRIBUTORS",
     "description": "The link to the CONTRIBUTORS file."
   },
   "contributorsThanksLinkText": {
     "message": "todos los demás contribuyentes",
     "description": "The link text linking to the contributors file. See contributorsThanks."
   },
-  
+
   // ARIA labels/descriptions for messages
   "dismissIconDescription": {
     "message": "Cerrar este mensaje",
@@ -202,4 +202,4 @@
     "description": "the aria label to label the message box as an warning message box"
   }
 }
-  
+
