@@ -10,6 +10,10 @@
 
 * [@paulo-roger](https://github.com/paulo-roger)
 
+### Dutch
+
+* [Hugo van Rijswijk](https://github.com/hugo-vrijswijk)
+
 ### French
 
 - [@PoorPocketsMcNeuHold](https://github.com/PoorPocketsMcNeuHold)
