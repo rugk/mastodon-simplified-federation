@@ -17,7 +17,7 @@ Additionally, it may send information about the OWN ACCOUNT and OWN SERVER to OW
 The ADD-ON will not send information about your OWN ACCOUNT or OWN SERVER to any REMOTE SERVER. If that case should inadvertently happen, it is considered a vulnerability in the ADD-ON.
 It may happen, however, that the REMOTE SERVER is the same as the OWN SERVER. In such a case, the ADD-ON works the same and may thus send all the information to it's own server.
 
-An explanation of all permissions, this ADD-ON requests, can be found at https://github.com/rugk/mastodon-simplified-federation/blob/master/assets/texts/en/permissions.md.
+An explanation of all permissions, this ADD-ON requests, can be found at https://github.com/rugk/mastodon-simplified-federation/blob/main/assets/texts/en/permissions.md.
 
 == IMPLICATIONS ==
 

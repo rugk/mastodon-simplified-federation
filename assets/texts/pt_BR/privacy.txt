@@ -17,7 +17,7 @@ Além disso, pode enviar informações da PRÓPRIA CONTA e PRÓPRIO SERVIDOR par
 O COMPLEMENTO não enviará informações sobre sua CONTA PRÓPRIA ou SERVIDOR PRÓPRIO para nenhum SERVIDOR REMOTO. Se esse caso ocorrer inadvertidamente, é considerado uma vulnerabilidade no COMPLEMENTO.
 Pode acontecer, porém, que o SERVIDOR REMOTO seja o mesmo que o SERVIDOR PRÓPRIO. Nesse caso, o COMPLEMENTO funciona da mesma forma, podendo assim enviar toda a informação para o seu próprio servidor.
 
-Uma explicação de todas as permissões, solicitações deste COMPLEMENTO, pode ser encontrada em https://github.com/rugk/mastodon-simplified-federation/blob/master/assets/texts/en/permissions.md.
+Uma explicação de todas as permissões, solicitações deste COMPLEMENTO, pode ser encontrada em https://github.com/rugk/mastodon-simplified-federation/blob/main/assets/texts/en/permissions.md.
 
 == IMPLICAÇÕES ==
 

@@ -17,7 +17,7 @@ De plus, il peut envoyer des informations sur le COMPTE PROPRE et le SERVEUR PRO
 L'ADD-ON n'enverra pas d'informations sur votre COMPTE PROPRE ou votre SERVEUR PROPRE à un SERVEUR À DISTANCE. Si ce cas se produit par inadvertance, il est considéré comme une vulnérabilité dans l'ADD-ON.
 Il peut toutefois arriver que le SERVEUR À DISTANCE soit le même que le SERVEUR PROPRE. Dans un tel cas, l'ADD-ON fonctionne de la même manière et peut donc envoyer toutes les informations à son propre serveur.
 
-Une explication de toutes les permissions demandées dans le présent ADD-ON peut être consultée à l'adresse suivante : https://github.com/rugk/mastodon-simplified-federation/blob/master/assets/texts/fr/permissions.md
+Une explication de toutes les permissions demandées dans le présent ADD-ON peut être consultée à l'adresse suivante : https://github.com/rugk/mastodon-simplified-federation/blob/main/assets/texts/fr/permissions.md
 
 == IMPLICATIONS == IMPLICATIONS ==
 
