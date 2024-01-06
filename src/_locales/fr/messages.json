@@ -231,7 +231,7 @@
     "hash": "5f54e42067e19895a2641b17a5233418"
   },
   "ariaMessageSuccess": {
-    "message": "message de validation",
+    "message": "message de succès",
     "description": "the aria label to label the message box as an success message box",
     "hash": "334387b4ae53483d17f11519a70dd3af"
   },
