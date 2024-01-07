@@ -95,7 +95,7 @@
     "hash": "e46a9b3ba7502d7b5d399f0b9461fc82"
   },
   "permissionRequiredTabs": {
-    "message": "L'autorisation d’accès aux onglets du navigateur est requise pour cette fonction.",
+    "message": "L'autorisation d'accéder aux onglets du navigateur est requise pour cette fonction.",
     "description": "The message shown, when the emojiCopyOnlyFallback option in the settings needs to request permissions to work.",
     "hash": "dce672ef8e244e85b5972c4c4b885a56"
   },
@@ -173,14 +173,14 @@
     "hash": "5e2a6e34c5fed46740dc238f1cc7768a"
   },
   "optionRedirectInMainWindow": {
-    "message": "Bloque l’usage de pop-up.",
+    "message": "Redirection vers la fenêtre principale.",
     "description": "This is an option shown in the add-on settings.",
-    "hash": "dc056fc373c7161104ad81b28884a017"
+    "hash": "67bb7ec7a9bee72e4551070cb2be57bc"
   },
   "optionRedirectInMainWindowDescr": {
-    "message": "Bloque l’usage d’une fenêtre supplémentaire et redirige l’action sur la fenêtre principale.",
+    "message": "Bloque l’usage d’un onglet supplémentaire et redirige l’action sur la page principale.",
     "description": "This is an option shown in the add-on settings.",
-    "hash": "ba0f60f1ae0c6d6785d5eb410247eb11"
+    "hash": "a8f0ba44634e64e41ec2577b195cc5e0"
   },
   "translatorCredit": {
     "message": "Cette extension a été traduite en français par $TRANSLATORS$.",
@@ -211,7 +211,7 @@
   "contributorsThanksLink": {
     "message": "https://github.com/rugk/mastodon-simplified-federation/blob/main/CONTRIBUTORS.md",
     "description": "The link to the CONTRIBUTORS file.",
-    "hash": "1fbeb3813910bf47c53cf596035c27db"
+    "hash": "0261a0a43f3b4c0454d9b0d862e9088c"
   },
   "contributorsThanksLinkText": {
     "message": "toutes les autres personnes ayant contribué",
