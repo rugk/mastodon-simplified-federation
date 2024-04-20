@@ -181,15 +181,19 @@ async function init() {
         initInjections();
     });
 
-    // monitor only the main column in the Mastodon UI
-    const mainColumn = await waitForElement(
-        "#mastodon .ui",
-        false,
-    );
-    observer.observe(mainColumn, {
-        childList: true,
-        subtree: true,
-    });
+    try {
+        // monitor only the main column in the Mastodon UI
+        const mainColumn = await waitForElement(
+            "#mastodon .ui",
+            false,
+        );
+        observer.observe(mainColumn, {
+            childList: true,
+            subtree: true,
+        });
+    } catch(error) {
+        // is not a mastodon website, do nothing
+    }
 }
 
 init().catch(console.error);
