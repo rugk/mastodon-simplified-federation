@@ -132,15 +132,19 @@ async function init() {
         initInjections();
     });
 
-    // monitor only the main column in the Misskey UI
-    const mainColumn = await waitForElement(
-        ".mk-app > .main",
-        false,
-    );
-    observer.observe(mainColumn, {
-        childList: true,
-        subtree: true,
-    });
+    try {
+        // monitor only the main column in the Misskey UI
+        const mainColumn = await waitForElement(
+            ".mk-app > .main",
+            false,
+        );
+        observer.observe(mainColumn, {
+            childList: true,
+            subtree: true,
+        });
+    } catch(error) {
+        // is not a misskey website, do nothing
+    }
 }
 
 init().catch(console.error);
