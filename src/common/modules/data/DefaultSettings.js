@@ -6,5 +6,6 @@
 
 export const DEFAULT_SETTINGS = Object.freeze({
     ownMastodon: null,
-    redirectInMainWindow: false
+    redirectInMainWindow: false,
+    redirectImmediately: false,
 });
