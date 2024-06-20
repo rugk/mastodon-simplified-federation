@@ -10,10 +10,10 @@
 
   "content_security_policy": "default-src 'self'; connect-src https:",
   "icons": {
-    "16": "icons/icon.svg",
-    "32": "icons/icon.svg",
-    "48": "icons/icon.svg",
-    "96": "icons/icon.svg"
+    "16": "icons/icon.png",
+    "32": "icons/icon.png",
+    "48": "icons/icon.png",
+    "96": "icons/icon.png"
   },
   "default_locale": "en",
 
