@@ -38,7 +38,7 @@
     "tabs"
   ],
 
-  "applications": {
+  "browser_specific_settings": {
     "gecko": {
       "id": "mastodon-auto-remote-follow@rugk.github.io",
       "strict_min_version": "79.0"
