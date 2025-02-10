@@ -13,6 +13,7 @@ Simplifies following or interacting with other users on remote Mastodon instance
 
 **[![Get it for Firefox!](https://extensionworkshop.com/assets/img/documentation/publish/get-the-addon-178x60px.dad84b42.png)](https://addons.mozilla.org/firefox/addon/mastodon-simplified-federation?utm_source=github.com&utm_medium=git&utm_content=download-button&campaign=github)**
 
+> [!NOTE]
 > **BTW:** If you want to generate QR codes privately, do check out our **[Offline QR Code Generator](https://github.com/rugk/offline-qr-code)** too!
 
 ## In action…
