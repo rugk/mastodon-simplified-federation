@@ -51,6 +51,7 @@ function waitForElement(selector, multiple = false, timeoutDuration = 200000) {
 
         const timeout = window.setTimeout(() => {
             reject(new Error("waitForElement timed out"));
+            observer.disconnect();
         }, timeoutDuration);
 
         const element = getElement();
