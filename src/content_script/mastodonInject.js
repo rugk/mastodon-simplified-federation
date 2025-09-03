@@ -169,8 +169,7 @@ function initInjections() {
  */
 async function init() {
     if (typeof MASTODON_INJECTED_CLASS === "undefined"){
-        // eslint-disable-next-line vars-on-top, no-var
-        var MASTODON_INJECTED_CLASS = true;
+        globalThis.MASTODON_INJECTED_CLASS = true;
     } else {
         // init has already run
         return;

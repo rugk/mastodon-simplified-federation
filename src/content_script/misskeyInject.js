@@ -120,8 +120,7 @@ function initInjections() {
  */
 async function init() {
     if (typeof MISSKEY_INJECTED === "undefined"){
-        // eslint-disable-next-line vars-on-top, no-var
-        var MISSKEY_INJECTED = true;
+        globalThis.MISSKEY_INJECTED = true;
     } else {
         // init has already run
         return;
