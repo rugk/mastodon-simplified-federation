@@ -58,6 +58,7 @@ function waitForElement(selector, multiple = false, timeoutDuration = 200000) {
 
         const timeout = window.setTimeout(() => {
             reject(new Error("waitForElement timed out"));
+            observer.disconnect();
         }, timeoutDuration);
 
         const element = getElement();
@@ -168,8 +169,7 @@ function initInjections() {
  */
 async function init() {
     if (typeof MASTODON_INJECTED_CLASS === "undefined"){
-        // eslint-disable-next-line vars-on-top, no-var
-        var MASTODON_INJECTED_CLASS = true;
+        globalThis.MASTODON_INJECTED_CLASS = true;
     } else {
         // init has already run
         return;

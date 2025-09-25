@@ -51,6 +51,7 @@ function waitForElement(selector, multiple = false, timeoutDuration = 200000) {
 
         const timeout = window.setTimeout(() => {
             reject(new Error("waitForElement timed out"));
+            observer.disconnect();
         }, timeoutDuration);
 
         const element = getElement();
@@ -119,8 +120,7 @@ function initInjections() {
  */
 async function init() {
     if (typeof MISSKEY_INJECTED === "undefined"){
-        // eslint-disable-next-line vars-on-top, no-var
-        var MISSKEY_INJECTED = true;
+        globalThis.MISSKEY_INJECTED = true;
     } else {
         // init has already run
         return;
