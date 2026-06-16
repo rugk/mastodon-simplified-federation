@@ -183,7 +183,7 @@
     "hash": "a8f0ba44634e64e41ec2577b195cc5e0"
   },
   "translatorCredit": {
-    "message": "Este complemento foi traduzido para o inglês por $TRANSLATORS$.",
+    "message": "Este complemento foi traduzido para o português do Brasil por $TRANSLATORS$.",
     "description": "The credit text for the translator. See https://github.com/TinyWebEx/common/blob/master/CONTRIBUTING.md#translator-credit-inside-of-add-on for how to translate this.",
     "placeholders": {
       "translators": { "content": "$1", "example": "<a href=\"https://github.com/rugk/\">@rugk</a>" }
@@ -191,12 +191,12 @@
     "hash": "a6f5deecd624d5f8cd58350c72dd8fdf"
   },
   "translatorLink": {
-    "message": "https://pauloroger.dev/",
+    "message": "https://github.com/rugk/mastodon-simplified-federation/blob/main/CONTRIBUTORS.md#brazilian-portuguese",
     "description": "The link to the translator's GitHub profile.",
     "hash": "4775fb2f88fd33d02b871e5021dec3e9"
   },
   "translatorUsername": {
-    "message": "Paulo Roger",
+    "message": "Paulo Roger e Waldir Pimenta",
     "description": "The username that the translator wants to be referred to.",
     "hash": "ce96c18a8a1b4b528b294e981ee4d651"
   },
