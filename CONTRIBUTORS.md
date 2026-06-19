@@ -8,11 +8,12 @@
 
 ### Brazilian Portuguese
 
-* [@paulo-roger](https://github.com/paulo-roger)
+- Paulo Roger ([@paulo-roger](https://github.com/paulo-roger))
+- Waldir Pimenta ([@waldyrious](https://github.com/waldyrious))
 
 ### Dutch
 
-* [Hugo van Rijswijk](https://github.com/hugo-vrijswijk)
+- Hugo van Rijswijk ([@hugo-vrijswijk](https://github.com/hugo-vrijswijk))
 
 ### French
 
@@ -41,7 +42,3 @@
 
 - Ömür Turan ([@omurturan](https://github.com/omurturan))
 - Hozan Şahin ([@hozansahin](https://github.com/hozansahin))
-
-### Dutch
-
-- [@hugo-vrijswijk](https://github.com/hugo-vrijswijk)
