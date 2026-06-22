@@ -15,6 +15,7 @@ import * as MisskeyDetect from "./Detect/Misskey.js";
 
 import * as NetworkTools from "/common/modules/NetworkTools.js";
 import * as MastodonRedirect from "./MastodonRedirect.js";
+import { redirectByActivityPubLink } from "./ActivityPubRedirect.js";
 
 import * as AddonSettings from "/common/modules/AddonSettings/AddonSettings.js";
 import * as MastodonHandleCheck from "/common/modules/MastodonHandle/ConfigCheck.js";
@@ -149,12 +150,18 @@ function getInteractionType(url) {
 
 /**
  * Handles changes to the URL of a tab.
- * 
+ *
  * @param {string} tabId
  * @param {Object} changeInfo
  * @returns {void}
  */
 async function onTabUpdate(tabId, changeInfo) {
+    // clear cache of settings
+    await AddonSettings.loadOptions();
+    if (await AddonSettings.get("redirectImmediately")) {
+        redirectByActivityPubLink(tabId, changeInfo.url);
+    }
+
     const ownMastodon = await AddonSettings.get("ownMastodon");
     const currentURL = new URL(changeInfo.url);
     if (ownMastodon.server !== currentURL.hostname){

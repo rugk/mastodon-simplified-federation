@@ -99,3 +99,22 @@ export function getTootStatus(mastodonServer, localTootId) {
         return response.json();
     });
 }
+
+/**
+ * Resolves the ActivityPub object ID on a given server
+ *
+ * @param {string} mastodonServer
+ * @param {string} objectId
+ */
+export async function resolveActivityPubId(mastodonServer, objectId) {
+    const apiUrl = new URL("api/v2/search", `https://${mastodonServer}`);
+    apiUrl.searchParams.set("q", objectId);
+    apiUrl.searchParams.set("resolve", "true");
+
+    const response = await NetworkTools.fetch(apiUrl);
+    if (!response.ok) {
+        throw new MastodonApiError(mastodonServer, response, `Failed to resolve ${objectId}.`);
+    }
+
+    return await response.json();
+}
