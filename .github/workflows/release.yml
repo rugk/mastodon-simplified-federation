@@ -1,0 +1,51 @@
+name: Publish Releases
+
+on:
+  push:
+    tags: '[0-9]+.[0-9]?[0-9]?[0-9]?.?[0-9]+'
+
+jobs:
+  Release-Firefox:
+    runs-on: ubuntu-latest
+    outputs:
+      filename: ${{ steps.build.outputs.filename }}
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: zip firefox
+      id: build
+      run: |
+        scripts/make.sh
+        echo "filename=build/mastodon-auto-remote-follow@rugk.github.io.xpi" >> $GITHUB_OUTPUT
+    
+    - name: Generate Release Notes
+      id: generate_release_notes
+      run: |
+        # Write shell commands to parse changelog data and generate JSON
+        release_notes="{"
+        for lang_dir in $(ls -d assets/texts/*); do
+          lang=$(basename $lang_dir)
+          changelog_file="${lang}/Changelog/${VERSION}.html"
+          if [ -f "$changelog_file" ]; then
+            content=$(cat $changelog_file)
+            release_notes+="\"${lang}\":\"${content}\","
+          fi
+        done
+        release_notes="${release_notes%,}"  # Remove trailing comma
+        release_notes+="}"
+
+        echo "release_notes=$release_notes" >> $GITHUB_OUTPUT
+      env:
+        VERSION: ${{ github.event.tag_name }}
+      
+    - name: Publish Firefox
+      uses: wdzeng/firefox-addon@v1.1.0-alpha.0
+      with:
+        addon-guid: "mastodon-auto-remote-follow@rugk.github.io"
+        xpi-path: "${{ steps.build.outputs.filename }}"
+        self-hosted: false
+        release-notes: ${{ steps.generate_release_notes.outputs.release_notes }}
+        approval-notes: "Source code for this version is available at ${{ github.server_url }}/${{ github.repository }}/releases/tag/${{ github.event.tag_name }}."
+        license: MIT
+        jwt-issuer: ${{ secrets.MOZILLA_ADDONS_JWT_ISSUER }}
+        jwt-secret: ${{ secrets.MOZILLA_ADDONS_JWT_SECRET }}
